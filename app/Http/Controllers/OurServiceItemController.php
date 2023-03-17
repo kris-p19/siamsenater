@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\OurServiceItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class OurServiceItemController extends Controller
 {
@@ -35,9 +36,25 @@ class OurServiceItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
-        //
+        $table = new OurServiceItem;
+        $table->our_service_id = $id;
+        $table->name_th = $request->name_th;
+        $table->name_en = $request->name_en;
+        if (!empty($request->file('picture'))) {
+            $files = $request->file('picture');
+            $destinationPath = public_path('/images/our-service-items/');
+            $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
+            if ($files->move($destinationPath, $profileImage)) {
+                $table->picture = $profileImage;
+            }
+        }
+        $table->save();
+        if ($table) {
+            return redirect('/webadmin/our-service/item/'.$id)->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
 
     /**
@@ -76,15 +93,30 @@ class OurServiceItemController extends Controller
     {
         //
     }
-
+    public function itemUpdateStatus($id, $status, OurServiceItem $ourServiceItem)
+    {
+        $table = $ourServiceItem->where('id',$id)->update([
+            'status' => $status
+        ]);
+        if ($table) {
+            return redirect('/webadmin/our-service/item/'.$id)->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\OurServiceItem  $ourServiceItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OurServiceItem $ourServiceItem)
+    public function destroy($id, OurServiceItem $ourServiceItem)
     {
-        //
+        $table = $ourServiceItem->where('id',$id)->first();
+        try { unlink(public_path('/images/our-service-item/'.$table->picture)); } catch (\Throwable $th) { }
+        $table = $ourServiceItem->where('id',$id)->delete();
+        if ($table) {
+            return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
 }

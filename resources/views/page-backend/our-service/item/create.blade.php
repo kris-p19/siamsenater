@@ -23,15 +23,15 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>ชื่อภาษาไทย</label>
-                            <input type="text" class="form-control" name="service_name_th" autofocus placeholder="ชื่อบริการภาษาไทย">
+                            <input type="text" class="form-control" name="name_th" autofocus placeholder="ชื่อภาษาไทย">
                         </div>
                         <div class="form-group">
-                            <label>ชื่อภาษาอังกฤา</label>
-                            <input type="text" class="form-control" name="service_name_th" autofocus placeholder="ชื่อบริการภาษาไทย">
+                            <label>ชื่อภาษาอังกฤษ</label>
+                            <input type="text" class="form-control" name="name_en" autofocus placeholder="ชื่อภาษาอังกฤษ">
                         </div>
                         <div class="form-group">
                             <label>ภาพ</label>
-                            <input type="file" class="form-control" name="picture_header" accept="image/*">
+                            <input type="file" class="form-control" name="picture" accept="image/*">
                         </div>
                     </div>
                 </div>

@@ -90,8 +90,3 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/our-service/deleteitem/{id}','OurServiceItemController@destroy');
     Route::get('/our-service/item-update-status/{id}/{status}','OurServiceItemController@itemUpdateStatus');
 });
-
-
-Route::get('db2' ,function(){
-    DB::connection('stackdowhile')->table('gold_prices')->get();
-});
