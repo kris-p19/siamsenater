@@ -1,0 +1,19 @@
+$(document).ready(function(){
+    $("#owl-carousel-welcome").owlCarousel({
+        items:1,
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        autoplay:true,
+        autoplayHoverPause:true,
+        dots:false
+    });
+    $("#owl-carousel-hot-issue").owlCarousel({
+        items:1,
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        autoplay:true,
+        autoplayHoverPause:true
+    });
+});
