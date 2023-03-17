@@ -68,12 +68,8 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/news-activities/update-status/{id}/{status}','NewsActivitieController@updateStatus');
 
     Route::get('/contact-us','ContactUsController@show');
-    // Route::get('/contact-us/create','ContactUsController@create');
-    // Route::post('/contact-us/create','ContactUsController@store');
     Route::get('/contact-us/edit/{id}','ContactUsController@edit');
     Route::post('/contact-us/edit/{id}','ContactUsController@update');
-    // Route::get('/contact-us/delete/{id}','ContactUsController@destroy');
-    // Route::get('/contact-us/update-status/{id}/{status}','ContactUsController@updateStatus');
 
     Route::get('/our-service','OurServiceController@show');
     Route::get('/our-service/create','OurServiceController@create');

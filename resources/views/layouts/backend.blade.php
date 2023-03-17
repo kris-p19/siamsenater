@@ -222,15 +222,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a style="color:red;" href="{{ url('/webadmin/our-service') }}" class="nav-link @yield('webadmin-our-service')">
+              <a href="{{ url('/webadmin/our-service') }}" class="nav-link @yield('webadmin-our-service')">
                 <i class="nav-icon fas fa-th"></i>
                 <p>{{ __('messages.our-service') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a style="color:red;" href="{{ url('/webadmin/history') }}" class="nav-link @yield('webadmin-history')">
-                <i class="nav-icon fas fa-th"></i>
-                <p>{{ __('messages.history') }}</p>
               </a>
             </li>
             <li class="nav-item">

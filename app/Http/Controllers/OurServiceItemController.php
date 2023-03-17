@@ -77,9 +77,12 @@ class OurServiceItemController extends Controller
      * @param  \App\OurServiceItem  $ourServiceItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(OurServiceItem $ourServiceItem)
+    public function edit($id, OurServiceItem $ourServiceItem)
     {
-        //
+        return view('page-backend.our-service.item.edit',[
+            'data' => $ourServiceItem->where('id',$id)->first(),
+            'our_service_id' => $ourServiceItem->where('id',$id)->first()->our_service_id
+        ]);
     }
 
     /**
@@ -89,9 +92,27 @@ class OurServiceItemController extends Controller
      * @param  \App\OurServiceItem  $ourServiceItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OurServiceItem $ourServiceItem)
+    public function update($id, Request $request, OurServiceItem $ourServiceItem)
     {
-        //
+        $data = [
+            'name_th' => $request->name_th,
+            'name_en' => $request->name_en
+        ];
+        if (!empty($request->file('picture'))) {
+            $table = $ourServiceItem->where('id',$id)->first();
+            try { unlink(public_path('/images/our-service-items/'.$table->picture)); } catch (\Throwable $th) { }
+            $files = $request->file('picture');
+            $destinationPath = public_path('/images/our-service-items/');
+            $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
+            if ($files->move($destinationPath, $profileImage)) {
+                $data['picture'] = $profileImage;
+            }
+        }
+        $table = $ourServiceItem->where('id',$id)->update($data);
+        if ($table) {
+            return redirect()->back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
     public function itemUpdateStatus($id, $status, OurServiceItem $ourServiceItem)
     {
@@ -99,7 +120,7 @@ class OurServiceItemController extends Controller
             'status' => $status
         ]);
         if ($table) {
-            return redirect('/webadmin/our-service/item/'.$id)->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+            return redirect()->back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
         }
         return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
@@ -112,7 +133,7 @@ class OurServiceItemController extends Controller
     public function destroy($id, OurServiceItem $ourServiceItem)
     {
         $table = $ourServiceItem->where('id',$id)->first();
-        try { unlink(public_path('/images/our-service-item/'.$table->picture)); } catch (\Throwable $th) { }
+        try { unlink(public_path('/images/our-service-items/'.$table->picture)); } catch (\Throwable $th) { }
         $table = $ourServiceItem->where('id',$id)->delete();
         if ($table) {
             return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);

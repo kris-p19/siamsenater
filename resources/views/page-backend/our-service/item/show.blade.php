@@ -13,6 +13,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">{{ __('messages.our-service') }}</h3>
+            <a style="border-radius:45px;margin-left:10px;" href="{{ url('/webadmin/our-service') }}" class="btn btn-default btn-sm float-right"><i class="ion-arrow-left-b"></i> ย้อนกลับ</a>
             <a style="border-radius:45px;" href="{{ url('/webadmin/our-service/createitem/'.$our_service_id) }}" class="btn btn-outline-primary btn-sm float-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> เพิ่มรายการ</a>
         </div>
         <div class="card-body">
@@ -33,8 +34,8 @@
                                 <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/our-service/edititem/'.$row->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit" aria-hidden="true"></i> แก้ไข</a>
                                 <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/our-service/item-update-status/'.$row->id.'/'.($row->status=='active'?'inactive':'active')) }}" class="btn btn-outline-{{ ($row->status=='active'?'primary':'secondary') }} btn-sm"><i class="fa fa-{{ ($row->status=='active'?'eye':'eye-slash') }}" aria-hidden="true"></i> {{ ($row->status=='active'?'เผยแพร่':'ไม่เผยแพร่') }}</a>
                             </td>
-                            <td>{!! $row->service_name_th !!}<hr>{!! $row->service_name_en !!}</td>
-                            <td><img src="{{ asset('images/our-service/'.$row->picture_header) }}" class="img-responsive" style="width:150px;" onerror="this.style.display='none'"></td>
+                            <td>{!! $row->name_th !!}<hr>{!! $row->name_en !!}</td>
+                            <td><img src="{{ asset('images/our-service-items/'.$row->picture) }}" class="img-responsive" style="width:150px;" onerror="this.style.display='none'"></td>
                         </tr>
                         @endforeach
                     </tbody>
