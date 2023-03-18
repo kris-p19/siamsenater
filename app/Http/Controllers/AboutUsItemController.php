@@ -10,6 +10,20 @@ use DB;
 
 class AboutUsItemController extends Controller
 {
+    public static function welcomPage()
+    {
+        if (app()->getLocale()=='th') {
+            return AboutUsItem::wherein('id',[2,5])
+            ->where('status','active')
+            ->select('subject_th as subject','content_th as content','datatype')
+            ->get();
+        } else {
+            return AboutUsItem::wherein('id',[2,5])
+            ->where('status','active')
+            ->select('subject_en as subject','content_en as content','datatype')
+            ->get();
+        }
+    }
     public function getItem($about_us_id, $lang)
     {
         if ($lang=='th') {

@@ -89,22 +89,26 @@
 </div>
 <div class="row">
     <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="min-height: 480px;">
+            <div class="panel-body">
+                <h3 class="title">{{ __('messages.company_name_full') }}</h3>
+                @foreach (\App\Http\Controllers\AboutUsItemController::welcomPage() as $row)
+                    <h4>{!! $row->subject !!}</h4>
+                    <p>{!! $row->content !!}</p>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-default" style="min-height: 480px;">
             <div class="panel-body">
                 <h3 class="title"><i class="fa fa-facebook-official" aria-hidden="true"></i> {{ __('messages.company-facebook-page') }}</h3>
-                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsiamsenater&tabs=timeline&width=326&height=290&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1271732449825933" width="100%" height="290" style="border:none;overflow:hidden" scrolling="no" frameborder="0" role="none" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsiamsenater&tabs=timeline&width=326&height=370&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1271732449825933" width="100%" height="370" style="border:none;overflow:hidden" scrolling="no" frameborder="0" role="none" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
             </div>
         </div>
     </div>
     <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel-body">
-            
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="min-height: 480px;">
             <div class="panel-body">
                 <h3 class="title"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{ __('messages.vote') }}</h3>
                 <p>{{ __('messages.web-site-satisfaction-survey') }}</p>

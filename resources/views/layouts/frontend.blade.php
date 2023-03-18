@@ -178,11 +178,12 @@
                                 <div class="col-md-3 col-sm-6 footer-col">
                                     <h6 class="heading7">{{ __('messages.lastpost') }}</h6>
                                     <div class="post">
-                                        @foreach(DB::table('news_activities')->select('title_th','title_en','id','public_datetime')->where('status','active')->where('public_datetime','<',date('Y-m-d H:i:s'))->orderBy('public_datetime','desc')->take(3)->get() as $index => $item)
+                                        @foreach(DB::table('news_activities')->select('title_th','title_en','id','public_datetime','conter')->where('status','active')->where('public_datetime','<',date('Y-m-d H:i:s'))->orderBy('public_datetime','desc')->take(3)->get() as $index => $item)
                                         <li style="color:var(--theme-font-color);">
-                                            <a href="{{ url('news-activities/read/'.$item->id) }}">
+                                            <a href="{{ url('news-activities/read/'.$item->id) }}" style="color:var(--theme-font-color);">
+                                                <span class="material-icons" style="font-size:16px;position:relative !important;">visibility</span> {{ $item->conter }} | 
                                                 {!! (app()->getLocale()=='th'?$item->title_th:$item->title_en) !!}
-                                                <span>{{ date('d',strtotime($item->public_datetime)) . ' ' . (__('messages.month.'.strtolower(date('F',strtotime($item->public_datetime))))) . ' ' . (date('Y',strtotime($item->public_datetime))+543) }}</span>
+                                                <span style="display:block;">{{ date('d',strtotime($item->public_datetime)) . ' ' . (__('messages.month.'.strtolower(date('F',strtotime($item->public_datetime))))) . ' ' . (date('Y',strtotime($item->public_datetime))+543) }}</span>
                                             </a>
                                         </li>
                                         @endforeach
