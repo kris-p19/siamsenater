@@ -46,7 +46,9 @@ class FacebookMessagePluginController extends Controller
      */
     public function show(FacebookMessagePlugin $facebookMessagePlugin)
     {
-        //
+        return view('page-backend.facebook.show',[
+            'data' => $facebookMessagePlugin->first()
+        ]);
     }
 
     /**
@@ -69,7 +71,26 @@ class FacebookMessagePluginController extends Controller
      */
     public function update(Request $request, FacebookMessagePlugin $facebookMessagePlugin)
     {
-        //
+        $this->validate($request,[
+            'content' => 'required'
+        ]);
+        $table = $facebookMessagePlugin->where('id',$facebookMessagePlugin->first()->id)->update([
+            'content' => html_entity_decode($request->content)
+        ]);
+        if ($table) {
+            return redirect()->back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
+    }
+    public function updateStatus($status_name, FacebookMessagePlugin $facebookMessagePlugin)
+    {
+        $table = $facebookMessagePlugin->where('id',$facebookMessagePlugin->first()->id)->update([
+            'status' => $status_name
+        ]);
+        if ($table) {
+            return redirect()->back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
 
     /**

@@ -76,6 +76,7 @@
                     <img src="{{ asset('images/logo.png') }}" alt="โลโก้บริษัท" class="img-responsive" style="width:100%;">
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+                    @if(!empty($contactUs->url_googlemap))<a href="{!! $contactUs->url_googlemap !!}" title="Google map" target="_blank"><img src="{{ asset('images/contact-us/social-gm.png') }}" alt="social"></a>@endif
                     @if(!empty($contactUs->url_facebook))<a href="{!! $contactUs->url_facebook !!}" title="Facebook" target="_blank"><img src="{{ asset('images/contact-us/social-fb.png') }}" alt="social"></a>@endif
                     @if(!empty($contactUs->url_twitter))<a href="{!! $contactUs->url_twitter !!}" title="Twitter" target="_blank"><img src="{{ asset('images/contact-us/social-tw.png') }}" alt="social"></a>@endif
                     @if(!empty($contactUs->url_instagram))<a href="{!! $contactUs->url_instagram !!}" title="Instagram" target="_blank"><img src="{{ asset('images/contact-us/social-ig.png') }}" alt="social"></a>@endif
@@ -208,6 +209,39 @@
                             <li><a href="#">Site Map</a></li>
                         </ul>
                     </div> --}}
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="popup">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color:transparent;border:0px;border-radius:0px;-webkit-box-shadow:none;box-shadow:none;">
+                    <div class="modal-header" style="border-bottom:0px;">
+                        <button type="button" class="close" style="font-size:30px;color:#ffffff;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="owl-carousel owl-theme" id="owl-carousel-popup">
+                            <div>
+                                <a href="javascript:void(0);">
+                                    <img src="{{ asset('images/slide1.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);">
+                                    <img src="{{ asset('images/slide2.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);">
+                                    <img src="{{ asset('images/slide3.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);">
+                                    <img src="{{ asset('images/slide4.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

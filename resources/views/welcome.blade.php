@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="row" style="margin-top: 10px;">
-    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9" id="panel-owl-carousel-welcome">
         <div class="owl-carousel owl-theme" id="owl-carousel-welcome">
             <div>
                 <a href="javascript:void(0);">
@@ -64,9 +64,25 @@
 <div class="row">
     <div class="col-md-12">
         <h2 class="text-center title">{{ __('messages.our-service') }}</h2>
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="background-color: brown;">
             <div class="panel-body">
-                CONTENT
+                <div class="row">
+                    @foreach(\App\Http\Controllers\OurServiceController::indexArr() as $item)
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="panel panel-default hover">
+                            <div class="panel-body">
+                                <a href="{{ url('our-service/read/'.$item->id) }}">
+                                    <img class="media-object" src="{{ asset('images/our-service/'.$item->picture_header) }}" style="width:100%;object-fit:cover;" onerror="this.style.display='none';">
+                                </a>
+                                <h4 class="media-heading title">{!! $item->service_name !!}</h4>
+                                <p>{!! $item->service_desciption !!}</p>
+                                <p>@foreach(explode(',',$item->hastag) as $hastag) <label class="label label-default">{!! $hastag !!}</label> @endforeach</p>
+                                <p><a href="{{ url('our-service/read/'.$item->id) }}" class="btn btn-primary">{{ __('messages.detail') }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
@@ -92,39 +108,45 @@
             <div class="panel-body">
                 <h3 class="title"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{ __('messages.vote') }}</h3>
                 <p>{{ __('messages.web-site-satisfaction-survey') }}</p>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="5">
-                        {{ __('messages.level_survey.level_5') }}
-                    </label>
+                <div id="panel-vote">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="5">
+                            {{ __('messages.level_survey.level_5') }}
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="4">
+                            {{ __('messages.level_survey.lavel_4') }}
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios3" value="3">
+                            {{ __('messages.level_survey.lavel_3') }}
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios4" value="2">
+                            {{ __('messages.level_survey.lavel_2') }}
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios5" value="1">
+                            {{ __('messages.level_survey.lavel_1') }}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-default btn-theme">{{ __('messages.vote') }}</a>
+                        <a class="btn btn-default btn-theme" onclick="$('#panel-vote').hide();$('#panel-view-vote').show();">{{ __('messages.view-vote') }}</a>
+                    </div>
                 </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="4">
-                        {{ __('messages.level_survey.lavel_4') }}
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="3">
-                        {{ __('messages.level_survey.lavel_3') }}
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios4" value="2">
-                        {{ __('messages.level_survey.lavel_2') }}
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios5" value="1">
-                        {{ __('messages.level_survey.lavel_1') }}
-                    </label>
-                </div>
-                <div class="form-group">
-                    <a class="btn btn-default btn-theme">{{ __('messages.vote') }}</a>
-                    <a class="btn btn-default btn-theme">{{ __('messages.view-vote') }}</a>
+                <div id="panel-view-vote" style="display:none;">
+                    <canvas id="donutChart"></canvas>
+                    <a class="btn btn-default btn-theme" onclick="$('#panel-vote').show();$('#panel-view-vote').hide();">{{ __('messages.back') }}</a>
                 </div>
             </div>
         </div>
@@ -147,26 +169,45 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="popup">
-    <div class="modal-dialog">
-        <div class="modal-content" style="background-color:transparent;border:0px;border-radius:0px;-webkit-box-shadow:none;box-shadow:none;">
-            <div class="modal-header" style="border-bottom:0px;">
-                <button type="button" class="close" style="font-size:30px;color:#ffffff;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body text-center">
-                เนื้อหาประกาศ
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('script')
     <script src="https://api.longdo.com/map/?key=592a36a1908c4318a921581123606947"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function(){
-            $('#popup').modal('show');
+            const ctx = document.getElementById('donutChart');
+            const data = {
+                labels: [
+                    "{{ __('messages.level_survey.level_5') }}",
+                    "{{ __('messages.level_survey.lavel_4') }}",
+                    "{{ __('messages.level_survey.lavel_3') }}",
+                    "{{ __('messages.level_survey.lavel_2') }}",
+                    "{{ __('messages.level_survey.lavel_1') }}"
+                ],
+                datasets: [{
+                    label: "{{ __('messages.vote') }}",
+                    data: [
+                        300, 
+                        50, 
+                        50, 
+                        50, 
+                        100
+                    ],
+                    // backgroundColor: [
+                    //     'rgb(255, 99, 132)',
+                    //     'rgb(54, 162, 235)',
+                    //     'rgb(255, 205, 86)'
+                    // ],
+                    hoverOffset: 4
+                }]
+            };
+            const config = {
+                type: 'doughnut',
+                data: data,
+            };
+            new Chart(ctx, config);
+
         });
         var map;
         var lat = 13.580427, lon = 100.778433;
@@ -202,6 +243,17 @@
                 $(this).attr('aria-label','menu hot issue ' + (k+1));
             }); 
             $('.ldmap_anchor').attr('aria-label','ตำแหน่งที่ตั้งบริษัท');
+            $("#owl-carousel-popup").owlCarousel({
+                items:1,
+                loop:true,
+                margin:10,
+                responsiveClass:true,
+                autoplay:true,
+                autoplayHoverPause:true
+            });
+            setTimeout(() => {
+                $('#popup').modal('show'); 
+            }, 2000);
         });
     </script>
 @endsection

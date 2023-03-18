@@ -25,12 +25,10 @@
         <div class="row">
             @foreach ($data as $index => $item)
             <div class="col-xs-6 col-sm-4 col-md-3 col-md-3">
-                <div class="panel panel-default" data-toggle="modal" data-target="#dialog-gallery" onclick="setModalContent({{$index}})">
-                    <div class="panel-body">
-                        <a>
-                            <img src="{{ asset('images/customers/'.$item->customer_logo) }}" class="img-responsive" style="width:100%;border-radius:10px;padding: 10px;">
-                            @if(!empty($item->name))<h4 class="title">{{ $item->name }}</h4>@endif
-                        </a>
+                <div class="panel panel-default hover" data-toggle="modal" data-target="#dialog-gallery" onclick="setModalContent({{$index}})">
+                    <div class="panel-body text-center">
+                        <img src="{{ asset('images/customers/'.$item->customer_logo) }}" class="img-responsive" style="width:100%;border-radius:10px;padding: 10px;">
+                        @if(!empty($item->name))<h4>{{ $item->name }}</h4>@endif
                     </div>
                 </div>
             </div>

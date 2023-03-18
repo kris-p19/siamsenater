@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'back' => 'Back',
+    'slideShow' => 'Slide Show',
+    'pupup' => 'Pop up',
+    'hotIssue' => 'Hot Issue',
+    'facebookPlugin' => 'Facebook Plugin',
     'company-facebook-page' => 'Company facebook page',
     'vote' => 'Vote',
     'view-vote' => 'View the vote',

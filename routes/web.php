@@ -85,4 +85,10 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/our-service/edititem/{id}','OurServiceItemController@update');
     Route::get('/our-service/deleteitem/{id}','OurServiceItemController@destroy');
     Route::get('/our-service/item-update-status/{id}/{status}','OurServiceItemController@itemUpdateStatus');
+
+    Route::get('/facebookPlugin','FacebookMessagePluginController@show');
+    Route::post('/facebookPlugin','FacebookMessagePluginController@update');
+    Route::get('/facebookPlugin/status/{status_name}','FacebookMessagePluginController@updateStatus');
+
+    Route::get('/administration','UserController@index');
 });

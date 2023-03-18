@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'back' => 'ย้อนกลับ',
+    'slideShow' => 'สไลด์โชว์หน้าแรก',
+    'pupup' => 'ป๊อปอัพ',
+    'hotIssue' => 'ประเด็นร้อน',
+    'facebookPlugin' => 'เฟสบุ๊คปลั๊กอิน',
     'company-facebook-page' => 'เพจเฟสบุ๊คของบริษัท',
     'vote' => 'โหวต',
     'view-vote' => 'ดูผลโหวต',

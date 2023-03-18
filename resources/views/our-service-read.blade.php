@@ -23,7 +23,7 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="col-sm-offest-3 col-sm-6 col-md-offset-4 col-md-4">
                 <div class="panel panel-default hover">
                     <div class="panel-body">
                         <a href="{{ url('our-service/read/'.$data->id) }}">
@@ -37,6 +37,28 @@
                 </div>
             </div>
         </div>
+
+        @foreach ($item as $row)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default hover">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-left">
+                              <a href="#">
+                                <img class="media-object" src="{{ asset('images/our-service-items/'.$row->picture) }}" style="width:150px;object-fit:cover;" onerror="this.style.display='none';">
+                              </a>
+                            </div>
+                            <div class="media-body">
+                              <h4 class="media-heading">{!! $row->name !!}</h4>
+                            </div>
+                            Description
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
 
     </div>
 </div>

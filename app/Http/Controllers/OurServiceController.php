@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\OurService;
+use App\OurServiceItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -38,8 +39,7 @@ class OurServiceController extends Controller
             'data' => $data
         ]);
     }
-
-    public function read($id, OurService $ourService)
+    public static function indexArr($skip = 0, $limit = 3)
     {
         $data = [];
         if (app()->getLocale()=='th') {
@@ -49,7 +49,37 @@ class OurServiceController extends Controller
                 'hastag_th as hastag',
                 'picture_header',
                 'id'
+            )->where('status','active')->skip($skip)->limit($limit)->orderBy('created_at','desc')->get();
+        } else {
+            $data = OurService::select(
+                'service_name_en as service_name',
+                'service_desciption_en as service_desciption',
+                'hastag_en as hastag',
+                'picture_header',
+                'id'
+            )->where('status','active')->skip($skip)->limit($limit)->orderBy('created_at','desc')->get();
+        }
+        
+        return $data;
+    }
+
+    public function read($id, OurService $ourService)
+    {
+        $data = [];
+        $item = [];
+        if (app()->getLocale()=='th') {
+            $data = OurService::select(
+                'service_name_th as service_name',
+                'service_desciption_th as service_desciption',
+                'hastag_th as hastag',
+                'picture_header',
+                'id'
             )->where('id',$id)->where('status','active')->first();
+            $item = OurServiceItem::select(
+                'name_th as name',
+                'picture',
+                'id'
+            )->where('our_service_id',$id)->where('status','active')->get();
         } else {
             $data = OurService::select(
                 'service_name_en as service_name',
@@ -58,9 +88,15 @@ class OurServiceController extends Controller
                 'picture_header',
                 'id'
             )->where('id',$id)->where('status','active')->first();
+            $item = OurServiceItem::select(
+                'name_en as name',
+                'picture',
+                'id'
+            )->where('our_service_id',$id)->where('status','active')->get();
         }
         return view('our-service-read',[
-            'data' => $data
+            'data' => $data,
+            'item' => $item
         ]);
     }
 

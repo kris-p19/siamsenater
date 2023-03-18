@@ -234,18 +234,24 @@ h1, h2, h3 {
 .breadcrumb>li {
     font-size: 12px;
 }
+.media-heading {
+    margin-top: 10px;
+}
 .hover {
-    transition: 0.1s;
+    transition: 0.2s;
 }
 .hover:hover {
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    background-color: var(--theme-color);
+    color: var(--theme-font-color);
+    border-radius: 10px;
 }
 .btn-theme {
     background-color: var(--theme-color);
     color: var(--theme-font-color);
 }
 .btn, html, body, div, a, button {
-    transition: .2s;
+    transition: .1s;
 }
 .navbar-default .navbar-toggle .icon-bar {
     background-color: var(--theme-font-color);
