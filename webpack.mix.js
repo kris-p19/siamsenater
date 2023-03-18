@@ -50,4 +50,14 @@ mix.combine([
    'resources/theme/AdminLTE-3.2.0/dist/css/adminlte.min.css'
 ],'public/css/login.css');
 
-
+// Register
+mix.combine([
+   'resources/theme/AdminLTE-3.2.0/plugins/jquery/jquery.min.js',
+   'resources/theme/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js',
+   'resources/theme/AdminLTE-3.2.0/dist/js/adminlte.min.js'
+],'public/js/Register.js');
+mix.combine([
+   'resources/theme/AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css',
+   'resources/theme/AdminLTE-3.2.0/plugins/icheck-bootstrap/icheck-bootstrap.min.css',
+   'resources/theme/AdminLTE-3.2.0/dist/css/adminlte.min.css'
+],'public/css/Register.css');
