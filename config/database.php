@@ -63,26 +63,6 @@ return [
             ]) : [],
         ],
 
-        'stackdowhile' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => '163.44.198.71:2083',
-            // 'host' => 'https://cpanel16wh.bkk1.cloud.z.com',
-            'port' => '3306',
-            'database' => 'cp654753_stackdowhile',
-            'username' => 'cp654753',
-            'password' => 'Kris&1993@ZServer',
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => false,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
