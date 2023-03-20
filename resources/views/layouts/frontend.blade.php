@@ -97,7 +97,7 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="{{ url('/') }}">{{ __('messages.brand') }}</a>
+                                {{-- <a class="navbar-brand" href="{{ url('/') }}">{{ __('messages.brand') }}</a> --}}
                             </div>
                       
                             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -116,6 +116,7 @@
                                     <li class="@yield('page-customer')"><a href="{{ url('/customer') }}">{{ __('messages.customer') }}</a></li>
                                     <li class="@yield('page-news-activities')"><a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a></li>
                                     <li class="@yield('page-contact-us')"><a href="{{ url('/contact-us') }}">{{ __('messages.contact-us') }}</a></li>
+                                    <li class="@yield('page-join-us')"><a href="{{ url('/join-us/all') }}">{{ __('messages.join-us') }}</a></li>
                                     <li class="@yield('page-administration')"><a href="{{ url('/administration') }}">{{ __('messages.administration') }}</a></li>
 
                                     <li class="text-center">

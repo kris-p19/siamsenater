@@ -28,6 +28,9 @@ Route::get('/customer','CustomerController@index');
 Route::get('/news-activities','NewsActivitieController@index');
 Route::get('/news-activities/read/{id}','NewsActivitieController@read');
 Route::get('/contact-us','ContactUsController@index');
+Route::get('/join-us/{all}','JoinUsJobController@index');
+Route::get('/join-us-read/{id}','JoinUsJobController@read');
+Route::post('/join-us-register','JoinUsJobController@register');
 
 Route::get('/admin',function(){ return redirect('/webadmin'); });
 Route::get('/administration',function(){ return redirect('/webadmin'); });
@@ -109,4 +112,12 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/slideShow/create','SlideShowController@store');
     Route::get('/slideShow/update-status','SlideShowController@updateStatus');
     
+    Route::get('/join-us','JoinUsJobController@index');
+    Route::post('/join-us/create','JoinUsJobController@store');
+    Route::get('/join-us/edit/{id}','JoinUsJobController@edit');
+    Route::post('/join-us/edit/{id}','JoinUsJobController@update');
+    Route::get('/join-us/update-status/{id}/{status}','JoinUsJobController@updateStatus');
+    Route::get('/join-us/delete/{id}','JoinUsJobController@destroy');
+    Route::get('/join-us-is-join/{id}','JoinUsJobController@viewRegister');
+
 });
