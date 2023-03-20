@@ -36,26 +36,33 @@
             </div>
             <div class="panel-body" style="padding:0px;padding-bottom:10px;">
                 <div class="owl-carousel owl-theme" id="owl-carousel-hot-issue">
+                    @foreach (DB::table('hot_issues')->where('status','active')->orderBy('created_at')->get() as $info)
                     <div>
+                        <a href="{{ ($info->url=='empty'?'javascript:void(0);':$info->url) }}">
+                            <img src="{{ asset('images/hotIssue/'.$info->picture) }}" alt="300x300" style="width:100%;object-fit: cover;">
+                        </a>
+                    </div>
+                    @endforeach
+                    {{-- <div>
                         <a href="javascript:void(0);">
-                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;">
+                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;object-fit: cover;">
                         </a>
                     </div>
                     <div>
                         <a href="javascript:void(0);">
-                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;">
+                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;object-fit: cover;">
                         </a>
                     </div>
                     <div>
                         <a href="javascript:void(0);">
-                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;">
+                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;object-fit: cover;">
                         </a>
                     </div>
                     <div>
                         <a href="javascript:void(0);">
-                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;">
+                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;object-fit: cover;">
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -241,23 +248,23 @@
             title: "{{ __('messages.company_name_full') }}",
             detail: "<a href='https://www.google.com/maps/search/?api=1&query="+lat+","+lon+"' target='_blank'>ขอเส้นทาง</a>"
         }));
-        $(document).ready(function(){
-            $('#owl-carousel-hot-issue').find('.owl-dot').each(function(k,v){
-                $(this).attr('role','none');
-                $(this).attr('aria-label','menu hot issue ' + (k+1));
-            }); 
-            $('.ldmap_anchor').attr('aria-label','ตำแหน่งที่ตั้งบริษัท');
-            $("#owl-carousel-popup").owlCarousel({
-                items:1,
-                loop:true,
-                margin:10,
-                responsiveClass:true,
-                autoplay:true,
-                autoplayHoverPause:true
-            });
-            setTimeout(() => {
-                $('#popup').modal('show'); 
-            }, 2000);
-        });
+        // $(document).ready(function(){
+        //     $('#owl-carousel-hot-issue').find('.owl-dot').each(function(k,v){
+        //         $(this).attr('role','none');
+        //         $(this).attr('aria-label','menu hot issue ' + (k+1));
+        //     }); 
+        //     $('.ldmap_anchor').attr('aria-label','ตำแหน่งที่ตั้งบริษัท');
+        //     $("#owl-carousel-popup").owlCarousel({
+        //         items:1,
+        //         loop:true,
+        //         margin:10,
+        //         responsiveClass:true,
+        //         autoplay:true,
+        //         autoplayHoverPause:true
+        //     });
+        //     setTimeout(() => {
+        //         $('#popup').modal('show'); 
+        //     }, 2000);
+        // });
     </script>
 @endsection

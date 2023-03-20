@@ -91,4 +91,8 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/facebookPlugin/status/{status_name}','FacebookMessagePluginController@updateStatus');
 
     Route::get('/administration','UserController@index');
+
+    Route::get('/hotIssue','HotIssueController@index');
+    Route::post('/hotIssue/create','HotIssueController@store');
+    Route::get('/hotIssue/update-status','HotIssueController@updateStatus');
 });

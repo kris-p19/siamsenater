@@ -198,7 +198,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a style="color:rgb(196, 105, 105);" href="{{ url('/webadmin/hotIssue') }}" class="nav-link @yield('webadmin-hotIssue')">
+              <a href="{{ url('/webadmin/hotIssue') }}" class="nav-link @yield('webadmin-hotIssue')">
                 <i class="nav-icon far fa-flag"></i>
                 <p>{{ __('messages.hotIssue') }}</p>
               </a>
