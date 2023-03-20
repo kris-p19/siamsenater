@@ -221,26 +221,13 @@
                     </div>
                     <div class="modal-body text-center">
                         <div class="owl-carousel owl-theme" id="owl-carousel-popup">
+                            @foreach (DB::table('popups')->where('status','active')->orderBy('created_at','desc')->get() as $info)
                             <div>
-                                <a href="javascript:void(0);">
-                                    <img src="{{ asset('images/slide1.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
+                                <a href="{{ ($info->url=='empty'?'javascript:void(0);':$info->url) }}">
+                                    <img src="{{ asset('images/popup/'.$info->picture) }}?_={{ time() }}" alt="{{ $info->picture }}" style="width:100%;">
                                 </a>
                             </div>
-                            <div>
-                                <a href="javascript:void(0);">
-                                    <img src="{{ asset('images/slide2.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
-                                </a>
-                            </div>
-                            <div>
-                                <a href="javascript:void(0);">
-                                    <img src="{{ asset('images/slide3.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
-                                </a>
-                            </div>
-                            <div>
-                                <a href="javascript:void(0);">
-                                    <img src="{{ asset('images/slide4.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
-                                </a>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

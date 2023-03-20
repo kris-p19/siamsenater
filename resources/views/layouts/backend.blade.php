@@ -204,13 +204,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a style="color:rgb(196, 105, 105);" href="{{ url('/webadmin/pupup') }}" class="nav-link @yield('webadmin-pupup')">
+              <a href="{{ url('/webadmin/pupup') }}" class="nav-link @yield('webadmin-pupup')">
                 <i class="nav-icon fas fa-bell"></i>
                 <p>{{ __('messages.pupup') }}</p>
               </a>
             </li>
             <li class="nav-item">
-              <a style="color:rgb(196, 105, 105);" href="{{ url('/webadmin/slideShow') }}" class="nav-link @yield('webadmin-slideShow')">
+              <a href="{{ url('/webadmin/slideShow') }}" class="nav-link @yield('webadmin-slideShow')">
                 <i class="nav-icon fas fa-images"></i>
                 <p>{{ __('messages.slideShow') }}</p>
               </a>

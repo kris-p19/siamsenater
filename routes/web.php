@@ -95,4 +95,13 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/hotIssue','HotIssueController@index');
     Route::post('/hotIssue/create','HotIssueController@store');
     Route::get('/hotIssue/update-status','HotIssueController@updateStatus');
+
+    Route::get('/pupup','PopupController@index');
+    Route::post('/pupup/create','PopupController@store');
+    Route::get('/pupup/update-status','PopupController@updateStatus');
+
+    Route::get('/slideShow','SlideShowController@index');
+    Route::post('/slideShow/create','SlideShowController@store');
+    Route::get('/slideShow/update-status','SlideShowController@updateStatus');
+    
 });

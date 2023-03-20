@@ -5,26 +5,13 @@
 <div class="row" style="margin-top: 10px;">
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9" id="panel-owl-carousel-welcome">
         <div class="owl-carousel owl-theme" id="owl-carousel-welcome">
+            @foreach (DB::table('slide_shows')->where('status','active')->orderBy('created_at','desc')->get() as $info)
             <div>
-                <a href="javascript:void(0);">
-                    <img src="{{ asset('images/slide1.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
+                <a href="{{ ($info->url=='empty'?'javascript:void(0);':$info->url) }}">
+                    <img src="{{ asset('images/slideShow/'.$info->picture) }}" alt="{{ $info->picture }}" style="width:100%;">
                 </a>
-            </div>
-            <div>
-                <a href="javascript:void(0);">
-                    <img src="{{ asset('images/slide2.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
-                </a>
-            </div>
-            <div>
-                <a href="javascript:void(0);">
-                    <img src="{{ asset('images/slide3.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
-                </a>
-            </div>
-            <div>
-                <a href="javascript:void(0);">
-                    <img src="{{ asset('images/slide4.jpg') }}?_={{ time() }}" alt="slide1" style="width:100%;">
-                </a>
-            </div>
+            </div>  
+            @endforeach
         </div>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
@@ -248,23 +235,29 @@
             title: "{{ __('messages.company_name_full') }}",
             detail: "<a href='https://www.google.com/maps/search/?api=1&query="+lat+","+lon+"' target='_blank'>ขอเส้นทาง</a>"
         }));
-        // $(document).ready(function(){
-        //     $('#owl-carousel-hot-issue').find('.owl-dot').each(function(k,v){
-        //         $(this).attr('role','none');
-        //         $(this).attr('aria-label','menu hot issue ' + (k+1));
-        //     }); 
-        //     $('.ldmap_anchor').attr('aria-label','ตำแหน่งที่ตั้งบริษัท');
-        //     $("#owl-carousel-popup").owlCarousel({
-        //         items:1,
-        //         loop:true,
-        //         margin:10,
-        //         responsiveClass:true,
-        //         autoplay:true,
-        //         autoplayHoverPause:true
-        //     });
-        //     setTimeout(() => {
-        //         $('#popup').modal('show'); 
-        //     }, 2000);
-        // });
+        $(document).ready(function(){
+            $('#owl-carousel-hot-issue').find('.owl-dot').each(function(k,v){
+                $(this).attr('role','none');
+                $(this).attr('aria-label','menu hot issue ' + (k+1));
+            }); 
+            $('.ldmap_anchor').attr('aria-label','ตำแหน่งที่ตั้งบริษัท');
+        });
     </script>
+    @if(DB::table('popups')->where('status','active')->count()>0)
+        <script>
+            $(document).ready(function(){
+                $("#owl-carousel-popup").owlCarousel({
+                    items:1,
+                    loop:true,
+                    margin:10,
+                    responsiveClass:true,
+                    autoplay:true,
+                    autoplayHoverPause:true
+                });
+                setTimeout(() => {
+                    $('#popup').modal('show'); 
+                }, 2000);
+            });
+        </script> 
+    @endif
 @endsection
