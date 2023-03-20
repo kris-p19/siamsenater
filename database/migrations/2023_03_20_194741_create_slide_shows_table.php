@@ -16,10 +16,31 @@ class CreateSlideShowsTable extends Migration
         Schema::create('slide_shows', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('picture');
-            $table->string('url');
+            $table->string('url')->default('empty');
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });
+
+        DB::table('slide_shows')->insert([
+            [
+                'picture' => 'slide1.jpg',
+                'url' => 'empty',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'picture' => 'slide2.jpg',
+                'url' => 'empty',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'picture' => 'slide3.jpg',
+                'url' => 'empty',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]
+        ]);
     }
 
     /**

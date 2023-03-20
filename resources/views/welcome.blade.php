@@ -3,6 +3,7 @@
 
 @section('content')
 <div class="row" style="margin-top: 10px;">
+    @if(DB::table('slide_shows')->where('status','active')->count()>0)
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9" id="panel-owl-carousel-welcome">
         <div class="owl-carousel owl-theme" id="owl-carousel-welcome">
             @foreach (DB::table('slide_shows')->where('status','active')->orderBy('created_at','desc')->get() as $info)
@@ -14,6 +15,8 @@
             @endforeach
         </div>
     </div>
+    @endif
+    @if(DB::table('hot_issues')->where('status','active')->count())
     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -30,30 +33,11 @@
                         </a>
                     </div>
                     @endforeach
-                    {{-- <div>
-                        <a href="javascript:void(0);">
-                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;object-fit: cover;">
-                        </a>
-                    </div>
-                    <div>
-                        <a href="javascript:void(0);">
-                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;object-fit: cover;">
-                        </a>
-                    </div>
-                    <div>
-                        <a href="javascript:void(0);">
-                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;object-fit: cover;">
-                        </a>
-                    </div>
-                    <div>
-                        <a href="javascript:void(0);">
-                            <img src="{{ asset('images/300x300.jpg') }}" alt="300x300" style="width:100%;object-fit: cover;">
-                        </a>
-                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
+    @endif
 </div>
 <div class="row">
     <div class="col-md-12">

@@ -16,10 +16,25 @@ class CreateHotIssuesTable extends Migration
         Schema::create('hot_issues', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('picture');
-            $table->string('url');
+            $table->string('url')->default('empty');
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });
+
+        DB::table('hot_issues')->insert([
+            [
+                'picture' => '300x300.jpg',
+                'url' => 'empty',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'picture' => '300x300.jpg',
+                'url' => 'empty',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]
+        ]);
     }
 
     /**

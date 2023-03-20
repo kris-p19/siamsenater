@@ -20,16 +20,18 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('status',['active','inactive'])->default('active');
             $table->rememberToken();
             $table->timestamps();
         });
 
         DB::table('users')->insert([
             [
-                'name'              =>  'กฤช โพธิ์ประดิษฐ์', 
-                'email'             =>  'kris.p.pop@gmail.com', 
-                'email_verified_at' =>  date('Y-m-d H:i:s'), 
-                'password'          =>  Hash::make('google1234'),
+                'name'              => 'Super Administrator', 
+                'email'             => 'master@siamsenater.com', 
+                'email_verified_at' => date('Y-m-d H:i:s'), 
+                'password'          => Hash::make('12345678'),
+                'status'            => 'active',
                 'created_at'        => date('Y-m-d H:i:s'),
                 'updated_at'        => date('Y-m-d H:i:s')
             ]

@@ -264,7 +264,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a style="color:rgb(196, 105, 105);" href="{{ url('/webadmin/administration') }}" class="nav-link @yield('webadmin-administration')">
+              <a href="{{ url('/webadmin/administration') }}" class="nav-link @yield('webadmin-administration')">
                 <i class="nav-icon fas fa-user-cog"></i>
                 <p>{{ __('messages.administration') }}</p>
               </a>

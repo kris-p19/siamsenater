@@ -28,11 +28,17 @@
                     <tbody>
                         @foreach($data as $index => $row)
                         <tr>
-                            <td class="text-center">{!! $index+1 !!}</td>
+                            <td class="text-center">{!! ($index+1) !!}</td>
                             <td class="text-center">
+                                @if($row->email=='master@siamsenater.com')
+                                    @if(Auth::user()->email=='master@siamsenater.com')
+                                    <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/administration/reset/'.$row->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i> รีเซ็ตรหัส</a>
+                                    @endif
+                                @else
                                 <a style="border-radius:45px;width:100px;" onclick="if(confirm('ยืนยันการทำรายการ?')){ window.location.href=$(this).data('href'); }" data-href="{{ url('/webadmin/administration/delete/'.$row->id) }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> ลบ</a>
-                                <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/administration/edit/'.$row->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit" aria-hidden="true"></i> แก้ไข</a>
+                                <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/administration/reset/'.$row->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i> รีเซ็ตรหัส</a>
                                 <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/administration/update-status/'.$row->id.'/'.($row->status=='active'?'inactive':'active')) }}" class="btn btn-outline-{{ ($row->status=='active'?'primary':'secondary') }} btn-sm"><i class="fa fa-{{ ($row->status=='active'?'eye':'eye-slash') }}" aria-hidden="true"></i> {{ ($row->status=='active'?'เปิดใช้งาน':'ปิดใช้งาน') }}</a>
+                                @endif
                             </td>
                             <td>{!! $row->name !!}</td>
                             <td>{!! $row->email !!}</td>

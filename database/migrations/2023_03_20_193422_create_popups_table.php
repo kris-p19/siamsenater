@@ -16,7 +16,7 @@ class CreatePopupsTable extends Migration
         Schema::create('popups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('picture');
-            $table->string('url');
+            $table->string('url')->default('empty');
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });
