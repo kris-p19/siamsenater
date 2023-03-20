@@ -32,7 +32,7 @@
                     <input type="text" class="form-control" autofocus placeholder="URL" value="{!! $data->path !!}" name="path">
                 </div>
                 <div class="form-group">
-                    <label>ไอคอน (material-icons)</label>
+                    <label>ไอคอน (material-icons) <a href="https://fonts.google.com/icons?icon.style=Filled&icon.set=Material+Icons" target="_blank">ดูตัวอย่าง</a></label>
                     <input type="text" class="form-control" autofocus placeholder="ไอคอน (material-icons)" value="{!! $data->icon !!}" name="icon">
                 </div>
             </div>
