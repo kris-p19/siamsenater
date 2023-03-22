@@ -154,7 +154,8 @@ class JoinUsJobController extends Controller
         ->whereDate('date_end','>=',date('Y-m-d'))
         ->where('status','active')
         ->where('maximum_regis','>=',JoinUsRegis::where('job_id',$request->job_id)->count())
-        ->first();
+        ->count();
+        
         if ($job==0) {
             return response()->json(['status'=>'danger', 'msg'=>'ขออภัย, ตำแหน่งงานนี้ปิดรับสมัครแล้ว']);
         }

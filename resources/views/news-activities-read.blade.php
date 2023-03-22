@@ -36,11 +36,11 @@
                 <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
                     @if(!empty($data->picture_gallery))
                         <div id="lightgallery">
-                            <a href="{{ asset('images/news-activites/'.$data->picture_header) }}" data-sub-html="{{ $data->title }}">
+                            <a class="selector" href="{{ asset('images/news-activites/'.$data->picture_header) }}" data-sub-html="{{ $data->title }}">
                                 <img src="{{ asset('images/news-activites/'.$data->picture_header) }}" style="width:150px;height:150px;object-fit:cover;" onerror="this.style.display='none'">
                             </a>
                             @foreach(json_decode($data->picture_gallery) as $index => $info)
-                            <a href="{{ asset('images/news-activites/'.$info) }}" data-sub-html="{{ $data->title }}">
+                            <a class="selector" href="{{ asset('images/news-activites/'.$info) }}" data-sub-html="{{ $data->title }}">
                                 <img src="{{ asset('images/news-activites/'.$info) }}" style="width:150px;height:150px;object-fit:cover;" onerror="this.style.display='none'">
                             </a>
                             @endforeach
@@ -58,12 +58,11 @@
 
 @section('script')
 <script>
-    lightGallery(document.getElementById('lightgallery'), {
-        plugins: [lgZoom, lgThumbnail, lgAutoplay, lgShare],
-        licenseKey: '{{ mt_rand(1000000, 9999999) }}',
-        speed: 500,
-    });
     $(document).ready(function(){
+        $('#lightgallery').lightGallery({
+            thumbnail: true,
+            selector: '.selector'
+        });
         $("#content-new").find("img").each(function(){
             $(this).addClass("img-responsive")
         });

@@ -28,14 +28,14 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9" id="lightgallery">
                 @foreach ($content as $index => $item)
                     <div class="row" style="padding-bottom:30px;">
                         <div class="col-md-12" style="border-bottom: 1px solid #eee;padding-bottom:10px;">
                             <div class="col-md-3 text-right title" style="margin-bottom:10px;"><b>{!! $item->subject !!}</b></div>
                             <div class="col-md-9">
                                 @if($item->datatype=='image')
-                                    <a href="{{ asset('upload/about-us/'.$item->content) }}" target="_blank">
+                                    <a class="selector" href="{{ asset('upload/about-us/'.$item->content) }}" target="_blank" data-sub-html="{{ $item->subject }}">
                                         <img src="{{ asset('upload/about-us/'.$item->content) }}" class="img-responsive">
                                     </a>
                                 @elseif($item->datatype=='file')
@@ -43,7 +43,9 @@
                                         <img src="{{ asset('images/'.explode('.',$item->content)[1].'.png') }}" style="width:40px;" class="img-responsive">
                                     </a>
                                 @else
-                                    {!! $item->content !!}
+                                    <div id="content-new">
+                                        {!! $item->content !!}
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -53,4 +55,18 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $('#lightgallery').lightGallery({
+                thumbnail: true,
+                selector: '.selector'
+            });
+            $("#content-new").find("img").each(function(){
+                $(this).addClass("img-responsive")
+            });
+        });
+    </script>
 @endsection
