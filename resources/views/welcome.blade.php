@@ -53,7 +53,6 @@
                                     <img class="media-object" src="{{ asset('images/our-service/'.$item->picture_header) }}" style="width:100%;object-fit:cover;" onerror="this.style.display='none';">
                                 </a>
                                 <h4 class="media-heading title">{!! $item->service_name !!}</h4>
-                                <p>{!! $item->service_desciption !!}</p>
                                 <p>@foreach(explode(',',$item->hastag) as $hastag) <label class="label label-default">{!! $hastag !!}</label> @endforeach</p>
                                 <p><a href="{{ url('our-service/read/'.$item->id) }}" class="btn btn-primary">{{ __('messages.detail') }}</a></p>
                             </div>

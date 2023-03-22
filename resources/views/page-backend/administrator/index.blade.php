@@ -32,7 +32,7 @@
                             <td class="text-center">
                                 @if($row->email=='master@siamsenater.com')
                                     @if(Auth::user()->email=='master@siamsenater.com')
-                                    <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/administration/reset/'.$row->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i> รีเซ็ตรหัส</a>
+                                    <a style="border-radius:45px;width:100px;" onclick="if(confirm('ยืนยันการรีเส็จรหัสผ่าน')){window.location.href=$(this).data('href')};" data-href="{{ url('/webadmin/administration/reset/'.$row->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i> รีเซ็ตรหัส</a>
                                     @endif
                                 @else
                                 <a style="border-radius:45px;width:100px;" onclick="if(confirm('ยืนยันการทำรายการ?')){ window.location.href=$(this).data('href'); }" data-href="{{ url('/webadmin/administration/delete/'.$row->id) }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> ลบ</a>

@@ -166,9 +166,9 @@
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #541e1e;">
       <!-- Brand Logo -->
-      <a href="{{ url('/') }}" class="brand-link">
+      <a href="{{ url('/') }}" class="brand-link" style="background-color: #7e0000;">
         <img src="{{ asset('images/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8;width:30px;height:30px;object-fit:cover;">
         <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
       </a>

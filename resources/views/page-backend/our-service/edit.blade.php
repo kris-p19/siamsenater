@@ -69,8 +69,8 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        CKEDITOR.replace("editor_content_th");
-        CKEDITOR.replace("editor_content_en");
+        CKEDITOR.replace("service_desciption_th");
+        CKEDITOR.replace("service_desciption_en");
         CKEDITOR.config.height = 300;
     });
 </script>
