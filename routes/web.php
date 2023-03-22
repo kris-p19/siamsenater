@@ -24,6 +24,8 @@ foreach (DB::table('about_us')->get() as $key => $item) {
 }
 Route::get('/our-service','OurServiceController@index');
 Route::get('/our-service/read/{id}','OurServiceController@read');
+Route::get('/product','ProductController@index');
+Route::get('/product/grp/{group_name}','ProductController@index');
 Route::get('/customer','CustomerController@index');
 Route::get('/news-activities','NewsActivitieController@index');
 Route::get('/news-activities/read/{id}','NewsActivitieController@read');
@@ -81,6 +83,7 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/our-service/edit/{id}','OurServiceController@update');
     Route::get('/our-service/delete/{id}','OurServiceController@destroy');
     Route::get('/our-service/update-status/{id}/{status}','OurServiceController@updateStatus');
+
     Route::get('/our-service/item/{our_service_id}','OurServiceItemController@show');
     Route::get('/our-service/createitem/{our_service_id}','OurServiceItemController@create');
     Route::post('/our-service/createitem/{our_service_id}','OurServiceItemController@store');
@@ -127,4 +130,12 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/related-link/edit/{id}','RelatedLinkController@update');
     Route::get('/related-link/update-status/{id}/{status}','RelatedLinkController@updateStatus');
     Route::get('/related-link/delete/{id}','RelatedLinkController@destroy');
+
+    Route::get('/product','ProductController@show');
+    Route::get('/product/createitem','ProductController@create');
+    Route::post('/product/createitem','ProductController@store');
+    Route::get('/product/edititem/{id}','ProductController@edit');
+    Route::post('/product/edititem/{id}','ProductController@update');
+    Route::get('/product/deleteitem/{id}','ProductController@destroy');
+    Route::get('/product/item-update-status/{id}/{status}','ProductController@itemUpdateStatus');
 });
