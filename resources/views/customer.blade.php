@@ -39,7 +39,7 @@
             <div id="light-gallery" style="display:none;">
                 @foreach ($data as $index => $item)
                 <a id="hide_id_{{$index}}" href="{{ asset('images/customers/'.$item->customer_logo) }}" data-sub-html="{{ $item->name }}<br>{{ $item->description }}">
-                    <img src="{{ asset('images/customers/'.$item->customer_logo) }}">
+                    <img src="{{ asset('images/customers/'.$item->customer_logo) }}" style="width:200px !important;">
                 </a>
                 @endforeach
             </div>
