@@ -40,27 +40,29 @@
 
         <hr>
 
-        @foreach ($item as $row)
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default hover">
-                    <div class="panel-body">
-                        <div class="media">
-                            <div class="media-left">
-                              <a href="javascript:void(0);">
-                                <img class="media-object" src="{{ asset('images/our-service-items/'.$row->picture) }}" style="width:150px;object-fit:cover;" onerror="this.style.display='none';">
-                              </a>
+        <div id="light-gallery">
+            @foreach ($item as $row)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default hover">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a class="selector" href="{{ asset('images/our-service-items/'.$row->picture) }}" data-sub-html="{!! $row->name !!} {{ $row->desciption }}">
+                                        <img class="media-object" src="{{ asset('images/our-service-items/'.$row->picture) }}" style="width:150px;object-fit:cover;" onerror="this.style.display='none';">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading title">{!! $row->name !!}</h4>
+                                </div>
                             </div>
-                            <div class="media-body">
-                              <h4 class="media-heading">{!! $row->name !!}</h4>
-                            </div>
-                            Description
+                            <p style="margin-top: 10px;">{!! $row->desciption !!}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
 
     </div>
 </div>
@@ -71,6 +73,10 @@
         $(document).ready(function(){
             $("#content-new").find("img").each(function(){
                 $(this).addClass("img-responsive")
+            });
+            $('#light-gallery').lightGallery({
+                thumbnail: true,
+                selector: '.selector'
             });
         });
     </script>

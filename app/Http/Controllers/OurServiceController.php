@@ -77,6 +77,7 @@ class OurServiceController extends Controller
             )->where('id',$id)->where('status','active')->first();
             $item = OurServiceItem::select(
                 'name_th as name',
+                'desciption_th as desciption',
                 'picture',
                 'id'
             )->where('our_service_id',$id)->where('status','active')->get();
@@ -90,6 +91,7 @@ class OurServiceController extends Controller
             )->where('id',$id)->where('status','active')->first();
             $item = OurServiceItem::select(
                 'name_en as name',
+                'desciption_en as desciption',
                 'picture',
                 'id'
             )->where('our_service_id',$id)->where('status','active')->get();

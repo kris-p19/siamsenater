@@ -18,6 +18,8 @@ class CreateOurServiceItemsTable extends Migration
             $table->integer('our_service_id');
             $table->string('name_th')->nullable();
             $table->string('name_en')->nullable();
+            $table->text('desciption_th')->nullable();
+            $table->text('desciption_en')->nullable();
             $table->text('picture');
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();

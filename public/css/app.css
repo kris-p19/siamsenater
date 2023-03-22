@@ -246,6 +246,9 @@ h1, h2, h3 {
     color: var(--theme-font-color);
     border-radius: 10px;
 }
+.hover:hover .title {
+    color: var(--theme-font-color);
+}
 .btn-theme {
     background-color: var(--theme-color);
     color: var(--theme-font-color);

@@ -25,7 +25,7 @@
         <div class="row">
             @foreach ($data as $index => $item)
             <div class="col-xs-6 col-sm-4 col-md-3 col-md-3">
-                <div class="panel panel-default hover" data-toggle="modal" data-target="#dialog-gallery" onclick="setModalContent({{$index}})">
+                <div class="panel panel-default hover" onclick="$('#hide_id_{{$index}}').trigger('click');">
                     <div class="panel-body text-center">
                         <img src="{{ asset('images/customers/'.$item->customer_logo) }}" class="img-responsive" style="width:100%;border-radius:10px;padding: 10px;">
                         @if(!empty($item->name))<h4>{{ $item->name }}</h4>@endif
@@ -36,23 +36,12 @@
             <div style="display:none;" id="title_{{$index}}">{!! $item->name !!}</div>
             <div style="display:none;" id="content_{{$index}}">{!! $item->description !!}</div>
             @endforeach
-        </div>
-        <div class="modal fade" id="dialog-gallery">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="border-bottom:0px;">
-                        <button type="button" class="close" style="font-size:30px;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 style="margin-top:15px;" class="modal-title title"></h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <img src="{{ asset('images/logo.png') }}" style="width:100%;" class="images" onerror="this.style.display='none';">
-                                <p style="margin-top:15px;" class="content"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="light-gallery" style="display:none;">
+                @foreach ($data as $index => $item)
+                <a id="hide_id_{{$index}}" href="{{ asset('images/customers/'.$item->customer_logo) }}" data-sub-html="{{ $item->name }}<br>{{ $item->description }}">
+                    <img src="{{ asset('images/customers/'.$item->customer_logo) }}">
+                </a>
+                @endforeach
             </div>
         </div>
     </div>
@@ -66,5 +55,9 @@
         $("#dialog-gallery").find(".title").html($("#title_" + id).html());
         $("#dialog-gallery").find(".content").html($("#content_" + id).html());
     }
+    $('#light-gallery').lightGallery({
+        thumbnail: true,
+        selector: 'a'
+    });
 </script>
 @endsection

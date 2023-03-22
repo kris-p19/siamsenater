@@ -42,6 +42,8 @@ class OurServiceItemController extends Controller
         $table->our_service_id = $id;
         $table->name_th = $request->name_th;
         $table->name_en = $request->name_en;
+        $table->desciption_th = $request->desciption_th;
+        $table->desciption_en = $request->desciption_en;
         if (!empty($request->file('picture'))) {
             $files = $request->file('picture');
             $destinationPath = public_path('/images/our-service-items/');
@@ -96,7 +98,9 @@ class OurServiceItemController extends Controller
     {
         $data = [
             'name_th' => $request->name_th,
-            'name_en' => $request->name_en
+            'name_en' => $request->name_en,
+            'desciption_th' => $request->desciption_th,
+            'desciption_en' => $request->desciption_en
         ];
         if (!empty($request->file('picture'))) {
             $table = $ourServiceItem->where('id',$id)->first();

@@ -20,15 +20,27 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>ชื่อภาษาไทย</label>
                             <input type="text" class="form-control" name="name_th" autofocus placeholder="ชื่อภาษาไทย" value="{{ $data->name_th }}">
                         </div>
                         <div class="form-group">
+                            <label>คำอธิบายภาษาไทย</label>
+                            <textarea name="desciption_th" id="desciption_th">{{ $data->desciption_th }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label>ชื่อภาษาอังกฤษ</label>
                             <input type="text" class="form-control" name="name_en" autofocus placeholder="ชื่อภาษาอังกฤษ" value="{{ $data->name_en }}">
                         </div>
+                        <div class="form-group">
+                            <label>คำอธิบายภาษาอังกฤษ</label>
+                            <textarea name="desciption_en" id="desciption_en">{{ $data->desciption_en }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label>ภาพ</label>
                             <input type="file" class="form-control" name="picture" accept="image/*">
@@ -51,9 +63,9 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        // CKEDITOR.replace("service_desciption_th");
-        // CKEDITOR.replace("service_desciption_en");
-        // CKEDITOR.config.height = 300;
+        CKEDITOR.replace("desciption_th");
+        CKEDITOR.replace("desciption_en");
+        CKEDITOR.config.height = 300;
     });
 </script>
 @endsection
