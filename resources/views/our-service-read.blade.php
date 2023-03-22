@@ -49,7 +49,7 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a class="selector" href="{{ asset('images/our-service-items/'.$row->picture) }}" data-sub-html="{!! $row->name !!} {{ $row->desciption }}">
-                                        <img class="media-object" src="{{ asset('images/our-service-items/'.$row->picture) }}" style="width:150px;object-fit:cover;" onerror="this.style.display='none';">
+                                        <img class="media-object" src="{{ asset('images/our-service-items/resize/'.$row->picture) }}" style="width:150px;object-fit:cover;" onerror="this.style.display='none';">
                                     </a>
                                 </div>
                                 <div class="media-body">

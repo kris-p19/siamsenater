@@ -19,25 +19,6 @@ class OurServiceItemController extends Controller
         //
     }
 
-    public function allResize()
-    {
-        $data = OurServiceItem::get();
-        $destinationPath = public_path('/images/our-service-items/');
-        foreach ($data as $key => $value) {
-            if (!File::exists(public_path('/images/our-service-items/resize/'.$value->picture))) {
-                list($width, $height) = getimagesize($destinationPath . $value->picture);
-                $newwidth = 300;
-                $newheight = ($height / $width) * $newwidth;
-                $thumb = imagecreatetruecolor($newwidth, $newheight);
-                $source = imagecreatefromjpeg($destinationPath . $value->picture);
-                imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                $resized_folder = $destinationPath . 'resize/' . $value->picture;
-                imagejpeg($thumb, $resized_folder, 80);
-            }
-        }
-        return 'done';
-    }
-
     /**
      * Show the form for creating a new resource.
      *
