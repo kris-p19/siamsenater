@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'empty' => 'We currently do not have job openings.',
     'back' => 'Back',
     'slideShow' => 'Slide Show',
     'pupup' => 'Pop up',

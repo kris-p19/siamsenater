@@ -23,6 +23,7 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="list-group">
+                    @if(empty(count($data)))<a href="javascript:void(0);" class="list-group-item" style="border:0px;">{{ __('messages.empty') }}</a>@endif
                     @foreach ($data as $item)
                     <a href="{{ url('join-us-read/'.$item->id) }}" class="list-group-item">
                         <p class="title">

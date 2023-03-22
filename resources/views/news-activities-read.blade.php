@@ -30,7 +30,7 @@
                 <div class="col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6" style="margin-bottom: 20px;">
                     <img src="{{ asset('images/news-activites/'.$data->picture_header) }}" class="img-responsive" style="width:100%;" onerror="this.style.display='none'">
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
+                <div id="content-new" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
                     {!! $data->content !!}
                 </div>
                 <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
@@ -62,6 +62,11 @@
         plugins: [lgZoom, lgThumbnail, lgAutoplay, lgShare],
         licenseKey: '{{ mt_rand(1000000, 9999999) }}',
         speed: 500,
+    });
+    $(document).ready(function(){
+        $("#content-new").find("img").each(function(){
+            $(this).addClass("img-responsive")
+        });
     });
 </script>
 @endsection
