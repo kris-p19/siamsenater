@@ -25,7 +25,7 @@
             @foreach ($first_item as $item)
             <div class="col-md-4">
                 <div class="thumbnail" style="cursor:pointer;background-color: #ffe8d6;padding:0px;border:0px;" onclick="window.location.href=$(this).data('href');" data-href="{{ url('news-activities/read/'.$item->id) }}">
-                    <img src="{{ asset('images/news-activites/'.$item->picture_header) }}" alt="{{ $item->title }}" style="object-fit: cover;width:100%;height:300px;">
+                    <img src="{{ asset('images/news-activites/'.$item->picture_header) }}" alt="{{ $item->title }}" style="object-fit: cover;width:100%;height:300px;" onerror="this.style.display='none';">
                     <div class="caption">
                         <p style="color:red;"><span class="material-icons" style="font-size:16px;position:relative !important;">calendar_month</span> {{ date('d',strtotime($item->public_datetime)) . ' ' . (__('messages.month.'.strtolower(date('F',strtotime($item->public_datetime))))) . ' ' . (date('Y',strtotime($item->public_datetime))+543) }}</p>
                         <h4 class="title" style="font-weight:normal;">{{ $item->title }}</h4>
@@ -42,7 +42,7 @@
                     <a href="{{ url('news-activities/read/'.$item->id) }}" class="list-group-item">
                         <div class="row">
                             <div class="col-xs-3 col-sm-3 col-md-1 col-lg-1">
-                                <img src="{{ asset('images/news-activites/'.$item->picture_header) }}" alt="{{ $item->title }}" style="object-fit: cover;width:100%;">
+                                <img src="{{ asset('images/news-activites/'.$item->picture_header) }}" alt="{{ $item->title }}" style="object-fit: cover;width:100%;" onerror="this.style.display='none';">
                             </div>
                             <div class="col-xs-9 col-sm-9 col-md-11 col-lg-11">
                                 <p class="title">{{ $item->title }}</p>
