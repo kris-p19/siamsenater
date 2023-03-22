@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="row" style="margin-bottom:20px;">
-            <div class="col-md-12 table-responsive">
+            <div class="col-md-12">
                 {!! $data->job_description !!}
             </div>
         </div>
@@ -137,8 +137,12 @@
                             if (response.status=='success') {
                                 alert(response.msg);
                                 $('#modal-register-join-us').modal('hide');
+                                window.location.href = "";
+                            } else {
+                                alert(response.msg);
+                                $('#modal-register-join-us').modal('hide');
+                                window.location.href = "";
                             }
-                            console.log(response);
                         }
                     });
                 });

@@ -120,4 +120,11 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/join-us/delete/{id}','JoinUsJobController@destroy');
     Route::get('/join-us-is-join/{id}','JoinUsJobController@viewRegister');
 
+    Route::get('/related-link','RelatedLinkController@index');
+    Route::get('/related-link/create','RelatedLinkController@create');
+    Route::post('/related-link/create','RelatedLinkController@store');
+    Route::get('/related-link/edit/{id}','RelatedLinkController@edit');
+    Route::post('/related-link/edit/{id}','RelatedLinkController@update');
+    Route::get('/related-link/update-status/{id}/{status}','RelatedLinkController@updateStatus');
+    Route::get('/related-link/delete/{id}','RelatedLinkController@destroy');
 });

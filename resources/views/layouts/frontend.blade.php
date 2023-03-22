@@ -168,7 +168,10 @@
                                 <div class="col-md-3 col-sm-6 footer-col">
                                     <h6 class="heading7">{{ __('messages.general-links') }}</h6>
                                     <ul class="footer-ul">
-                                        <li><a href="{{ url('/about-us') }}">{{ __('messages.about-us') }}</a></li>
+                                        @foreach (DB::table('related_links')->where('status','active')->get() as $ik)
+                                        <li><a target="_blank" href="{{ urldecode($ik->url) }}">{{ app()->getLocale()=='th'?$ik->name_th:$ik->name_en }}</a></li>
+                                        @endforeach
+                                        <li><a href="{{ url('/about-us/company-info') }}">{{ __('messages.about-us') }}</a></li>
                                         <li><a href="{{ url('/our-service') }}">{{ __('messages.our-service') }}</a></li>
                                         <li><a href="{{ url('/customer') }}">{{ __('messages.customer') }}</a></li>
                                         <li><a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a></li>

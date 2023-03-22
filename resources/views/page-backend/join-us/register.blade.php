@@ -23,7 +23,8 @@
                         <table id="data-table" class="table table-bordered" style="width:100%;">
                             <thead>
                                 <tr>
-                                    <th class="text-center" style="white-space:nowrap;">job_id</th>
+                                    <th class="text-center" style="white-space:nowrap;">ลำดับ</th>
+                                    <th class="text-center" style="white-space:nowrap;">Job Name</th>
                                     <th class="text-center" style="white-space:nowrap;">ชื่อ</th>
                                     <th class="text-center" style="white-space:nowrap;">สกุล</th>
                                     <th class="text-center" style="white-space:nowrap;">เบอร์โทร</th>
@@ -37,7 +38,8 @@
                             <tbody>
                                 @foreach ($data as $index => $item)
                                     <tr>
-                                        <td><a href="{{ url('join-us-read/'.$item->job_id) }}" target="_blank">{{ $item->job_id }}</a></td>
+                                        <td class="text-center">{{ ($index+1) }}</td>
+                                        <td><a href="{{ url('join-us-read/'.$item->job_id) }}" target="_blank">{{ DB::table('join_us_jobs')->where('id',$item->job_id)->first()->job_name_th }}</a></td>
                                         <td>{{ $item->first_name }}</td>
                                         <td>{{ $item->last_name }}</td>
                                         <td>`{{ base64_decode($item->phone) }}</td>

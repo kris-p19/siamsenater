@@ -31,8 +31,8 @@ class JoinUsJobController extends Controller
                         'maximum_regis',
                     )
                     ->where('status','active')
-                    ->where('date_begin','<=',date('Y-m-d'))
-                    ->where('date_end','>=',date('Y-m-d'))
+                    ->whereDate('date_begin','<=',date('Y-m-d'))
+                    ->whereDate('date_end','>=',date('Y-m-d'))
                     ->orderBy('created_at','desc')
                     ->get();
             } else {
@@ -45,8 +45,8 @@ class JoinUsJobController extends Controller
                     'maximum_regis',
                 )
                 ->where('status','active')
-                ->where('date_begin','<=',date('Y-m-d'))
-                ->where('date_end','>=',date('Y-m-d'))
+                ->whereDate('date_begin','<=',date('Y-m-d'))
+                ->whereDate('date_end','>=',date('Y-m-d'))
                 ->orderBy('created_at','desc')
                 ->get();
             }
@@ -70,8 +70,8 @@ class JoinUsJobController extends Controller
                         'maximum_regis',
                     )
                     ->where('status','active')
-                    ->where('date_begin','<=',date('Y-m-d'))
-                    ->where('date_end','>=',date('Y-m-d'))
+                    ->whereDate('date_begin','<=',date('Y-m-d'))
+                    ->whereDate('date_end','>=',date('Y-m-d'))
                     ->orderBy('created_at','desc')
                     ->first();
             } else {
@@ -84,8 +84,8 @@ class JoinUsJobController extends Controller
                     'maximum_regis',
                 )
                 ->where('status','active')
-                ->where('date_begin','<=',date('Y-m-d'))
-                ->where('date_end','>=',date('Y-m-d'))
+                ->whereDate('date_begin','<=',date('Y-m-d'))
+                ->whereDate('date_end','>=',date('Y-m-d'))
                 ->orderBy('created_at','desc')
                 ->first();
             }
@@ -149,6 +149,16 @@ class JoinUsJobController extends Controller
             "birth_date" => "required|string",
             "id_card" => "required|string|min:13"
         ]);
+        $job = JoinUsJob::where('id',$request->job_id)
+        ->whereDate('date_begin','<=',date('Y-m-d'))
+        ->whereDate('date_end','>=',date('Y-m-d'))
+        ->where('status','active')
+        ->where('maximum_regis','>=',JoinUsRegis::where('job_id',$request->job_id)->count())
+        ->first();
+        if ($job==0) {
+            return response()->json(['status'=>'danger', 'msg'=>'ขออภัย, ตำแหน่งงานนี้ปิดรับสมัครแล้ว']);
+        }
+        
         $table = new JoinUsRegis;
         $table->job_id = $request->job_id;
         $table->first_name = $request->first_name;

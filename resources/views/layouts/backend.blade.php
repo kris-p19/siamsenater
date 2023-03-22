@@ -30,13 +30,18 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a href="{{ url('/lang/th') }}" class="nav-link">
-            <img src="{{ asset('images/lang-th.png') }}" alt="lang-th" style="{{ (app()->getLocale()=='th'?'':'-webkit-filter:grayscale(100%);filter:gray;') }}width:18px;">
+          <a href="{{ url('/lang/th') }}" class="nav-link" style="padding-left:5px;padding-right:5px;">
+            <img src="{{ asset('images/lang-th.png') }}" alt="lang-th" style="{{ (app()->getLocale()=='th'?'':'-webkit-filter:grayscale(100%);filter:gray;') }}width:24px;">
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/lang/en') }}" class="nav-link">
-            <img src="{{ asset('images/lang-en.png') }}" alt="lang-en" style="{{ (app()->getLocale()=='en'?'':'-webkit-filter:grayscale(100%);filter:gray;') }}width:18px;">
+          <a href="{{ url('/lang/en') }}" class="nav-link" style="padding-left:5px;padding-right:5px;">
+            <img src="{{ asset('images/lang-en.png') }}" alt="lang-en" style="{{ (app()->getLocale()=='en'?'':'-webkit-filter:grayscale(100%);filter:gray;') }}width:24px;">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:void(0);" onclick="document.getElementById('post-logout').submit();" style="padding-left:5px;padding-right:5px;" class="nav-link">
+            <img src="https://cdn-icons-png.flaticon.com/512/4034/4034229.png" alt="lang-en" style="width:25px;">
           </a>
         </li>
         <!-- Navbar Search -->
@@ -164,7 +169,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{ url('/') }}" class="brand-link">
-        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="{{ asset('images/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8;width:30px;height:30px;object-fit:cover;">
         <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
       </a>
 
@@ -173,7 +178,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+            <img src="{{ asset('https://cdn-icons-png.flaticon.com/512/2304/2304226.png') }}" style="width:34px;height:34px;object-fit:cover;" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
             <a href="{{ url('profile') }}" class="d-block">{{ Auth::user()->name }}</a>
@@ -192,7 +197,7 @@
               <form method="POST" action="{{ route('logout') }}" id="post-logout">@csrf</form>
             </li>
             <li class="nav-item">
-              <a style="color:rgb(196, 105, 105);" href="{{ url('home') }}" class="nav-link @yield('webadmin-home')">
+              <a href="{{ url('home') }}" class="nav-link @yield('webadmin-home')">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
               </a>
@@ -240,13 +245,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a style="color:rgb(196, 105, 105);" href="{{ url('/webadmin/related-link') }}" class="nav-link @yield('webadmin-related-link')">
+              <a href="{{ url('/webadmin/related-link') }}" class="nav-link @yield('webadmin-related-link')">
                 <i class="nav-icon fas fa-link"></i>
                 <p>{{ __('messages.related-link') }}</p>
               </a>
             </li>
             <li class="nav-item">
-              <a style="color:rgb(196, 105, 105);" href="{{ url('/webadmin/join-us') }}" class="nav-link @yield('webadmin-join-us')">
+              <a href="{{ url('/webadmin/join-us') }}" class="nav-link @yield('webadmin-join-us')">
                 <i class="nav-icon fas fa-user-md"></i>
                 <p>{{ __('messages.join-us') }}</p>
               </a>
@@ -269,12 +274,12 @@
                 <p>{{ __('messages.administration') }}</p>
               </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a style="color:rgb(196, 105, 105);" href="{{ url('/webadmin/system-configuration') }}" class="nav-link">
                 <i class="nav-icon fas fa-cogs"></i>
                 <p>{{ __('messages.system-configuration') }}</p>
               </a>
-            </li>
+            </li> --}}
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
