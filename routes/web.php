@@ -11,6 +11,7 @@
 |
 */
 Auth::routes();
+Route::get('resize','OurServiceItemController@allResize');
 Route::get('/', function () {
     return view('welcome');
 });

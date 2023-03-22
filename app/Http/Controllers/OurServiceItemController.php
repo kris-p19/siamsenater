@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\OurServiceItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use File;
 
 class OurServiceItemController extends Controller
 {
@@ -16,6 +17,25 @@ class OurServiceItemController extends Controller
     public function index()
     {
         //
+    }
+
+    public function allResize()
+    {
+        $data = OurServiceItem::get();
+        $destinationPath = public_path('/images/our-service-items/');
+        foreach ($data as $key => $value) {
+            if (!File::exists(public_path('/images/our-service-items/resize/'.$value->picture))) {
+                list($width, $height) = getimagesize($destinationPath . $value->picture);
+                $newwidth = 300;
+                $newheight = ($height / $width) * $newwidth;
+                $thumb = imagecreatetruecolor($newwidth, $newheight);
+                $source = imagecreatefromjpeg($destinationPath . $value->picture);
+                imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                $resized_folder = $destinationPath . 'resize/' . $value->picture;
+                imagejpeg($thumb, $resized_folder, 80);
+            }
+        }
+        return 'done';
     }
 
     /**
@@ -49,6 +69,18 @@ class OurServiceItemController extends Controller
             $destinationPath = public_path('/images/our-service-items/');
             $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
             if ($files->move($destinationPath, $profileImage)) {
+                // Resize image
+                list($width, $height) = getimagesize($destinationPath . $profileImage);
+                $newwidth = 300;
+                $newheight = ($height / $width) * $newwidth;
+                $thumb = imagecreatetruecolor($newwidth, $newheight);
+                $source = imagecreatefromjpeg($destinationPath . $profileImage);
+                imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                
+                // Save resized image
+                $resized_folder = $destinationPath . 'resize/' . $profileImage;
+                imagejpeg($thumb, $resized_folder, 80);
+
                 $table->picture = $profileImage;
             }
         }
@@ -105,10 +137,23 @@ class OurServiceItemController extends Controller
         if (!empty($request->file('picture'))) {
             $table = $ourServiceItem->where('id',$id)->first();
             try { unlink(public_path('/images/our-service-items/'.$table->picture)); } catch (\Throwable $th) { }
+            try { unlink(public_path('/images/our-service-items/resize/'.$table->picture)); } catch (\Throwable $th) { }
             $files = $request->file('picture');
             $destinationPath = public_path('/images/our-service-items/');
             $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
             if ($files->move($destinationPath, $profileImage)) {
+                // Resize image
+                list($width, $height) = getimagesize($destinationPath . $profileImage);
+                $newwidth = 300;
+                $newheight = ($height / $width) * $newwidth;
+                $thumb = imagecreatetruecolor($newwidth, $newheight);
+                $source = imagecreatefromjpeg($destinationPath . $profileImage);
+                imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                
+                // Save resized image
+                $resized_folder = $destinationPath . 'resize/' . $profileImage;
+                imagejpeg($thumb, $resized_folder, 80);
+
                 $data['picture'] = $profileImage;
             }
         }
