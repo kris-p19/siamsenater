@@ -38,6 +38,9 @@ Route::get('/admin',function(){ return redirect('/webadmin'); });
 Route::get('/administration',function(){ return redirect('/webadmin'); });
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('/send-vote','VoteItemController@store');
+Route::get('/query-score','VoteController@show');
+
 Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/','HomeController@index');
 
@@ -138,4 +141,7 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/product/edititem/{id}','ProductController@update');
     Route::get('/product/deleteitem/{id}','ProductController@destroy');
     Route::get('/product/item-update-status/{id}/{status}','ProductController@itemUpdateStatus');
+
+    Route::get('/vote','VoteController@index');
+    Route::get('/vote/create','VoteController@store');
 });

@@ -263,6 +263,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ url('/webadmin/vote') }}" class="nav-link @yield('webadmin-vote')">
+                <i class="nav-icon fas fa-signal"></i>
+                <p>{{ __('messages.vote') }}</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ url('/webadmin/facebookPlugin') }}" class="nav-link @yield('webadmin-facebookPlugin')">
                 <i class="nav-icon fab fa-facebook-messenger"></i>
                 <p>{{ __('messages.facebookPlugin') }}</p>

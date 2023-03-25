@@ -90,43 +90,27 @@
                 <h3 class="title"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{ __('messages.vote') }}</h3>
                 <p>{{ __('messages.web-site-satisfaction-survey') }}</p>
                 <div id="panel-vote">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="5">
-                            {{ __('messages.level_survey.level_5') }}
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="4">
-                            {{ __('messages.level_survey.lavel_4') }}
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios3" value="3">
-                            {{ __('messages.level_survey.lavel_3') }}
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios4" value="2">
-                            {{ __('messages.level_survey.lavel_2') }}
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios5" value="1">
-                            {{ __('messages.level_survey.lavel_1') }}
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <a class="btn btn-default btn-theme">{{ __('messages.vote') }}</a>
-                        <a class="btn btn-default btn-theme" onclick="$('#panel-vote').hide();$('#panel-view-vote').show();">{{ __('messages.view-vote') }}</a>
-                    </div>
+                    <form action="{{ url('send-vote') }}" method="post">
+                        @csrf
+                        @foreach (DB::table('votes')->get() as $index => $vote_item)
+                        <div class="radio">
+                            <label>
+                                <input {{ $index==0?'checked':'' }} type="radio" name="vote_item" id="vote_item{{$index}}" value="{{ $vote_item->id }}">
+                                {{ app()->getLocale()=='th'?$vote_item->name_th:$vote_item->name_en }}
+                            </label>
+                        </div>    
+                        @endforeach
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default btn-theme">{{ __('messages.vote') }}</button>
+                            <a class="btn btn-default btn-theme" onclick="$('#panel-vote').hide();$('#panel-view-vote').show();queryScore();">{{ __('messages.view-vote') }}</a>
+                        </div>    
+                    </form>
+                    <p id="text-status"></p>
                 </div>
                 <div id="panel-view-vote" style="display:none;">
-                    <canvas id="donutChart"></canvas>
+                    <div class="well-come-vote">
+                        <iframe src="{{ url('query-score') }}?{{time()}}" frameborder="0" style="height:300px;"></iframe>
+                    </div>
                     <a class="btn btn-default btn-theme" onclick="$('#panel-vote').show();$('#panel-view-vote').hide();">{{ __('messages.back') }}</a>
                 </div>
             </div>
@@ -154,41 +138,65 @@
 
 @section('script')
     <script src="https://api.longdo.com/map/?key=592a36a1908c4318a921581123606947"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        function queryScore() {
+            $.ajax({
+                type:"get",
+                url:"{{ url('query-score') }}",
+                // dataType:"json",
+                cache:false,
+                beforeSend:function(){
+                    // chaassss.data.labels.pop();
+                    // chaassss.data.datasets.forEach((dataset) => {
+                    //     dataset.data.pop();
+                    // });
+                    // chaassss.update();
+                },
+                success:function(res){
+                    $('.well-come-vote').find('iframe').attr('src',"{{ url('query-score') }}?"+Math.random());
+                    console.log(res);
+                    // let l = [];
+                    // let d = [];
+                    // $.each(res.data,function(k,v){
+                    //     @if(app()->getLocale()=='th')
+                    //     l.push(v.name_th);
+                    //     @else
+                    //     l.push(v.name_en);
+                    //     @endif
+                    //     d.push(v.number_vote);
+                    // });
+                    // chaassss.data.labels.push(l);
+                    // chaassss.data.datasets.forEach((dataset) => {
+                    //     dataset.data.push(Number(d));
+                    // });
+                    // chaassss.update();
+                    // console.log([
+                    //     l,d
+                    // ]);
+                }
+            });
+        }
         $(document).ready(function(){
-            const ctx = document.getElementById('donutChart');
-            const data = {
-                labels: [
-                    "{{ __('messages.level_survey.level_5') }}",
-                    "{{ __('messages.level_survey.lavel_4') }}",
-                    "{{ __('messages.level_survey.lavel_3') }}",
-                    "{{ __('messages.level_survey.lavel_2') }}",
-                    "{{ __('messages.level_survey.lavel_1') }}"
-                ],
-                datasets: [{
-                    label: "{{ __('messages.vote') }}",
-                    data: [
-                        300, 
-                        50, 
-                        50, 
-                        50, 
-                        100
-                    ],
-                    // backgroundColor: [
-                    //     'rgb(255, 99, 132)',
-                    //     'rgb(54, 162, 235)',
-                    //     'rgb(255, 205, 86)'
-                    // ],
-                    hoverOffset: 4
-                }]
-            };
-            const config = {
-                type: 'doughnut',
-                data: data,
-            };
-            new Chart(ctx, config);
-
+            $('#panel-vote form').submit(function(e){
+                e.preventDefault();
+                $.ajax({
+                    url:$(this).attr('action'),
+                    type:$(this).attr('method'),
+                    cache:false,
+                    dataType:"json",
+                    data:$(this).serialize(),
+                    success:function(res){
+                        if (res.status=='success') {
+                            $("#text-status").html(res.msg);
+                            $("#text-status").attr("style","color:green;");
+                            setTimeout(() => {
+                                $("#text-status").text("");
+                                $("#text-status").attr("style","");
+                            }, 4000);
+                        }
+                    }
+                });
+            });
         });
         var map;
         var lat = 13.580427, lon = 100.778433;
