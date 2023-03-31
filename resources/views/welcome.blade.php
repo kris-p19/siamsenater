@@ -65,7 +65,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default" style="min-height: 480px;">
             <div class="panel-body">
                 <h3 class="title">{{ __('messages.company_name_full') }}</h3>
@@ -76,7 +76,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default" style="min-height: 480px;">
             <div class="panel-body">
                 <h3 class="title"><i class="fa fa-facebook-official" aria-hidden="true"></i> {{ __('messages.company-facebook-page') }}</h3>
@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default" style="min-height: 480px;">
             <div class="panel-body">
                 <h3 class="title"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{ __('messages.vote') }}</h3>
