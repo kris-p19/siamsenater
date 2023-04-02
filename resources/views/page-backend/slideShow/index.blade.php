@@ -40,38 +40,40 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-bordered" style="width:100%;">
-                        <thead>
-                            <tr>
-                                <th class="text-center">ลำดับ</th>
-                                <th class="text-center">ภาพ</th>
-                                <th class="text-center">ลิงค์</th>
-                                <th class="text-center">สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $index => $item)
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="width:100%;">
+                            <thead>
                                 <tr>
-                                    <td class="text-center">{{ ($index+1) }}</td>
-                                    <td class="text-center"><a href="{{ asset('images/slideShow/'.$item->picture) }}" target="_blank"><img src="{{ asset('images/slideShow/'.$item->picture) }}" class="img-responsive" style="width:200px;"></a></td>
-                                    <td class="text-left">
-                                        @if($item->url=='empty')
-                                            ไม่มีลิงค์
-                                        @else
-                                            <a href="{{ $item->url }}">{{ $item->url }}</a>
-                                        @endif
-                                    </td>
-                                    <td class="text-left">
-                                        @if($item->status=='active')
-                                            <a href="{{ url('webadmin/slideShow/update-status') }}?status=inactive&id={{ $item->id }}" style="color:green;">{{ $item->status }}</a>
-                                        @else
-                                            <a href="{{ url('webadmin/slideShow/update-status') }}?status=active&id={{ $item->id }}" style="color:red;">{{ $item->status }}</a>
-                                        @endif
-                                    </td>
+                                    <th class="text-center">ลำดับ</th>
+                                    <th class="text-center">ภาพ</th>
+                                    <th class="text-center">ลิงค์</th>
+                                    <th class="text-center">สถานะ</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $index => $item)
+                                    <tr>
+                                        <td class="text-center">{{ ($index+1) }}</td>
+                                        <td class="text-center"><a href="{{ asset('images/slideShow/'.$item->picture) }}" target="_blank"><img src="{{ asset('images/slideShow/'.$item->picture) }}" class="img-responsive" style="width:200px;"></a></td>
+                                        <td class="text-left">
+                                            @if($item->url=='empty')
+                                                ไม่มีลิงค์
+                                            @else
+                                                <a href="{{ $item->url }}">{{ $item->url }}</a>
+                                            @endif
+                                        </td>
+                                        <td class="text-left">
+                                            @if($item->status=='active')
+                                                <a href="{{ url('webadmin/slideShow/update-status') }}?status=inactive&id={{ $item->id }}" style="color:green;">{{ $item->status }}</a>
+                                            @else
+                                                <a href="{{ url('webadmin/slideShow/update-status') }}?status=active&id={{ $item->id }}" style="color:red;">{{ $item->status }}</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

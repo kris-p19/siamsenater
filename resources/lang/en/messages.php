@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'supplier-meeting-account' => 'Supplier Meeting Account',
     'list' => 'List',
     'file' => 'File',
     'authenticate-to-access-information' => 'Authenticate to access information',

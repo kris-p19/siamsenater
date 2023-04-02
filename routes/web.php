@@ -108,6 +108,12 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/supplier-meeting/delete/{id}','SupplierMeetingItemController@destroy');
     Route::get('/supplier-meeting/update-status/{id}/{status}','SupplierMeetingItemController@updateStatus');
 
+    Route::get('/supplier-meeting/account','SupplierMeetingController@account');
+    Route::get('/supplier-meeting/account-update-status/{id}/{status}','SupplierMeetingController@updateStatus');
+    Route::get('/supplier-meeting/account-delete/{id}','SupplierMeetingController@destroy');
+    Route::get('/supplier-meeting/account-edit','SupplierMeetingController@update');
+    Route::get('/supplier-meeting/account-create','SupplierMeetingController@store');
+    
     Route::get('/facebookPlugin','FacebookMessagePluginController@show');
     Route::post('/facebookPlugin','FacebookMessagePluginController@update');
     Route::get('/facebookPlugin/status/{status_name}','FacebookMessagePluginController@updateStatus');

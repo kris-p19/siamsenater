@@ -100,43 +100,45 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-bordered" style="width:100%;">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="white-space:nowrap;">ลำดับ</th>
-                                <th class="text-center" style="white-space:nowrap;">กิจกรรม</th>
-                                <th class="text-center" style="white-space:nowrap;">ชื่อตำแหน่งงาน</th>
-                                <th class="text-center" style="white-space:nowrap;">วันที่รับสมัคร</th>
-                                <th class="text-center" style="white-space:nowrap;">จำกัดจำนวนผู้สมัคร</th>
-                                <th class="text-center" style="white-space:nowrap;">คำอธิบายตำแหน่งงาน</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $index => $item)
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="width:100%;">
+                            <thead>
                                 <tr>
-                                    <td class="text-center">{{ ($index+1) }}</td>
-                                    <td class="text-center">
-                                        <a style="border-radius:45px;width:100px;" onclick="if(confirm('ยืนยันการทำรายการ?')){ window.location.href=$(this).data('href'); }" data-href="{{ url('/webadmin/join-us/delete/'.$item->id) }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> ลบ</a>
-                                        <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/join-us/edit/'.$item->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit" aria-hidden="true"></i> แก้ไข</a>
-                                        <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/join-us/update-status/'.$item->id.'/'.($item->status=='active'?'inactive':'active')) }}" class="btn btn-outline-{{ ($item->status=='active'?'primary':'secondary') }} btn-sm"><i class="fa fa-{{ ($item->status=='active'?'eye':'eye-slash') }}" aria-hidden="true"></i> {{ ($item->status=='active'?'เผยแพร่':'ไม่เผยแพร่') }}</a>
-                                        <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/join-us-is-join/'.$item->id) }}" target="_blank" class="btn btn-outline-success btn-sm"><i class="far fa-eye"></i> ดูผู้สมัคร</a>
-                                    </td>
-                                    <td>{{ $item->date_begin . " ถึง " . $item->date_end }}</td>
-                                    <td class="text-center">{{ $item->maximum_regis }}</td>
-                                    <td>
-                                        {{ $item->job_name_th }}
-                                        <hr>
-                                        {{ $item->job_name_en }}
-                                    </td>
-                                    <td>
-                                        {!! $item->job_description_th !!}
-                                        <hr>
-                                        {!! $item->job_description_en !!}
-                                    </td>
+                                    <th class="text-center" style="white-space:nowrap;">ลำดับ</th>
+                                    <th class="text-center" style="white-space:nowrap;">กิจกรรม</th>
+                                    <th class="text-center" style="white-space:nowrap;">ชื่อตำแหน่งงาน</th>
+                                    <th class="text-center" style="white-space:nowrap;">วันที่รับสมัคร</th>
+                                    <th class="text-center" style="white-space:nowrap;">จำกัดจำนวนผู้สมัคร</th>
+                                    <th class="text-center" style="white-space:nowrap;">คำอธิบายตำแหน่งงาน</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $index => $item)
+                                    <tr>
+                                        <td class="text-center">{{ ($index+1) }}</td>
+                                        <td class="text-center">
+                                            <a style="border-radius:45px;width:100px;" onclick="if(confirm('ยืนยันการทำรายการ?')){ window.location.href=$(this).data('href'); }" data-href="{{ url('/webadmin/join-us/delete/'.$item->id) }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> ลบ</a>
+                                            <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/join-us/edit/'.$item->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit" aria-hidden="true"></i> แก้ไข</a>
+                                            <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/join-us/update-status/'.$item->id.'/'.($item->status=='active'?'inactive':'active')) }}" class="btn btn-outline-{{ ($item->status=='active'?'primary':'secondary') }} btn-sm"><i class="fa fa-{{ ($item->status=='active'?'eye':'eye-slash') }}" aria-hidden="true"></i> {{ ($item->status=='active'?'เผยแพร่':'ไม่เผยแพร่') }}</a>
+                                            <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/join-us-is-join/'.$item->id) }}" target="_blank" class="btn btn-outline-success btn-sm"><i class="far fa-eye"></i> ดูผู้สมัคร</a>
+                                        </td>
+                                        <td>{{ $item->date_begin . " ถึง " . $item->date_end }}</td>
+                                        <td class="text-center">{{ $item->maximum_regis }}</td>
+                                        <td>
+                                            {{ $item->job_name_th }}
+                                            <hr>
+                                            {{ $item->job_name_en }}
+                                        </td>
+                                        <td>
+                                            {!! $item->job_description_th !!}
+                                            <hr>
+                                            {!! $item->job_description_en !!}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

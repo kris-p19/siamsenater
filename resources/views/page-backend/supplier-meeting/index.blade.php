@@ -13,6 +13,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">{{ __('messages.supplier-meeting') }}</h3>
+            <a style="border-radius:45px;margin-left:10px;" href="{{ url('/webadmin/supplier-meeting/account') }}" class="btn btn-outline-dark btn-sm float-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> สมาชิก</a>
             <a style="border-radius:45px;" href="{{ url('/webadmin/supplier-meeting/create') }}" class="btn btn-outline-primary btn-sm float-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> เพิ่มรายการ</a>
         </div>
         <div class="card-body">

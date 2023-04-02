@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'supplier-meeting-account' => 'จัดการสมาชิกซัพพลายเออร์',
     'list' => 'รายการ',
     'file' => 'ไฟล์',
     'authenticate-to-access-information' => 'ยืนยันตัวตนเพื่อเข้าถึงข้อมูล',

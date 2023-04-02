@@ -42,32 +42,34 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-bordered" style="width:100%;">
-                        <thead>
-                            <tr>
-                                <th class="text-center">ลำดับ</th>
-                                <th class="text-center">ชื่อ</th>
-                                <th class="text-center">คะแนน</th>
-                                <th class="text-center">จำนวน Vote</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $index => $item)
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="width:100%;">
+                            <thead>
                                 <tr>
-                                    <td class="text-center">{{ ($index+1) }}</td>
-                                    <td class="text-left">
-                                        {{ $item->name_th }} | {{ $item->name_en }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ number_format($item->score) }} คะแนน
-                                    </td>
-                                    <td class="text-center">
-                                        {{ number_format(DB::table('vote_items')->where('vote_id',$item->id)->count(),0) }} Vote
-                                    </td>
+                                    <th class="text-center">ลำดับ</th>
+                                    <th class="text-center">ชื่อ</th>
+                                    <th class="text-center">คะแนน</th>
+                                    <th class="text-center">จำนวน Vote</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $index => $item)
+                                    <tr>
+                                        <td class="text-center">{{ ($index+1) }}</td>
+                                        <td class="text-left">
+                                            {{ $item->name_th }} | {{ $item->name_en }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ number_format($item->score) }} คะแนน
+                                        </td>
+                                        <td class="text-center">
+                                            {{ number_format(DB::table('vote_items')->where('vote_id',$item->id)->count(),0) }} Vote
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -18,34 +18,36 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-bordered" style="width:100%;">
-                        <thead>
-                            <tr>
-                                <th class="text-center nowrap">ลำดับ</th>
-                                <th class="text-center nowrap">กิจกรรม</th>
-                                <th class="text-center nowrap">ชื่อ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $index => $item)
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="width:100%;">
+                            <thead>
                                 <tr>
-                                    <td class="text-center">{{ ($index+1) }}</td>
-                                    <td class="text-center">
-                                        <a style="border-radius:45px;width:100px;" onclick="if(confirm('ยืนยันการทำรายการ?')){ window.location.href=$(this).data('href'); }" data-href="{{ url('/webadmin/related-link/delete/'.$item->id) }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> ลบ</a>
-                                        <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/related-link/edit/'.$item->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit" aria-hidden="true"></i> แก้ไข</a>
-                                        <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/related-link/update-status/'.$item->id.'/'.($item->status=='active'?'inactive':'active')) }}" class="btn btn-outline-{{ ($item->status=='active'?'primary':'secondary') }} btn-sm"><i class="fa fa-{{ ($item->status=='active'?'eye':'eye-slash') }}" aria-hidden="true"></i> {{ ($item->status=='active'?'เผยแพร่':'ไม่เผยแพร่') }}</a>
-                                    </td>
-                                    <td class="text-left">
-                                        {{ $item->name_th }}
-                                        <hr>
-                                        {{ $item->name_en }}
-                                        <hr>
-                                        <a target="_blank" href="{{ urldecode($item->url) }}">เปิดลิงค์</a>
-                                    </td>
+                                    <th class="text-center nowrap">ลำดับ</th>
+                                    <th class="text-center nowrap">กิจกรรม</th>
+                                    <th class="text-center nowrap">ชื่อ</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $index => $item)
+                                    <tr>
+                                        <td class="text-center">{{ ($index+1) }}</td>
+                                        <td class="text-center">
+                                            <a style="border-radius:45px;width:100px;" onclick="if(confirm('ยืนยันการทำรายการ?')){ window.location.href=$(this).data('href'); }" data-href="{{ url('/webadmin/related-link/delete/'.$item->id) }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> ลบ</a>
+                                            <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/related-link/edit/'.$item->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit" aria-hidden="true"></i> แก้ไข</a>
+                                            <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/related-link/update-status/'.$item->id.'/'.($item->status=='active'?'inactive':'active')) }}" class="btn btn-outline-{{ ($item->status=='active'?'primary':'secondary') }} btn-sm"><i class="fa fa-{{ ($item->status=='active'?'eye':'eye-slash') }}" aria-hidden="true"></i> {{ ($item->status=='active'?'เผยแพร่':'ไม่เผยแพร่') }}</a>
+                                        </td>
+                                        <td class="text-left">
+                                            {{ $item->name_th }}
+                                            <hr>
+                                            {{ $item->name_en }}
+                                            <hr>
+                                            <a target="_blank" href="{{ urldecode($item->url) }}">เปิดลิงค์</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

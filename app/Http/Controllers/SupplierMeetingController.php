@@ -39,7 +39,22 @@ class SupplierMeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'token' => 'required',
+            'username' => 'required'
+        ]);
+
+        $table = SupplierMeeting::insert([
+            'username' => $request->username,
+            'supplier_name' => $request->supplier_name,
+            'token' => $request->token,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+        if ($table) {
+            return response()->json(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return response()->json(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
 
     /**
@@ -73,7 +88,21 @@ class SupplierMeetingController extends Controller
      */
     public function update(Request $request, SupplierMeeting $supplierMeeting)
     {
-        //
+        $this->validate($request,[
+            'token' => 'required',
+            'username' => 'required',
+            'id' => 'required'
+        ]);
+
+        $table = $supplierMeeting->where('id',$request->id)->update([
+            'username' => $request->username,
+            'supplier_name' => $request->supplier_name,
+            'token' => $request->token
+        ]);
+        if ($table) {
+            return response()->json(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return response()->json(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
 
     /**
@@ -82,9 +111,13 @@ class SupplierMeetingController extends Controller
      * @param  \App\SupplierMeeting  $supplierMeeting
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SupplierMeeting $supplierMeeting)
+    public function destroy($id, SupplierMeeting $supplierMeeting)
     {
-        //
+        $table = $supplierMeeting->where('id',$id)->first();
+        if ($table) {
+            return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
 
     public function login()
@@ -118,5 +151,23 @@ class SupplierMeetingController extends Controller
     {
         session()->forget('supplier_auth');
         return redirect('/supplier-meetings');
+    }
+
+    public function account(SupplierMeeting $supplierMeeting)
+    {
+        return view('page-backend.supplier-meeting.account',[
+            'data' => $supplierMeeting->orderBy('created_at','desc')->get()
+        ]);
+    }
+
+    public function updateStatus(Request $request, SupplierMeeting $supplierMeeting)
+    {
+        $table = SupplierMeeting::where('id',$request->id)->update([
+            'status' => $request->status
+        ]);
+        if ($table) {
+            return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
 }
