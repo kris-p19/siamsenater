@@ -32,7 +32,6 @@
                                 <a style="border-radius:45px;width:100px;" onclick="if(confirm('ยืนยันการทำรายการ?')){ window.location.href=$(this).data('href'); }" data-href="{{ url('/webadmin/supplier-meeting/delete/'.$row->id) }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> ลบ</a>
                                 <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/supplier-meeting/edit/'.$row->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit" aria-hidden="true"></i> แก้ไข</a>
                                 <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/supplier-meeting/update-status/'.$row->id.'/'.($row->status=='active'?'inactive':'active')) }}" class="btn btn-outline-{{ ($row->status=='active'?'primary':'secondary') }} btn-sm"><i class="fa fa-{{ ($row->status=='active'?'eye':'eye-slash') }}" aria-hidden="true"></i> {{ ($row->status=='active'?'เผยแพร่':'ไม่เผยแพร่') }}</a>
-                                <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/supplier-meeting/item/'.$row->id) }}" class="btn btn-outline-success btn-sm"><i class="fa fa-plus-circle" aria-hidden="true"></i> เพิ่มรายการ</a>
                             </td>
                             <td>{!! $row->title_th !!}<hr>{!! $row->title_en !!}</td>
                             <td>

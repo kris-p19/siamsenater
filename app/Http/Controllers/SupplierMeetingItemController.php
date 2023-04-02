@@ -65,13 +65,16 @@ class SupplierMeetingItemController extends Controller
     {
         $file = SupplierMeetingItem::where('id',$id)->first();
         if (!empty($file)) {
-            $files = public_path('/supplier-meeting/'.$file->file);
-            if (File::exists($files)) {
-                $name = !empty($file->title_th)?$file->title_th:Str::random(8);
-                return response(file_get_contents($files))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="'.$name.'.pdf"');
+            if ($file->status=='active') {
+                $files = public_path('/supplier-meeting/'.$file->file);
+                if (File::exists($files)) {
+                    $name = !empty($file->title_th)?$file->title_th:Str::random(8);
+                    return response(file_get_contents($files))
+                    ->header('Content-Type', 'application/pdf')
+                    ->header('Content-Disposition', 'inline; filename="'.$name.'.pdf"');
+                }
             }
+            abort(403,(app()->getLocale()=='th'?'ขออภัยไฟล์ถูกปิดใช้งาน':'Sorry, the file has been disabled.'));
         }
         abort(404);
     }

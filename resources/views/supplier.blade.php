@@ -22,7 +22,10 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-right">
-                <a href="{{ url('/logout-token') }}" class="btn btn-danger btn-sm">{{ __('messages.logout') }}</a>
+                <a href="{{ url('/logout-token') }}" class="btn btn-danger btn-sm" style="margin-bottom:10px;border-radius:45px;">
+                    <span class="glyphicon glyphicon-off"></span>
+                    {{ __('messages.logout') }}
+                </a>
             </div>
         </div>
         <div class="row">

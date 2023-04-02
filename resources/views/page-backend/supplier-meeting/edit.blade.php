@@ -39,7 +39,7 @@
                             @error('file')
                                 <span class="error invalid-feedback">{{ $message }}</span>
                             @enderror
-                            <a href="{{ url('supplier-meetings-view/'.$data->id) }}" target="_blank">เปิดดูไฟล์</a>
+                            <a style="margin-top:10px;border-radius:45px;" class="btn btn-primary" href="{{ url('supplier-meetings-view/'.$data->id) }}" target="_blank">เปิดดูไฟล์</a>
                         </div>
                     </div>
                 </div>
