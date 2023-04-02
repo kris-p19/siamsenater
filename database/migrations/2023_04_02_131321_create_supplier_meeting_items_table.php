@@ -15,7 +15,6 @@ class CreateSupplierMeetingItemsTable extends Migration
     {
         Schema::create('supplier_meeting_items', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('supplier_id');
             $table->string('title_th')->nullable();
             $table->string('title_en')->nullable();
             $table->text('file')->nullable();

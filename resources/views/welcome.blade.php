@@ -123,7 +123,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default" style="margin-bottom: 5px;">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="title"><b><i class="fa fa-map-marker" aria-hidden="true"></i> {{ __('messages.location_company') }}</b></h3>
             </div>

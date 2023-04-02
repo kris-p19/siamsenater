@@ -245,6 +245,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ url('/webadmin/supplier-meeting') }}" class="nav-link @yield('webadmin-supplier-meeting')">
+                <i class="nav-icon fas fa-users"></i>
+                <p>{{ __('messages.supplier-meeting') }}</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ url('/webadmin/related-link') }}" class="nav-link @yield('webadmin-related-link')">
                 <i class="nav-icon fas fa-link"></i>
                 <p>{{ __('messages.related-link') }}</p>

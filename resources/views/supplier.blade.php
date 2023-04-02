@@ -21,13 +21,42 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-12 text-right">
+                <a href="{{ url('/logout-token') }}" class="btn btn-danger btn-sm">{{ __('messages.logout') }}</a>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
-                <a href="{{ url('/logout-token') }}">{{ __('messages.logout') }}</a>
                 @if(session()->has('status'))
                 <div class="alert alert-danger">
                     {{ session()->get('msg') }}
                 </div>
                 @endif
+
+                <div class="table-responsive">
+                    <table class="table table-hover" style="width:100%:">
+                        <thead>
+                            <tr>
+                                <th>{{ __('messages.list') }}</th>
+                                <th>{{ __('messages.file') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($data as $index => $row)
+                            <tr>
+                                <td>
+                                    <p class="title">{{ !empty($row->title)?$row->title:'-' }}</p>
+                                </td>
+                                <td>
+                                    <a style="font-size:30px;color:red;" href="{{ url('supplier-meetings-view/'.$row->id) }}" target="_blank">
+                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

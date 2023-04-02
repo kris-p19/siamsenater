@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'list' => 'รายการ',
+    'file' => 'ไฟล์',
     'authenticate-to-access-information' => 'ยืนยันตัวตนเพื่อเข้าถึงข้อมูล',
     'username' => 'ชื่อผู้ใช้งาน',
     'password' => 'รหัสผ่าน',

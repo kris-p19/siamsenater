@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'list' => 'List',
+    'file' => 'File',
     'authenticate-to-access-information' => 'Authenticate to access information',
     'username' => 'Username',
     'password' => 'Password',

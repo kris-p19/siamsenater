@@ -24,7 +24,8 @@ foreach (DB::table('about_us')->get() as $key => $item) {
 }
 Route::get('/our-service','OurServiceController@index');
 Route::get('/our-service/read/{id}','OurServiceController@read');
-Route::get('/supplier-meeting','SupplierMeetingController@index')->middleware(['supplier']);
+Route::get('/supplier-meetings','SupplierMeetingController@index')->middleware(['supplier']);
+Route::get('/supplier-meetings-view/{id}','SupplierMeetingItemController@openFile')->middleware(['supplier']);
 Route::get('/required-token','SupplierMeetingController@login');
 Route::post('/required-token','SupplierMeetingController@checkLogin');
 Route::get('/logout-token','SupplierMeetingController@logout');
@@ -98,6 +99,14 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/our-service/edititem/{id}','OurServiceItemController@update');
     Route::get('/our-service/deleteitem/{id}','OurServiceItemController@destroy');
     Route::get('/our-service/item-update-status/{id}/{status}','OurServiceItemController@itemUpdateStatus');
+
+    Route::get('/supplier-meeting','SupplierMeetingItemController@index');
+    Route::get('/supplier-meeting/create','SupplierMeetingItemController@create');
+    Route::post('/supplier-meeting/create','SupplierMeetingItemController@store');
+    Route::get('/supplier-meeting/edit/{id}','SupplierMeetingItemController@edit');
+    Route::post('/supplier-meeting/edit/{id}','SupplierMeetingItemController@update');
+    Route::get('/supplier-meeting/delete/{id}','SupplierMeetingItemController@destroy');
+    Route::get('/supplier-meeting/update-status/{id}/{status}','SupplierMeetingItemController@updateStatus');
 
     Route::get('/facebookPlugin','FacebookMessagePluginController@show');
     Route::post('/facebookPlugin','FacebookMessagePluginController@update');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\SupplierMeeting;
 use Illuminate\Http\Request;
+use App\Http\Controllers\SupplierMeetingItemController;
 
 class SupplierMeetingController extends Controller
 {
@@ -14,7 +15,10 @@ class SupplierMeetingController extends Controller
      */
     public function index()
     {
-        return view('supplier');
+        $data = (new SupplierMeetingItemController)->show();
+        return view('supplier',[
+            'data' => $data
+        ]);
     }
 
     /**
@@ -102,7 +106,7 @@ class SupplierMeetingController extends Controller
 
         if (!empty($supplier)) {
             session()->put('supplier_auth',$request->token);
-            return redirect('supplier-meeting');
+            return redirect('/supplier-meetings');
         }
 
         session()->forget('supplier_auth');
@@ -113,6 +117,6 @@ class SupplierMeetingController extends Controller
     public function logout()
     {
         session()->forget('supplier_auth');
-        return redirect('supplier-meeting');
+        return redirect('/supplier-meetings');
     }
 }

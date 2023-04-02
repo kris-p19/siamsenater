@@ -115,7 +115,7 @@
                                         </ul>
                                     </li>
                                     <li class="@yield('page-our-service')"><a href="{{ url('/our-service') }}">{{ __('messages.our-service') }}</a></li>
-                                    <li class="@yield('page-supplier-meeting')"><a href="{{ url('/supplier-meeting') }}">{{ __('messages.supplier-meeting') }}</a></li>
+                                    <li class="@yield('page-supplier-meeting')"><a href="{{ url('/supplier-meetings') }}">{{ __('messages.supplier-meeting') }}</a></li>
                                     {{-- <li class="@yield('page-product')"><a href="{{ url('/product') }}">{{ __('messages.product') }}</a></li> --}}
                                     <li class="@yield('page-customer')"><a href="{{ url('/customer') }}">{{ __('messages.customer') }}</a></li>
                                     <li class="@yield('page-news-activities')"><a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a></li>
@@ -156,7 +156,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <footer style="padding-bottom:20px;background-color:var(--theme-color);">
+                    <footer style="margin-top: -10px;padding-bottom:20px;background-color:var(--theme-color);">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-4 col-sm-6 footer-col">
