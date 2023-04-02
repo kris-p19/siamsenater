@@ -24,8 +24,12 @@ foreach (DB::table('about_us')->get() as $key => $item) {
 }
 Route::get('/our-service','OurServiceController@index');
 Route::get('/our-service/read/{id}','OurServiceController@read');
-Route::get('/product','ProductController@index');
-Route::get('/product/grp/{group_name}','ProductController@index');
+Route::get('/supplier-meeting','SupplierMeetingController@index')->middleware(['supplier']);
+Route::get('/required-token','SupplierMeetingController@login');
+Route::post('/required-token','SupplierMeetingController@checkLogin');
+Route::get('/logout-token','SupplierMeetingController@logout');
+// Route::get('/product','ProductController@index');
+// Route::get('/product/grp/{group_name}','ProductController@index');
 Route::get('/customer','CustomerController@index');
 Route::get('/news-activities','NewsActivitieController@index');
 Route::get('/news-activities/read/{id}','NewsActivitieController@read');
@@ -134,13 +138,13 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/related-link/update-status/{id}/{status}','RelatedLinkController@updateStatus');
     Route::get('/related-link/delete/{id}','RelatedLinkController@destroy');
 
-    Route::get('/product','ProductController@show');
-    Route::get('/product/createitem','ProductController@create');
-    Route::post('/product/createitem','ProductController@store');
-    Route::get('/product/edititem/{id}','ProductController@edit');
-    Route::post('/product/edititem/{id}','ProductController@update');
-    Route::get('/product/deleteitem/{id}','ProductController@destroy');
-    Route::get('/product/item-update-status/{id}/{status}','ProductController@itemUpdateStatus');
+    // Route::get('/product','ProductController@show');
+    // Route::get('/product/createitem','ProductController@create');
+    // Route::post('/product/createitem','ProductController@store');
+    // Route::get('/product/edititem/{id}','ProductController@edit');
+    // Route::post('/product/edititem/{id}','ProductController@update');
+    // Route::get('/product/deleteitem/{id}','ProductController@destroy');
+    // Route::get('/product/item-update-status/{id}/{status}','ProductController@itemUpdateStatus');
 
     Route::get('/vote','VoteController@index');
     Route::post('/vote/create','VoteController@store');

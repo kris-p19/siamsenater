@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'authenticate-to-access-information' => 'Authenticate to access information',
+    'username' => 'Username',
+    'password' => 'Password',
+    'supplier-meeting' => 'Supplier Meeting',
     'product' => 'Product',
     'empty' => 'We currently do not have job openings.',
     'back' => 'Back',

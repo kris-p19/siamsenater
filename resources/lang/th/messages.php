@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'authenticate-to-access-information' => 'ยืนยันตัวตนเพื่อเข้าถึงข้อมูล',
+    'username' => 'ชื่อผู้ใช้งาน',
+    'password' => 'รหัสผ่าน',
+    'supplier-meeting' => 'การประชุมซัพพลายเออร์',
     'product' => 'สินค้า',
     'empty' => 'ขณะนี้เรายังไม่มีตำแหน่งงานว่าง',
     'back' => 'ย้อนกลับ',
