@@ -143,5 +143,5 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/product/item-update-status/{id}/{status}','ProductController@itemUpdateStatus');
 
     Route::get('/vote','VoteController@index');
-    Route::get('/vote/create','VoteController@store');
+    Route::post('/vote/create','VoteController@store');
 });

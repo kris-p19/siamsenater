@@ -4,7 +4,11 @@
 @section('content')
 <div class="row" style="margin-top: 10px;">
     @if(DB::table('slide_shows')->where('status','active')->count()>0)
+    @if(DB::table('hot_issues')->where('status','active')->count()==0)
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="panel-owl-carousel-welcome">
+    @else
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9" id="panel-owl-carousel-welcome">
+    @endif
         <div class="owl-carousel owl-theme" id="owl-carousel-welcome">
             @foreach (DB::table('slide_shows')->where('status','active')->orderBy('created_at','desc')->get() as $info)
             <div>
