@@ -27,7 +27,7 @@ class CreateSupplierMeetingsTable extends Migration
             [
                 'supplier_name' => 'master',
                 'username' => 'master',
-                'token' => Str::random(8),
+                'token' => 1234,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]
