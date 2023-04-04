@@ -7,9 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Storage;
 use DB;
+use DataTables;
 
 class AboutUsItemController extends Controller
 {
+    public function ajaxQuery($id, Request $request)
+    {
+        if ($request->ajax()) {
+            $data = AboutUsItem::where('about_us_id',$id)->select("*");
+            return DataTables::of($data)->make(true);
+        }
+    }
     public static function welcomPage()
     {
         if (app()->getLocale()=='th') {

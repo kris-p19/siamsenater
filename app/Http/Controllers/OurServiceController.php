@@ -6,9 +6,18 @@ use App\OurService;
 use App\OurServiceItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use DataTables;
 
 class OurServiceController extends Controller
 {
+    public function ajaxQuery(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = OurService::select("*");
+            return DataTables::of($data)
+            ->make(true);
+        }
+    }
     /**
      * Display a listing of the resource.
      *

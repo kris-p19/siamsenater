@@ -175,6 +175,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -240,6 +241,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],
 

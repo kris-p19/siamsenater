@@ -17,8 +17,8 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table id="datatable" class="table table-bordered table-condensed">
-                    <thead>
+                <table id="table" class="table table-bordered table-condensed" style="width:100%;">
+                    {{-- <thead>
                         <th class="text-center nowrap">ลำดับ</th>
                         <th class="text-center nowrap">กิจกรรม</th>
                         <th class="text-center nowrap">ชื่อเรื่อง</th>
@@ -38,7 +38,7 @@
                             <td><img src="{{ asset('images/our-service/'.$row->picture_header) }}" class="img-responsive" style="width:150px;" onerror="this.style.display='none'"></td>
                         </tr>
                         @endforeach
-                    </tbody>
+                    </tbody> --}}
                 </table>
             </div>
         </div>
@@ -48,6 +48,57 @@
 
 @section('script')
 <script>
-    
+    var table;
+    $(document).ready( function () {
+        table = $('#table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{ url('webadmin/our-service-ajax') }}",
+            "language": {
+                "url": '//cdn.datatables.net/plug-ins/1.13.4/i18n/th.json',
+            },
+            "responsive": true,
+            "dom": "Bfrtip",
+            "buttons": [
+                "copyHtml5",
+                "excelHtml5",
+                "csvHtml5"
+            ],
+            "columns": [
+                {
+                    "data": null,
+                    "title": "ลำดับ",
+                    "sortable": false,
+                    "searchable": false,
+                    "className": "nowrap text-center",
+                    "render": function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    "data": null,
+                    "title": "กิจกรรม",
+                    "sortable": false,
+                    "searchable": false,
+                    "className": "nowrap text-center",
+                    "render": function(data, type, row, meta) {
+                        return `<a style="border-radius:45px;width:100px;" onclick="if(confirm('ยืนยันการทำรายการ?')){ window.location.href=$(this).data('href'); }" data-href="{{ url('/webadmin/our-service/delete') }}/`+row.id+`" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> ลบ</a>
+                        <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/our-service/edit') }}/`+row.id+`" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit" aria-hidden="true"></i> แก้ไข</a>
+                        <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/our-service/update-status') }}/`+row.id+`/`+(row.status=='active'?'inactive':'active')+`" class="btn btn-outline-`+(row.status=='active'?'primary':'secondary')+` btn-sm"><i class="fa fa-`+(row.status=='active'?'eye':'eye-slash')+`" aria-hidden="true"></i> `+(row.status=='active'?'เผยแพร่':'ไม่เผยแพร่')+`</a>
+                        <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/our-service/item') }}/`+row.id+`" class="btn btn-outline-success btn-sm"><i class="fa fa-plus-circle" aria-hidden="true"></i> เพิ่มรายการ</a>`;
+                    }
+                },
+                { "data": "service_name_th", "title": "ชื่อเรื่องไทย", "className": "nowrap" },
+                { "data": "service_name_en", "title": "ชื่อเรื่องอังกฤษ", "className": "nowrap" },
+                { 
+                    "data": "picture_header", "title": "ภาพส่วนหัว", 
+                    "render": function(data, type, row, meta) {
+                        return `<img src="{{ asset('images/our-service') }}/`+data+`" class="img-responsive" style="width:150px;" onerror="this.style.display='none'">`;
+                    }
+                }
+                
+            ]
+        });
+    });
 </script>
 @endsection

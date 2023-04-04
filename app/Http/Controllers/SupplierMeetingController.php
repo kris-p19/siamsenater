@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\SupplierMeeting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SupplierMeetingItemController;
+use DataTables;
 
 class SupplierMeetingController extends Controller
 {
+    public function ajaxQuery(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = SupplierMeeting::select("*");
+            return DataTables::of($data)->make(true);
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -113,7 +121,7 @@ class SupplierMeetingController extends Controller
      */
     public function destroy($id, SupplierMeeting $supplierMeeting)
     {
-        $table = $supplierMeeting->where('id',$id)->first();
+        $table = $supplierMeeting->where('id',$id)->delete();
         if ($table) {
             return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
         }

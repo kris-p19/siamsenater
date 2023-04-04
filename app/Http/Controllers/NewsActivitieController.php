@@ -5,9 +5,27 @@ namespace App\Http\Controllers;
 use App\NewsActivitie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use DataTables;
 
 class NewsActivitieController extends Controller
 {
+    public function ajaxQuery(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = NewsActivitie::select("*");
+            return DataTables::of($data)
+            ->addColumn('gallery', function ($row) {
+                $it = "";
+                $uri = asset('images/news-activites');
+                foreach (json_decode($row->picture_gallery) as $key => $value) {
+                    $it .= "<img src='".$uri."/".$value."' class='img-responsive' style='width:150px;' onerror='this.style.display=none'>";
+                }
+                return $it;
+            })
+            ->rawColumns(['gallery'])
+            ->make(true);
+        }
+    }
     /**
      * Display a listing of the resource.
      *

@@ -41,8 +41,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table table-bordered" style="width:100%;">
-                            <thead>
+                        <table id="table" class="table table-bordered" style="width:100%;">
+                            {{-- <thead>
                                 <tr>
                                     <th class="text-center">ลำดับ</th>
                                     <th class="text-center">ภาพ</th>
@@ -71,7 +71,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            </tbody>
+                            </tbody> --}}
                         </table>
                     </div>
                 </div>
@@ -83,6 +83,56 @@
 
 @section('script')
 <script>
-    
+    var table;
+    $(document).ready( function () {
+        table = $('#table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{ url('webadmin/slideShow-ajax') }}",
+            "language": {
+                "url": '//cdn.datatables.net/plug-ins/1.13.4/i18n/th.json',
+            },
+            "dom": "Bfrtip",
+            "buttons": [
+                "copyHtml5",
+                "excelHtml5",
+                "csvHtml5"
+            ],
+            "columns": [
+                {
+                    "data": null,
+                    "title": "ลำดับ",
+                    "sortable": false,
+                    "searchable": false,
+                    "className": "nowrap text-center",
+                    "width": '30px',
+                    "render": function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    "data": "picture",
+                    "title": "ภาพ",
+                    "className": "nowrap text-center",
+                    "render": function(data, type, row, meta) {
+                        return `<a href="{{ asset('images/slideShow') }}/`+data+`" target="_blank"><img src="{{ asset('images/slideShow') }}/`+data+`" class="img-responsive" style="width:200px;"></a>`;
+                    }
+                },
+                { "data": "url", "title": "ลิงค์" },
+                {
+                    "data": "status",
+                    "title": "สถานะ",
+                    "className": "nowrap text-center",
+                    "render": function(data, type, row, meta) {
+                        if(data=='active') {
+                            return `<a href="{{ url('webadmin/slideShow/update-status') }}?status=inactive&id=`+row.id+`" style="color:green;">`+data+`</a>`;
+                        } else {
+                            return `<a href="{{ url('webadmin/slideShow/update-status') }}?status=active&id=`+row.id+`" style="color:red;">`+data+`</a>`;
+                        }
+                    }
+                }
+            ]
+        });
+    });
 </script>
 @endsection

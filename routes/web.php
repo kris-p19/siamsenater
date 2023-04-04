@@ -63,6 +63,8 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/about-us/edititem/{id}','AboutUsItemController@update');
     Route::get('/about-us/deleteitem/{id}','AboutUsItemController@destroy');
     Route::get('/about-us/item-update-status/{id}/{status}','AboutUsItemController@itemUpdateStatus');
+    Route::get('/about-us-ajax','AboutUsController@ajaxQuery');
+    Route::get('/about-us-item-ajax/{about_us_id}','AboutUsItemController@ajaxQuery');
     
     Route::get('/customer','CustomerController@show');
     Route::get('/customer/create','CustomerController@create');
@@ -71,6 +73,7 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/customer/edit/{id}','CustomerController@update');
     Route::get('/customer/delete/{id}','CustomerController@destroy');
     Route::get('/customer/update-status/{id}/{status}','CustomerController@updateStatus');
+    Route::get('/customer-ajax','CustomerController@ajaxQuery');
 
     Route::get('/news-activities','NewsActivitieController@show');
     Route::get('/news-activities/create','NewsActivitieController@create');
@@ -79,6 +82,7 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/news-activities/edit/{id}','NewsActivitieController@update');
     Route::get('/news-activities/delete/{id}','NewsActivitieController@destroy');
     Route::get('/news-activities/update-status/{id}/{status}','NewsActivitieController@updateStatus');
+    Route::get('/news-activities-ajax','NewsActivitieController@ajaxQuery');
 
     Route::get('/contact-us','ContactUsController@show');
     Route::get('/contact-us/edit/{id}','ContactUsController@edit');
@@ -91,6 +95,7 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/our-service/edit/{id}','OurServiceController@update');
     Route::get('/our-service/delete/{id}','OurServiceController@destroy');
     Route::get('/our-service/update-status/{id}/{status}','OurServiceController@updateStatus');
+    Route::get('/our-service-ajax','OurServiceController@ajaxQuery');
 
     Route::get('/our-service/item/{our_service_id}','OurServiceItemController@show');
     Route::get('/our-service/createitem/{our_service_id}','OurServiceItemController@create');
@@ -99,6 +104,7 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/our-service/edititem/{id}','OurServiceItemController@update');
     Route::get('/our-service/deleteitem/{id}','OurServiceItemController@destroy');
     Route::get('/our-service/item-update-status/{id}/{status}','OurServiceItemController@itemUpdateStatus');
+    Route::get('/our-service-item-ajax/{our_service_id}','OurServiceItemController@ajaxQuery');
 
     Route::get('/supplier-meeting','SupplierMeetingItemController@index');
     Route::get('/supplier-meeting/create','SupplierMeetingItemController@create');
@@ -107,12 +113,14 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/supplier-meeting/edit/{id}','SupplierMeetingItemController@update');
     Route::get('/supplier-meeting/delete/{id}','SupplierMeetingItemController@destroy');
     Route::get('/supplier-meeting/update-status/{id}/{status}','SupplierMeetingItemController@updateStatus');
+    Route::get('/supplier-meeting-item-ajax','SupplierMeetingItemController@ajaxQuery');
 
     Route::get('/supplier-meeting/account','SupplierMeetingController@account');
     Route::get('/supplier-meeting/account-update-status/{id}/{status}','SupplierMeetingController@updateStatus');
     Route::get('/supplier-meeting/account-delete/{id}','SupplierMeetingController@destroy');
     Route::get('/supplier-meeting/account-edit','SupplierMeetingController@update');
     Route::get('/supplier-meeting/account-create','SupplierMeetingController@store');
+    Route::get('/supplier-meeting-ajax','SupplierMeetingController@ajaxQuery');
     
     Route::get('/facebookPlugin','FacebookMessagePluginController@show');
     Route::post('/facebookPlugin','FacebookMessagePluginController@update');
@@ -128,14 +136,17 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/hotIssue','HotIssueController@index');
     Route::post('/hotIssue/create','HotIssueController@store');
     Route::get('/hotIssue/update-status','HotIssueController@updateStatus');
+    Route::get('/hotIssue-ajax','HotIssueController@ajaxQuery');
 
     Route::get('/pupup','PopupController@index');
     Route::post('/pupup/create','PopupController@store');
     Route::get('/pupup/update-status','PopupController@updateStatus');
+    Route::get('/pupup-ajax','PopupController@ajaxQuery');
 
     Route::get('/slideShow','SlideShowController@index');
     Route::post('/slideShow/create','SlideShowController@store');
     Route::get('/slideShow/update-status','SlideShowController@updateStatus');
+    Route::get('/slideShow-ajax','SlideShowController@ajaxQuery');
     
     Route::get('/join-us','JoinUsJobController@index');
     Route::post('/join-us/create','JoinUsJobController@store');

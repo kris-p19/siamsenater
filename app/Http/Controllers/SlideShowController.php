@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\SlideShow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use DataTables;
 
 class SlideShowController extends Controller
 {
+    public function ajaxQuery(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = SlideShow::select("*");
+            return DataTables::of($data)->make(true);
+        }
+    }
     /**
      * Display a listing of the resource.
      *

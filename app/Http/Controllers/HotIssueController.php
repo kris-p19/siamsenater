@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\HotIssue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use DataTables;
 
 class HotIssueController extends Controller
 {
+    public function ajaxQuery(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = HotIssue::select("*");
+            return DataTables::of($data)->make(true);
+        }
+    }
     /**
      * Display a listing of the resource.
      *

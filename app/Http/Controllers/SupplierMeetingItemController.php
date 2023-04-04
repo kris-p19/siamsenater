@@ -6,9 +6,17 @@ use App\SupplierMeetingItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use File;
+use DataTables;
 
 class SupplierMeetingItemController extends Controller
 {
+    public function ajaxQuery(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = SupplierMeetingItem::select("*");
+            return DataTables::of($data)->make(true);
+        }
+    }
     /**
      * Display a listing of the resource.
      *
