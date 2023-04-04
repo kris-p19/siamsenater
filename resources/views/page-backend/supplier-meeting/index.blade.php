@@ -59,6 +59,7 @@
             "language": {
                 "url": '//cdn.datatables.net/plug-ins/1.13.4/i18n/th.json',
             },
+            "responsive": true,
             "dom": "Bfrtip",
             "buttons": [
                 "copyHtml5",

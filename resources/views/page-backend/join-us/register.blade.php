@@ -18,10 +18,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
-                    <a class="btn btn-success" onclick="doit('xlsx');">บันทึกเป็น Excel</a>
+                    {{-- <a class="btn btn-success" onclick="doit('xlsx');">บันทึกเป็น Excel</a> --}}
                     <div class="table-responsive">
-                        <table id="data-table" class="table table-bordered" style="width:100%;">
-                            <thead>
+                        <table id="table" class="table table-bordered" style="width:100%;">
+                            {{-- <thead>
                                 <tr>
                                     <th class="text-center" style="white-space:nowrap;">ลำดับ</th>
                                     <th class="text-center" style="white-space:nowrap;">Job Name</th>
@@ -50,7 +50,7 @@
                                         <td>{{ $item->created_at }}</td>
                                     </tr>
                                 @endforeach
-                            </tbody>
+                            </tbody> --}}
                         </table>
                     </div>
                 </div>
@@ -73,5 +73,46 @@
             XLSX.write(wb, {bookType:type, bookSST:true, type: 'base64'}) :
             XLSX.writeFile(wb, fn || ('{{ time() }}.' + (type || 'xlsx')));
     }
+
+    var table;
+    $(document).ready( function () {
+        table = $('#table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{ url('webadmin/join-us-is-join-ajax') }}",
+            "language": {
+                "url": '//cdn.datatables.net/plug-ins/1.13.4/i18n/th.json',
+            },
+            "responsive": true,
+            "dom": "Bfrtip",
+            "buttons": [
+                "copyHtml5",
+                "excelHtml5",
+                "csvHtml5"
+            ],
+            "columns": [
+                {
+                    "data": null,
+                    "title": "ลำดับ",
+                    "sortable": false,
+                    "searchable": false,
+                    "className": "nowrap text-center",
+                    "width": '30px',
+                    "render": function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                { "data": "job", "title": "Job Name" },
+                { "data": "first_name", "title": "ชื่อ" },
+                { "data": "last_name", "title": "สกุล" },
+                { "data": "de_phone", "name": "phone", "title": "เบอร์โทร" },
+                { "data": "de_email", "name": "email", "title": "อีเมล" },
+                { "data": "age", "title": "อายุ" },
+                { "data": "birth_date", "title": "วันเกิด" },
+                { "data": "de_id_card", "name": "id_card", "title": "id card" },
+                { "data": "created_at", "title": "วันที่สมัคร" },
+            ]
+        });
+    });
 </script>
 @endsection

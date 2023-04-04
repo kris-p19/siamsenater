@@ -17,8 +17,8 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table id="datatable" class="table table-bordered table-condensed">
-                    <thead>
+                <table id="table" class="table table-bordered table-condensed" style="width:100%;">
+                    {{-- <thead>
                         <th class="text-center nowrap">ลำดับ</th>
                         <th class="text-center nowrap">กิจกรรม</th>
                         <th class="text-center nowrap">ชื่อ</th>
@@ -45,7 +45,7 @@
                             <td>{!! $row->created_at !!}</td>
                         </tr>
                         @endforeach
-                    </tbody>
+                    </tbody> --}}
                 </table>
             </div>
         </div>
@@ -55,6 +55,40 @@
 
 @section('script')
 <script>
-    
+    var table;
+    $(document).ready( function () {
+        table = $('#table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{ url('webadmin/administration-ajax') }}",
+            "language": {
+                "url": '//cdn.datatables.net/plug-ins/1.13.4/i18n/th.json',
+            },
+            "responsive": true,
+            "dom": "Bfrtip",
+            "buttons": [
+                "copyHtml5",
+                "excelHtml5",
+                "csvHtml5"
+            ],
+            "columns": [
+                {
+                    "data": null,
+                    "title": "ลำดับ",
+                    "sortable": false,
+                    "searchable": false,
+                    "className": "nowrap text-center",
+                    "width": '30px',
+                    "render": function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                { "data": "action", "title": "กิจกรรม" },
+                { "data": "name", "title": "ชื่อ" },
+                { "data": "email", "title": "อีเมล์" },
+                { "data": "created_at", "title": "วันที่สร้าง" }
+            ]
+        });
+    });
 </script>
 @endsection

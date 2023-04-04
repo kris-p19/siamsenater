@@ -6,9 +6,31 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use DataTables;
+use Auth;
 
 class UserController extends Controller
 {
+    public function ajaxQuery(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = User::select("*");
+            return DataTables::of($data)
+            ->addColumn("action",function($row){
+                if($row->email=='master@siamsenater.com') {
+                    if(Auth::user()->email=='master@siamsenater.com') {
+                        return '<a style="border-radius:45px;width:100px;" onclick="if(confirm(\'ยืนยันการรีเส็จรหัสผ่าน\')){window.location.href=$(this).data(\'href\')};" data-href="'.url('/webadmin/administration/reset/'.$row->id).'" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i> รีเซ็ตรหัส</a>';
+                    }
+                } else {
+                    return '<a style="border-radius:45px;width:100px;" onclick="if(confirm(\'ยืนยันการทำรายการ?\')){ window.location.href=$(this).data(\'href\'); }" data-href="'.url('/webadmin/administration/delete/'.$row->id).'" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> ลบ</a>
+                    <a style="border-radius:45px;width:100px;" href="'.url('/webadmin/administration/reset/'.$row->id).'" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i> รีเซ็ตรหัส</a>
+                    <a style="border-radius:45px;width:100px;" href="'.url('/webadmin/administration/update-status/'.$row->id.'/'.($row->status=='active'?'inactive':'active')).'" class="btn btn-outline-'.($row->status=='active'?'primary':'secondary').' btn-sm"><i class="fa fa-'.($row->status=='active'?'eye':'eye-slash').'" aria-hidden="true"></i> '.($row->status=='active'?'เปิดใช้งาน':'ปิดใช้งาน').'</a>';
+                }
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+    }
     public function index(User $user)
     {
         return view('page-backend.administrator.index',[

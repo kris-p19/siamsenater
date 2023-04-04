@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\RelatedLink;
 use Illuminate\Http\Request;
+use DataTables;
 
 class RelatedLinkController extends Controller
 {
+    public function ajaxQuery(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = RelatedLink::select("*");
+            return DataTables::of($data)
+            ->addColumn("link",function($row){
+                return "<a href='".urldecode($row->url)."' target='_blank'>".urldecode($row->url)."</a>";
+            })
+            ->rawColumns(['link'])
+            ->make(true);
+        }
+    }
     /**
      * Display a listing of the resource.
      *

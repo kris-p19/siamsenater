@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\JoinUsJob;
 use App\JoinUsRegis;
 use Illuminate\Http\Request;
+use DataTables;
 
 class JoinUsJobController extends Controller
 {
+    public function ajaxQuery(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = JoinUsJob::select("*");
+            return DataTables::of($data)
+            ->make(true);
+        }
+    }
     /**
      * Display a listing of the resource.
      *

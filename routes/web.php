@@ -132,6 +132,7 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/administration/update-status/{id}/{status}','UserController@updateStatus');
     Route::get('/administration/delete/{id}','UserController@destroy');
     Route::get('/administration/reset/{id}','UserController@resetPassword');
+    Route::get('/administration-ajax','UserController@ajaxQuery');
 
     Route::get('/hotIssue','HotIssueController@index');
     Route::post('/hotIssue/create','HotIssueController@store');
@@ -155,6 +156,8 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/join-us/update-status/{id}/{status}','JoinUsJobController@updateStatus');
     Route::get('/join-us/delete/{id}','JoinUsJobController@destroy');
     Route::get('/join-us-is-join/{id}','JoinUsJobController@viewRegister');
+    Route::get('/join-us-ajax','JoinUsJobController@ajaxQuery');
+    Route::get('/join-us-is-join-ajax','JoinUsRegisController@ajaxQuery');
 
     Route::get('/related-link','RelatedLinkController@index');
     Route::get('/related-link/create','RelatedLinkController@create');
@@ -163,6 +166,7 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::post('/related-link/edit/{id}','RelatedLinkController@update');
     Route::get('/related-link/update-status/{id}/{status}','RelatedLinkController@updateStatus');
     Route::get('/related-link/delete/{id}','RelatedLinkController@destroy');
+    Route::get('/related-link-ajax','RelatedLinkController@ajaxQuery');
 
     // Route::get('/product','ProductController@show');
     // Route::get('/product/createitem','ProductController@create');
