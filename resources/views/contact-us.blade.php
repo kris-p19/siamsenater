@@ -66,7 +66,7 @@
                     {!! !empty($data->url_facebook)?"<a href='".$data->url_facebook."' target='_blank'><img src='".asset('images/contact-us/social-fb.png')."' class='img-responsive' style='display:inline;'></a>":"" !!}
                     {!! !empty($data->url_twitter)?"<a href='".$data->url_twitter."' target='_blank'><img src='".asset('images/contact-us/social-tw.png')."' class='img-responsive' style='display:inline;'></a>":"" !!}
                     {!! !empty($data->url_instagram)?"<a href='".$data->url_instagram."' target='_blank'><img src='".asset('images/contact-us/social-ig.png')."' class='img-responsive' style='display:inline;'></a>":"" !!}
-                    {!! !empty($data->url_youtube)?"<a href='".$data->url_youtube."' target='_blank'><img src='".asset('images/contact-us/')."' class='img-responsive' style='display:inline;'></a>":"" !!}
+                    {!! !empty($data->url_youtube)?"<a href='".$data->url_youtube."' target='_blank'><img src='".asset('images/contact-us/social-yt.png')."' class='img-responsive' style='display:inline;'></a>":"" !!}
                     {!! !empty($data->url_line)?"<a href='".$data->url_line."' target='_blank'><img src='".asset('images/contact-us/social-yt.png')."' class='img-responsive' style='display:inline;'></a>":"" !!}
                     {!! !empty($data->url_tiktok)?"<a href='".$data->url_tiktok."' target='_blank'><img src='".asset('images/contact-us/social-tt.png')."' class='img-responsive' style='display:inline;'></a>":"" !!}
                 </center>
