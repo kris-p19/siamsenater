@@ -16,6 +16,14 @@ class CustomerController extends Controller
             return DataTables::of($data)->make(true);
         }
     }
+    public static function wellcomeGet()
+    {
+        if (app()->getLocale()=='th') {
+            return Customer::select('customer_name_th as name','customer_description_th as description','customer_logo')->where('status','active')->orderBy('created_at','desc')->get();
+        } else {
+            return Customer::select('customer_name_en as name','customer_description_en as description','customer_logo')->where('status','active')->orderBy('created_at','desc')->get();
+        }
+    }
     /**
      * Display a listing of the resource.
      *

@@ -1,3 +1,7 @@
+@php
+    use App\Http\Controllers\AboutUsItemController;
+    use App\Http\Controllers\CustomerController;
+@endphp
 @extends('layouts.frontend')
 @section('page-home','active')
 
@@ -44,6 +48,51 @@
     @endif
 </div>
 <div class="row">
+    <div class="col-md-5">
+        <h2 class="text-center title">{{ __('messages.company-info') }}</h2>
+        <div class="panel panel-default" style="background-color: brown;">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-body" style="color:white;">
+                            @foreach((new AboutUsItemController)->welcomPageByG(1) as $key => $row)
+                                <p style="padding:15px;background:#af2d2d;border-radius:10px;">
+                                    {{ $row->subject }} 
+                                    @if($row->datatype=='image')
+                                    <img src="{{ asset('upload/about-us') }}/{{ $row->content }}" class="img-responsive">
+                                    @elseif($row->datatype=='file')
+                                    <a href="{{ asset('upload/about-us') }}/{{ $row->content }}" target="_blank">
+                                        <img src="{{ asset('images/pdf.png') }}" style="width:40px;" class="img-responsive">
+                                    </a>
+                                    @else
+                                    {!! $row->content !!}
+                                    @endif
+                                </p>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <h2 class="text-center title">{{ __('messages.one-stop-service') }}</h2>
+        <div class="panel panel-default" style="background-color: _brown;">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-body" style="color:white;">
+                            <p style="padding:15px;background:#af2d2d;border-radius:10px;">
+                                Content One Stop Service
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-12">
         <h2 class="text-center title">{{ __('messages.our-service') }}</h2>
         <div class="panel panel-default" style="background-color: brown;">
@@ -69,26 +118,158 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <div class="panel panel-default" style="min-height: 480px;">
+    <div class="col-md-12">
+        <h2 class="text-center title">{{ __('messages.certificate') }}</h2>
+        <div class="panel panel-default" style="background-color: brown;">
             <div class="panel-body">
-                <h3 class="title">{{ __('messages.company_name_full') }}</h3>
-                @foreach (\App\Http\Controllers\AboutUsItemController::welcomPage() as $row)
-                    <h4>{!! $row->subject !!}</h4>
-                    <p>{!! $row->content !!}</p>
-                @endforeach
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-body" style="color:white;">
+                            <div class="owl-carousel owl-theme" id="owl-carousel-certificate">
+                            @foreach((new AboutUsItemController)->welcomPageByG(3) as $key => $row)
+                            <div>
+                                        @if($row->datatype=='image')
+                                        <a class="selector" href="{{ asset('upload/about-us') }}/{{ $row->content }}" data-sub-html="{!! $row->subject !!}">
+                                            <img src="{{ asset('upload/about-us') }}/{{ $row->content }}" title="{{ $row->subject }}" class="img-responsive" style="max-height:350px;object-fit: cover;">
+                                        </a>
+                                        @elseif($row->datatype=='file')
+                                        <a class="selector" href="{{ asset('upload/about-us') }}/{{ $row->content }}" data-sub-html="{!! $row->subject !!}" target="_blank">
+                                            <img src="{{ asset('images/pdf.png') }}" style="width:40px;" title="{{ $row->subject }}" class="img-responsive" style="max-height:350px;object-fit: cover;">
+                                        </a>
+                                        @else
+                                        {!! $row->content !!}
+                                        @endif
+                            </div>
+                            @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center title">{{ __('messages.comtomer') }}</h2>
+        <div class="panel panel-default" style="background-color: brown;">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-body" style="color:white;">
+                            <div class="owl-carousel owl-theme" id="owl-carousel-customer">
+                            @foreach((new CustomerController)->wellcomeGet() as $key => $row)
+                            <div>
+                                <a class="selector" href="{{ asset('images/customers') }}/{{ $row->customer_logo }}" data-sub-html="{!! $row->name !!}<br>{!! $row->description !!}" target="_blank">
+                                    <img src="{{ asset('images/customers') }}/{{ $row->customer_logo }}" title="{{ $row->name }}" class="img-responsive" style="width:100%;">
+                                </a>
+                            </div>
+                            @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center title">{{ __('messages.site-map') }}</h2>
+        <div class="panel panel-default" style="background-color: _brown;">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-body">
+                            
+                            <div class="sitemap" style="overflow: auto;width: 100%;">
+                                <nav class="primary">
+                                    <ul>
+                                        <li id="home">
+                                            <a href="/">
+                        	               	    <i class="fa fa-home"></i> {{ __('messages.company_name_full') }} <small>{{ __('messages.company_name_full') }} description</small>
+                        	                </a>
+                        	                <ul>
+                        	                  <li>
+                        	                     <a href="/"><i class="fa fa-search"></i> {{ __('messages.home') }} <small>{{ __('messages.home') }} description</small></a>
+                        	                     <ul>
+                        	                        <li><a href="{{ str_replace(url('/'),"",url('about-us/company-info')) }}">{{ __('messages.company-info') }}</a></li>
+                        	                        <li><a href="{{ str_replace(url('/'),"",url('one-stop-service')) }}">{{ __('messages.one-stop-service') }}</a></li>
+                        	                        <li><a href="{{ str_replace(url('/'),"",url('our-service')) }}">{{ __('messages.our-service') }}</a></li>
+                                                    <li><a href="{{ str_replace(url('/'),"",url('customer')) }}">{{ __('messages.customer') }}</a></li>
+                                                    <li><a href="{{ str_replace(url('/'),"",url('news-activities')) }}">{{ __('messages.news-activities') }}</a></li>
+                                                    <li><a href="{{ str_replace(url('/'),"",url('contact-us')) }}">{{ __('messages.contact-us') }}</a></li>
+                                                    <li><a href="{{ str_replace(url('/'),"",url('administration')) }}">{{ __('messages.administration') }}</a></li>
+                        	                     </ul>
+                        	                  </li>
+                        	                  <li>
+                        	                     <a href="{{ str_replace(url('/'),"",url('/about-us')) }}"><i class="fa fa-building"></i> {{ __('messages.about-us') }} <small>{{ __('messages.about-us') }} description</small></a>
+                        	                     <ul>
+                        	                        <li><a href="{{ str_replace(url('/'),"",url('about-us/company-info')) }}">{{ __('messages.company-info') }}</a></li>
+                        	                        <li><a href="{{ str_replace(url('/'),"",url('about-us/history')) }}">{{ __('messages.history') }}</a></li>
+                        	                        <li><a href="{{ str_replace(url('/'),"",url('about-us/award-certificate')) }}">{{ __('messages.award-certificate') }}</a></li>
+                        	                     </ul>
+                        	                  </li>
+                        	                  <li>
+                        	                     <a href="{{ str_replace(url('/'),"",url('our-service')) }}"><i class="fa fa-building"></i> {{ __('messages.our-service') }} <small>{{ __('messages.our-service') }} description</small></a>
+                        	                  </li>
+                        	                  <li>
+                        	                     <a href="/blog"><i class="fa fa-rss"></i> Blog <small>Filter by category or tag.</small></a>
+                        	                     <ul>
+                        	                        <li><a href="/blog/article" class="multi">Article</a></li>
+                        	                     </ul>
+                        	                  </li>
+                        	                  <li>
+                        	                     <a href="/about"><i class="fa fa-info-circle"></i> About</a>
+                        	                  </li>
+                        	                  <li>
+                        	                     <a href="/contact"><i class="fa fa-phone"></i> Contact</a>
+                        	                  </li>
+                        	               </ul>
+                        	            </li>
+                        	         </ul>
+                                 </nav>
+                                 <nav class="secondary">
+                        	        <ul>
+                        	            <li><a href="/login">Sign In</a></li>
+                        	            <li><a href="/sitemap">Site Map</a></li>
+                        	            <li><a href="/faqs">FAQs</a></li>
+                        	            <li><a href="/terms">Terms &amp; Conditions</a></li>
+                        	            <li><a href="/privacy">Privacy Policy</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!--<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">-->
+    <!--    <div class="panel panel-default" style="min-height: 480px;">-->
+    <!--        <div class="panel-body">-->
+    <!--            <h3 class="title">{{ __('messages.company_name_full') }}</h3>-->
+    <!--            @foreach (\App\Http\Controllers\AboutUsItemController::welcomPage() as $row)-->
+    <!--                <h4>{!! $row->subject !!}</h4>-->
+    <!--                <p>{!! $row->content !!}</p>-->
+    <!--            @endforeach-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
         <div class="panel panel-default" style="min-height: 480px;">
             <div class="panel-body">
                 <h3 class="title"><i class="fa fa-facebook-official" aria-hidden="true"></i> {{ __('messages.company-facebook-page') }}</h3>
-                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsiamsenater&tabs=timeline&width=326&height=370&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1271732449825933" width="100%" height="370" style="border:none;overflow:hidden" scrolling="no" frameborder="0" role="none" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                <center>
+                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsiamsenater&tabs=timeline&width=1000&height=370&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1271732449825933" width="100%" height="370" style="border:none;overflow:hidden" scrolling="no" frameborder="0" role="none" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                </center>
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
         <div class="panel panel-default" style="min-height: 480px;">
             <div class="panel-body">
                 <h3 class="title"><i class="fa fa-pie-chart" aria-hidden="true"></i> {{ __('messages.vote') }}</h3>
@@ -138,6 +319,10 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('style')
+<link rel="stylesheet" href="{{ asset('css/sitemap.css') }}?_={{time()}}">
 @endsection
 
 @section('script')
@@ -200,6 +385,60 @@
                         }
                     }
                 });
+            });
+            $("#owl-carousel-certificate").owlCarousel({
+                items:4,
+                loop:true,
+                margin:10,
+                responsiveClass:true,
+                autoplay:true,
+                autoplayHoverPause:true,
+                responsive:{
+                    0:{
+                        items:1,
+                        nav:true
+                    },
+                    600:{
+                        items:3,
+                        nav:false
+                    },
+                    1000:{
+                        items:5,
+                        nav:true,
+                        loop:false
+                    }
+                }
+            });
+            $('#owl-carousel-certificate').lightGallery({
+                thumbnail: true,
+                selector: '.selector'
+            });
+            $("#owl-carousel-customer").owlCarousel({
+                items:4,
+                loop:true,
+                margin:10,
+                responsiveClass:true,
+                autoplay:true,
+                autoplayHoverPause:true,
+                responsive:{
+                    0:{
+                        items:1,
+                        nav:true
+                    },
+                    600:{
+                        items:3,
+                        nav:false
+                    },
+                    1000:{
+                        items:5,
+                        nav:true,
+                        loop:false
+                    }
+                }
+            });
+            $('#owl-carousel-customer').lightGallery({
+                thumbnail: true,
+                selector: '.selector'
             });
         });
         var map;

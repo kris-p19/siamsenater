@@ -78,13 +78,13 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
-                    @if(!empty($contactUs->url_googlemap))<a href="{!! $contactUs->url_googlemap !!}" title="Google map" target="_blank"><img src="{{ asset('images/contact-us/social-gm.png') }}" alt="social"></a>@endif
-                    @if(!empty($contactUs->url_facebook))<a href="{!! $contactUs->url_facebook !!}" title="Facebook" target="_blank"><img src="{{ asset('images/contact-us/social-fb.png') }}" alt="social"></a>@endif
-                    @if(!empty($contactUs->url_twitter))<a href="{!! $contactUs->url_twitter !!}" title="Twitter" target="_blank"><img src="{{ asset('images/contact-us/social-tw.png') }}" alt="social"></a>@endif
-                    @if(!empty($contactUs->url_instagram))<a href="{!! $contactUs->url_instagram !!}" title="Instagram" target="_blank"><img src="{{ asset('images/contact-us/social-ig.png') }}" alt="social"></a>@endif
-                    @if(!empty($contactUs->url_youtube))<a href="{!! $contactUs->url_youtube !!}" title="Youtube" target="_blank"><img src="{{ asset('images/contact-us/social-yt.png') }}" alt="social"></a>@endif
-                    @if(!empty($contactUs->url_line))<a href="{!! $contactUs->url_line !!}" title="Line" target="_blank"><img src="{{ asset('images/contact-us/social-li.png') }}" alt="social"></a>@endif
-                    @if(!empty($contactUs->url_tiktok))<a href="{!! $contactUs->url_tiktok !!}" title="Tiktok" target="_blank"><img src="{{ asset('images/contact-us/social-tt.png') }}" alt="social"></a>@endif
+                    @if(!empty($contactUs->url_googlemap))<a href="{!! $contactUs->url_googlemap !!}" title="Google map" target="_blank"><img style="width:40px;" src="{{ asset('images/contact-us/social-gm.png') }}" alt="social"></a>@endif
+                    @if(!empty($contactUs->url_facebook))<a href="{!! $contactUs->url_facebook !!}" title="Facebook" target="_blank"><img style="width:40px;" src="{{ asset('images/contact-us/social-fb.png') }}" alt="social"></a>@endif
+                    @if(!empty($contactUs->url_twitter))<a href="{!! $contactUs->url_twitter !!}" title="Twitter" target="_blank"><img style="width:40px;" src="{{ asset('images/contact-us/social-tw.png') }}" alt="social"></a>@endif
+                    @if(!empty($contactUs->url_instagram))<a href="{!! $contactUs->url_instagram !!}" title="Instagram" target="_blank"><img style="width:40px;" src="{{ asset('images/contact-us/social-ig.png') }}" alt="social"></a>@endif
+                    @if(!empty($contactUs->url_youtube))<a href="{!! $contactUs->url_youtube !!}" title="Youtube" target="_blank"><img style="width:40px;" src="{{ asset('images/contact-us/social-yt.png') }}" alt="social"></a>@endif
+                    @if(!empty($contactUs->url_line))<a href="{!! $contactUs->url_line !!}" title="Line" target="_blank"><img style="width:40px;" src="{{ asset('images/contact-us/social-li.png') }}" alt="social"></a>@endif
+                    @if(!empty($contactUs->url_tiktok))<a href="{!! $contactUs->url_tiktok !!}" title="Tiktok" target="_blank"><img style="width:40px;" src="{{ asset('images/contact-us/social-tt.png') }}" alt="social"></a>@endif
                 </div>
             </div>
             <div class="row">
@@ -114,13 +114,35 @@
                                             @endforeach
                                         </ul>
                                     </li>
-                                    <li class="@yield('page-our-service')"><a href="{{ url('/our-service') }}">{{ __('messages.our-service') }}</a></li>
-                                    <li class="@yield('page-supplier-meeting')"><a href="{{ url('/supplier-meetings') }}">{{ __('messages.supplier-meeting') }}</a></li>
+                                    <li class="dropdown @yield('page-our-service')">
+                                        <a href="{{ url('/our-service') }}">{{ __('messages.our-service') }}</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">{{ __('messages.one-stop-service') }}</a></li>
+                                            <li><a href="#">{{ __('messages.stamping') }}</a></li>
+                                            <li><a href="#">{{ __('messages.welding CO2') }}</a></li>
+                                            <li><a href="#">{{ __('messages.banding') }}</a></li>
+                                            <li><a href="#">{{ __('messages.spindle') }}</a></li>
+                                            <li><a href="#">{{ __('messages.spot') }}</a></li>
+                                        </ul>
+                                    </li>
                                     {{-- <li class="@yield('page-product')"><a href="{{ url('/product') }}">{{ __('messages.product') }}</a></li> --}}
                                     <li class="@yield('page-customer')"><a href="{{ url('/customer') }}">{{ __('messages.customer') }}</a></li>
-                                    <li class="@yield('page-news-activities')"><a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a></li>
-                                    <li class="@yield('page-contact-us')"><a href="{{ url('/contact-us') }}">{{ __('messages.contact-us') }}</a></li>
-                                    <li class="@yield('page-join-us')"><a href="{{ url('/join-us/all') }}">{{ __('messages.join-us') }}</a></li>
+                                    <li class="dropdown @yield('page-news-activities')">
+                                        <a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">{{ __('messages.announcement') }}</a></li>
+                                            <li><a href="#">{{ __('messages.event') }}</a></li>
+                                            <li><a href="#">{{ __('messages.article') }}</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown @yield('page-contact-us')">
+                                        <a href="{{ url('/contact-us') }}">{{ __('messages.contact-us') }}</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">{{ __('messages.contact-information') }}</a></li>
+                                            <li><a href="#">{{ __('messages.internship-program') }}</a></li>
+                                            <li class="@yield('page-supplier-meeting')"><a href="{{ url('/supplier-meetings') }}">{{ __('messages.supplier-meeting') }}</a></li>
+                                        </ul>
+                                    </li>
                                     <li class="@yield('page-administration')"><a href="{{ url('/administration') }}">{{ __('messages.administration') }}</a></li>
 
                                     <li class="text-center">
@@ -181,6 +203,7 @@
                                         <li><a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a></li>
                                         <li><a href="{{ url('/contact-us') }}">{{ __('messages.contact-us') }}</a></li>
                                         <li><a href="{{ url('/administration') }}">{{ __('messages.administration') }}</a></li>
+                                        <li class="@yield('page-join-us')"><a href="{{ url('/join-us/all') }}">{{ __('messages.join-us') }}</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-md-3 col-sm-6 footer-col">

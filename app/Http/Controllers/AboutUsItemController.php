@@ -18,6 +18,20 @@ class AboutUsItemController extends Controller
             return DataTables::of($data)->make(true);
         }
     }
+    public static function welcomPageByG($id)
+    {
+        if (app()->getLocale()=='th') {
+            return AboutUsItem::where('about_us_id',$id)
+            ->where('status','active')
+            ->select('subject_th as subject','content_th as content','datatype')
+            ->get();
+        } else {
+            return AboutUsItem::where('about_us_id',$id)
+            ->where('status','active')
+            ->select('subject_en as subject','content_en as content','datatype')
+            ->get();
+        }
+    }
     public static function welcomPage()
     {
         if (app()->getLocale()=='th') {
