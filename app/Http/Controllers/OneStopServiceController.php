@@ -14,7 +14,9 @@ class OneStopServiceController extends Controller
      */
     public function index()
     {
-        return view('page-backend.one-stop-service.index');
+        return view('page-backend.one-stop-service.index',[
+            'data' => OneStopService::first()
+        ]);
     }
 
     /**
@@ -69,7 +71,14 @@ class OneStopServiceController extends Controller
      */
     public function update(Request $request, OneStopService $oneStopService)
     {
-        //
+        $table = OneStopService::where('id',$oneStopService->max('id'))->update([
+            'content_th' => $request->content_th,
+            'content_en' => $request->content_en
+        ]);
+        if ($table) {
+            return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+        }
+        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
 
     /**

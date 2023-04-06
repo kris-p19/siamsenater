@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'other' => 'อื่น ๆ',
     'content-management' => 'การจัดการเนื้อหา',
     'ex-product-stamping' => 'Ex. Product Stamping',
     'ex-product-welding-co2' => 'Ex. Product Welding CO2',

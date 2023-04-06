@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'other' => 'Other',
     'content-management' => 'Content Management',
     'ex-product-stamping' => 'Ex. Product Stamping',
     'ex-product-welding-co2' => 'Ex. Product Welding CO2',
