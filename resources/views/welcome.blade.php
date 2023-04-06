@@ -215,11 +215,10 @@
                             
                             <div class="row">
                                 <div class="col-md-offset-4 col-md-4 text-center">
-                                    <div class="well">
+                                    <div class="alert alert-info">
                                         <a href="{{ url('/') }}">
                                             <i class="fa fa-home"></i> 
                                             {{ __('messages.company_name_full') }}
-                                            {{ url('/') }}
                                         </a>
                                     </div>
                                 </div>
@@ -248,7 +247,7 @@
                                                 <ul style="padding-left:30px;margin-bottom: 30px;">
                                                     <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('about-us/company-info')) }}">{{ __('messages.company-info') }}</a></li>
                                                     <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('about-us/history')) }}">{{ __('messages.history') }}</a></li>
-                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('about-us/award-certificate')) }}">{{ __('messages.award-certificate') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('about-us/certificate')) }}">{{ __('messages.certificate') }}</a></li>
                                                 </ul>
                                             </li>
                                             <li class="col-md-4" style="list-style-type:inherit;">
