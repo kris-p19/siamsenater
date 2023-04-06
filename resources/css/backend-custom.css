@@ -10,3 +10,7 @@ html, body {
 .nowrap {
     white-space: nowrap;
 }
+
+li.nav-item {
+    font-size: 13px;
+}

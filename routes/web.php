@@ -178,4 +178,6 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
 
     Route::get('/vote','VoteController@index');
     Route::post('/vote/create','VoteController@store');
+
+    Route::get('/one-stop-service','OneStopServiceController@index');
 });

@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/hint/show-hint.min.css">
   <link rel="stylesheet" href="{{ asset('css/backend.css') }}?_={{ time() }}">
   @if(app()->getLocale()=='th')
   <style>
@@ -216,99 +218,125 @@
             <li class="nav-item">
               <a href="{{ url('home') }}" class="nav-link @yield('webadmin-home')">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>Dashboard</p>
+                <p>{{ __('messages.home') }}</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/webadmin/hotIssue') }}" class="nav-link @yield('webadmin-hotIssue')">
-                <i class="nav-icon far fa-flag"></i>
-                <p>{{ __('messages.hotIssue') }}</p>
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tasks"></i>
+                <p>{{ __('messages.content-management') }} <i class="right fas fa-angle-left"></i></p>
               </a>
+              <ul class="nav nav-treeview" style="display: none;">
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/hotIssue') }}" class="nav-link @yield('webadmin-hotIssue')">
+                    <i class="nav-icon far fa-flag"></i>
+                    <p>{{ __('messages.hotIssue') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/pupup') }}" class="nav-link @yield('webadmin-pupup')">
+                    <i class="nav-icon fas fa-bell"></i>
+                    <p>{{ __('messages.pupup') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/slideShow') }}" class="nav-link @yield('webadmin-slideShow')">
+                    <i class="nav-icon fas fa-images"></i>
+                    <p>{{ __('messages.slideShow') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/about-us') }}" class="nav-link @yield('webadmin-about-us')">
+                    <i class="nav-icon fas fa-address-card"></i>
+                    <p>{{ __('messages.about-us') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/customer') }}" class="nav-link @yield('webadmin-customer')">
+                    <i class="nav-icon fab fa-intercom"></i>
+                    <p>{{ __('messages.customer') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/news-activities') }}" class="nav-link @yield('webadmin-news-activities')">
+                    <i class="nav-icon fas fa-rss"></i>
+                    <p>{{ __('messages.news-activities') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/our-service') }}" class="nav-link @yield('webadmin-our-service')">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>{{ __('messages.our-service') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/supplier-meeting') }}" class="nav-link @yield('webadmin-supplier-meeting')">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>{{ __('messages.supplier-meeting') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/related-link') }}" class="nav-link @yield('webadmin-related-link')">
+                    <i class="nav-icon fas fa-link"></i>
+                    <p>{{ __('messages.related-link') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/join-us') }}" class="nav-link @yield('webadmin-join-us')">
+                    <i class="nav-icon fas fa-user-md"></i>
+                    <p>{{ __('messages.join-us') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/contact-us') }}" class="nav-link @yield('webadmin-contact-us')">
+                    <i class="nav-icon fas fa-address-book"></i>
+                    <p>{{ __('messages.contact-us') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/vote') }}" class="nav-link @yield('webadmin-vote')">
+                    <i class="nav-icon fas fa-signal"></i>
+                    <p>{{ __('messages.vote') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/facebookPlugin') }}" class="nav-link @yield('webadmin-facebookPlugin')">
+                    <i class="nav-icon fab fa-facebook-messenger"></i>
+                    <p>{{ __('messages.facebookPlugin') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/administration') }}" class="nav-link @yield('webadmin-administration')">
+                    <i class="nav-icon fas fa-user-cog"></i>
+                    <p>{{ __('messages.administration') }}</p>
+                  </a>
+                </li>
+              </ul>
             </li>
+            
             <li class="nav-item">
-              <a href="{{ url('/webadmin/pupup') }}" class="nav-link @yield('webadmin-pupup')">
-                <i class="nav-icon fas fa-bell"></i>
-                <p>{{ __('messages.pupup') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/slideShow') }}" class="nav-link @yield('webadmin-slideShow')">
-                <i class="nav-icon fas fa-images"></i>
-                <p>{{ __('messages.slideShow') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/about-us') }}" class="nav-link @yield('webadmin-about-us')">
-                <i class="nav-icon fas fa-address-card"></i>
-                <p>{{ __('messages.about-us') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/customer') }}" class="nav-link @yield('webadmin-customer')">
-                <i class="nav-icon fab fa-intercom"></i>
-                <p>{{ __('messages.customer') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/news-activities') }}" class="nav-link @yield('webadmin-news-activities')">
-                <i class="nav-icon fas fa-rss"></i>
-                <p>{{ __('messages.news-activities') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/our-service') }}" class="nav-link @yield('webadmin-our-service')">
-                <i class="nav-icon fas fa-th"></i>
-                <p>{{ __('messages.our-service') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/supplier-meeting') }}" class="nav-link @yield('webadmin-supplier-meeting')">
-                <i class="nav-icon fas fa-users"></i>
-                <p>{{ __('messages.supplier-meeting') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/related-link') }}" class="nav-link @yield('webadmin-related-link')">
-                <i class="nav-icon fas fa-link"></i>
-                <p>{{ __('messages.related-link') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/join-us') }}" class="nav-link @yield('webadmin-join-us')">
-                <i class="nav-icon fas fa-user-md"></i>
-                <p>{{ __('messages.join-us') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/contact-us') }}" class="nav-link @yield('webadmin-contact-us')">
-                <i class="nav-icon fas fa-address-book"></i>
-                <p>{{ __('messages.contact-us') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/vote') }}" class="nav-link @yield('webadmin-vote')">
-                <i class="nav-icon fas fa-signal"></i>
-                <p>{{ __('messages.vote') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/facebookPlugin') }}" class="nav-link @yield('webadmin-facebookPlugin')">
-                <i class="nav-icon fab fa-facebook-messenger"></i>
-                <p>{{ __('messages.facebookPlugin') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/webadmin/administration') }}" class="nav-link @yield('webadmin-administration')">
-                <i class="nav-icon fas fa-user-cog"></i>
-                <p>{{ __('messages.administration') }}</p>
-              </a>
-            </li>
-            {{-- <li class="nav-item">
-              <a style="color:rgb(196, 105, 105);" href="{{ url('/webadmin/system-configuration') }}" class="nav-link">
-                <i class="nav-icon fas fa-cogs"></i>
+              <a href="{{ url('/webadmin/system-configuration') }}" class="nav-link @yield('webadmin-system-configuration')">
+                <i class="nav-icon fas fa-wrench"></i>
                 <p>{{ __('messages.system-configuration') }}</p>
               </a>
-            </li> --}}
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-question"></i>
+                <p>{{ __('messages.other') }} <i class="right fas fa-angle-left"></i></p>
+              </a>
+              <ul class="nav nav-treeview" style="display: none;">
+                <li class="nav-item">
+                  <a href="{{ url('/webadmin/one-stop-service') }}" class="nav-link @yield('webadmin-one-stop-service')">
+                    <i class="nav-icon far fa-star"></i>
+                    <p>{{ __('messages.one-stop-service') }}</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
@@ -374,6 +402,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/keymap/sublime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/hint/html-hint.min.js"></script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/htmlembedded/htmlembedded.min.js"></script> --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/htmlmixed/htmlmixed.min.js"></script>
   @yield('script')
 </body>
 </html>

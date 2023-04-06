@@ -2,6 +2,7 @@
     use App\Http\Controllers\AboutUsItemController;
     use App\Http\Controllers\CustomerController;
     use App\Http\Controllers\OurServiceController;
+    use App\Http\Controllers\OneStopServiceController;
 @endphp
 @extends('layouts.frontend')
 @section('page-home','active')
@@ -82,11 +83,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="panel-body" style="color:white;">
-                            <p style="padding:15px;background:#af2d2d;border-radius:10px;">
-                                Content One Stop Service
-                            </p>
-                        </div>
+                        {!! (new OneStopServiceController)->content()->content !!}
                     </div>
                 </div>
             </div>
