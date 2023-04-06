@@ -6,6 +6,7 @@ use App\SupplierMeeting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SupplierMeetingItemController;
 use DataTables;
+use Auth;
 
 class SupplierMeetingController extends Controller
 {
@@ -130,6 +131,9 @@ class SupplierMeetingController extends Controller
 
     public function login()
     {
+        if (!Auth::guest() && Auth::user()->status=='active') {
+            return redirect('supplier-meetings');
+        }
         return view('required-token');
     }
 
@@ -147,10 +151,12 @@ class SupplierMeetingController extends Controller
 
         if (!empty($supplier)) {
             session()->put('supplier_auth',$request->token);
+            session()->put('supplier_user',$supplier->supplier_name);
             return redirect('/supplier-meetings');
         }
 
         session()->forget('supplier_auth');
+        session()->forget('supplier_user');
         return back()->with(['status'=>'danger','msg'=>'Not Access!'])->withInput();
         // dd($supplier);
     }

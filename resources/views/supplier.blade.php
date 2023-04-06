@@ -22,10 +22,18 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-right">
+                @if(!Auth::guest() && Auth::user()->status=='active')
+                <a class="btn btn-default btn-sm disabled" style="margin-bottom:10px;border-radius:45px;">
+                    <span class="glyphicon glyphicon-user"></span>
+                    {{ Auth::user()->name }}
+                </a>
+                @else
                 <a href="{{ url('/logout-token') }}" class="btn btn-danger btn-sm" style="margin-bottom:10px;border-radius:45px;">
                     <span class="glyphicon glyphicon-off"></span>
+                    {{ session()->get('supplier_user') }}
                     {{ __('messages.logout') }}
                 </a>
+                @endif
             </div>
         </div>
         <div class="row">

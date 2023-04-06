@@ -5,15 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ __('messages.company_name_full') }}</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Thai|Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Thai|Sono|Poppins&display=fallback">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap4.min.css">
-
   <link rel="stylesheet" href="{{ asset('css/backend.css') }}?_={{ time() }}">
+  @if(app()->getLocale()=='th')
+  <style>
+      html, body {
+          font-family: 'Noto Sans Thai', sans-serif !important;
+      }
+  </style> 
+  @else
+  <style>
+      html, body {
+          font-family: 'Poppins', sans-serif !important;
+      }
+  </style>
+  @endif
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
   <div class="wrapper">
