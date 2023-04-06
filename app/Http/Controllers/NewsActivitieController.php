@@ -17,8 +17,10 @@ class NewsActivitieController extends Controller
             ->addColumn('gallery', function ($row) {
                 $it = "";
                 $uri = asset('images/news-activites');
-                foreach (json_decode($row->picture_gallery) as $key => $value) {
-                    $it .= "<img src='".$uri."/".$value."' class='img-responsive' style='width:150px;' onerror='this.style.display=none'>";
+                if (!empty($row->picture_gallery)) {
+                    foreach (json_decode($row->picture_gallery) as $key => $value) {
+                        $it .= "<img src='".$uri."/".$value."' class='img-responsive' style='width:150px;' onerror='this.style.display=none'>";
+                    }
                 }
                 return $it;
             })
