@@ -119,7 +119,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="#">{{ __('messages.one-stop-service') }}</a></li>
                                             <li><a href="#">{{ __('messages.stamping') }}</a></li>
-                                            <li><a href="#">{{ __('messages.welding CO2') }}</a></li>
+                                            <li><a href="#">{{ __('messages.welding-co2') }}</a></li>
                                             <li><a href="#">{{ __('messages.banding') }}</a></li>
                                             <li><a href="#">{{ __('messages.spindle') }}</a></li>
                                             <li><a href="#">{{ __('messages.spot') }}</a></li>

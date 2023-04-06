@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'company-info' => 'ข้อมูลบริษัท',
+    'one-stop-service' => 'บริการแบบครบวงจร',
+    'certificate' => 'ใบรับรอง',
+    'comtomer' => 'ลูกค้า',
+    'site-map' => 'แผนที่เว็บไซต์',
     'supplier-meeting-account' => 'จัดการสมาชิกซัพพลายเออร์',
     'list' => 'รายการ',
     'file' => 'ไฟล์',

@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'company-info' => 'Company info',
+    'one-stop-service' => 'One stop service',
+    'certificate' => 'Certificate',
+    'comtomer' => 'Comtomer',
+    'site-map' => 'Site map',
     'supplier-meeting-account' => 'Supplier Meeting Account',
     'list' => 'List',
     'file' => 'File',

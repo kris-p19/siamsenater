@@ -1,6 +1,7 @@
 @php
     use App\Http\Controllers\AboutUsItemController;
     use App\Http\Controllers\CustomerController;
+    use App\Http\Controllers\OurServiceController;
 @endphp
 @extends('layouts.frontend')
 @section('page-home','active')
@@ -91,14 +92,44 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
+    <div class="col-md-7">
         <h2 class="text-center title">{{ __('messages.our-service') }}</h2>
         <div class="panel panel-default" style="background-color: brown;">
             <div class="panel-body">
                 <div class="row">
-                    @foreach(\App\Http\Controllers\OurServiceController::indexArr() as $item)
+                    @foreach((new OurServiceController)->indexArr(0,3) as $item)
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="panel panel-default hover">
+                            <div class="panel-body">
+                                <a href="{{ url('our-service/read/'.$item->id) }}">
+                                    <img class="media-object" src="{{ asset('images/our-service/'.$item->picture_header) }}" style="width:100%;object-fit:cover;" onerror="this.style.display='none';">
+                                </a>
+                                <h4 class="media-heading title">{!! $item->service_name !!}</h4>
+                                <p>@foreach(explode(',',$item->hastag) as $hastag) <label class="label label-default">{!! $hastag !!}</label> @endforeach</p>
+                                <p><a href="{{ url('our-service/read/'.$item->id) }}" class="btn btn-primary">{{ __('messages.detail') }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="row">
+                    @foreach((new OurServiceController)->indexArr(3,3) as $item)
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="panel panel-default hover">
+                            <div class="panel-body">
+                                <a href="{{ url('our-service/read/'.$item->id) }}">
+                                    <img class="media-object" src="{{ asset('images/our-service/'.$item->picture_header) }}" style="width:100%;object-fit:cover;" onerror="this.style.display='none';">
+                                </a>
+                                <h4 class="media-heading title">{!! $item->service_name !!}</h4>
+                                <p>@foreach(explode(',',$item->hastag) as $hastag) <label class="label label-default">{!! $hastag !!}</label> @endforeach</p>
+                                <p><a href="{{ url('our-service/read/'.$item->id) }}" class="btn btn-primary">{{ __('messages.detail') }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="row">
+                    @foreach((new OurServiceController)->indexArr(6,3) as $item)
                     <div class="col-sm-6 col-md-4 col-lg-4">
                         <div class="panel panel-default hover">
                             <div class="panel-body">
@@ -182,64 +213,127 @@
                     <div class="col-md-12">
                         <div class="panel-body">
                             
-                            <div class="sitemap" style="overflow: auto;width: 100%;">
-                                <nav class="primary">
-                                    <ul>
-                                        <li id="home">
-                                            <a href="/">
-                        	               	    <i class="fa fa-home"></i> {{ __('messages.company_name_full') }} <small>{{ __('messages.company_name_full') }} description</small>
-                        	                </a>
-                        	                <ul>
-                        	                  <li>
-                        	                     <a href="/"><i class="fa fa-search"></i> {{ __('messages.home') }} <small>{{ __('messages.home') }} description</small></a>
-                        	                     <ul>
-                        	                        <li><a href="{{ str_replace(url('/'),"",url('about-us/company-info')) }}">{{ __('messages.company-info') }}</a></li>
-                        	                        <li><a href="{{ str_replace(url('/'),"",url('one-stop-service')) }}">{{ __('messages.one-stop-service') }}</a></li>
-                        	                        <li><a href="{{ str_replace(url('/'),"",url('our-service')) }}">{{ __('messages.our-service') }}</a></li>
-                                                    <li><a href="{{ str_replace(url('/'),"",url('customer')) }}">{{ __('messages.customer') }}</a></li>
-                                                    <li><a href="{{ str_replace(url('/'),"",url('news-activities')) }}">{{ __('messages.news-activities') }}</a></li>
-                                                    <li><a href="{{ str_replace(url('/'),"",url('contact-us')) }}">{{ __('messages.contact-us') }}</a></li>
-                                                    <li><a href="{{ str_replace(url('/'),"",url('administration')) }}">{{ __('messages.administration') }}</a></li>
-                        	                     </ul>
-                        	                  </li>
-                        	                  <li>
-                        	                     <a href="{{ str_replace(url('/'),"",url('/about-us')) }}"><i class="fa fa-building"></i> {{ __('messages.about-us') }} <small>{{ __('messages.about-us') }} description</small></a>
-                        	                     <ul>
-                        	                        <li><a href="{{ str_replace(url('/'),"",url('about-us/company-info')) }}">{{ __('messages.company-info') }}</a></li>
-                        	                        <li><a href="{{ str_replace(url('/'),"",url('about-us/history')) }}">{{ __('messages.history') }}</a></li>
-                        	                        <li><a href="{{ str_replace(url('/'),"",url('about-us/award-certificate')) }}">{{ __('messages.award-certificate') }}</a></li>
-                        	                     </ul>
-                        	                  </li>
-                        	                  <li>
-                        	                     <a href="{{ str_replace(url('/'),"",url('our-service')) }}"><i class="fa fa-building"></i> {{ __('messages.our-service') }} <small>{{ __('messages.our-service') }} description</small></a>
-                        	                  </li>
-                        	                  <li>
-                        	                     <a href="/blog"><i class="fa fa-rss"></i> Blog <small>Filter by category or tag.</small></a>
-                        	                     <ul>
-                        	                        <li><a href="/blog/article" class="multi">Article</a></li>
-                        	                     </ul>
-                        	                  </li>
-                        	                  <li>
-                        	                     <a href="/about"><i class="fa fa-info-circle"></i> About</a>
-                        	                  </li>
-                        	                  <li>
-                        	                     <a href="/contact"><i class="fa fa-phone"></i> Contact</a>
-                        	                  </li>
-                        	               </ul>
-                        	            </li>
-                        	         </ul>
-                                 </nav>
-                                 <nav class="secondary">
-                        	        <ul>
-                        	            <li><a href="/login">Sign In</a></li>
-                        	            <li><a href="/sitemap">Site Map</a></li>
-                        	            <li><a href="/faqs">FAQs</a></li>
-                        	            <li><a href="/terms">Terms &amp; Conditions</a></li>
-                        	            <li><a href="/privacy">Privacy Policy</a></li>
-                                    </ul>
-                                </nav>
+                            <div class="row">
+                                <div class="col-md-offset-4 col-md-4 text-center">
+                                    <div class="well">
+                                        <a href="{{ url('/') }}">
+                                            <i class="fa fa-home"></i> 
+                                            {{ __('messages.company_name_full') }}
+                                            {{ url('/') }}
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            
+
+                            <div class="row">
+                                <div class="col-md-12 text-left">
+                                    <div>
+                                        <ul style="padding-left:30px;">
+                                            <li class="col-md-4" style="list-style-type:inherit;">
+                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('/') }}">{{ __('messages.home') }}</a>
+                                                <ul style="padding-left:30px;margin-bottom: 30px;">
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('about-us/company-info')) }}">{{ __('messages.company-info') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('one-stop-service')) }}">{{ __('messages.one-stop-service') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('our-service')) }}">{{ __('messages.our-service') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('customer')) }}">{{ __('messages.customer') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('certificate')) }}">{{ __('messages.certificate') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('customer')) }}">{{ __('messages.customer') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('site-map')) }}">{{ __('messages.site-map') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('contact-information')) }}">{{ __('messages.contact-information') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('related-link')) }}">{{ __('messages.related-link') }}</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="col-md-4" style="list-style-type:inherit;">
+                                                <a style="font-size: 18px;font-weight: bold;" href="">{{ __('messages.about-us') }}</a>
+                                                <ul style="padding-left:30px;margin-bottom: 30px;">
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('about-us/company-info')) }}">{{ __('messages.company-info') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('about-us/history')) }}">{{ __('messages.history') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('about-us/award-certificate')) }}">{{ __('messages.award-certificate') }}</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="col-md-4" style="list-style-type:inherit;">
+                                                <a style="font-size: 18px;font-weight: bold;" href="">{{ __('messages.our-service') }}</a>
+                                                <ul style="padding-left:30px;margin-bottom: 30px;">
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('our-service/one-stop-service')) }}">{{ __('messages.one-stop-service') }}</a></li>
+                                                    <li style="list-style-type:inherit;">
+                                                        <a href="{{ str_replace(url('/'),"",url('our-service/stamping')) }}">{{ __('messages.stamping') }}</a>
+                                                        <ul style="padding-left:30px;">
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('our-service/stamping')) }}">{{ __('messages.ex-product-stamping') }}</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li style="list-style-type:inherit;">
+                                                        <a href="{{ str_replace(url('/'),"",url('our-service/welding-co2')) }}">{{ __('messages.welding-co2') }}</a>
+                                                        <ul style="padding-left:30px;">
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('our-service/welding-co2')) }}">{{ __('messages.ex-product-welding-co2') }}</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li style="list-style-type:inherit;">
+                                                        <a href="{{ str_replace(url('/'),"",url('our-service/banding')) }}">{{ __('messages.banding') }}</a>
+                                                        <ul style="padding-left:30px;">
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('our-service/banding')) }}">{{ __('messages.ex-product-banding') }}</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li style="list-style-type:inherit;">
+                                                        <a href="{{ str_replace(url('/'),"",url('our-service/spindle')) }}">{{ __('messages.spindle') }}</a>
+                                                        <ul style="padding-left:30px;">
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('our-service/spindle')) }}">{{ __('messages.ex-product-spindle') }}</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li style="list-style-type:inherit;">
+                                                        <a href="{{ str_replace(url('/'),"",url('our-service/spot')) }}">{{ __('messages.spot') }}</a>
+                                                        <ul style="padding-left:30px;">
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('our-service/spot')) }}">{{ __('messages.ex-product-spot') }}</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="col-md-4" style="list-style-type:inherit;">
+                                                <a style="font-size: 18px;font-weight: bold;" href="">{{ __('messages.customer') }}</a>
+                                            </li>
+                                            <li class="col-md-4" style="list-style-type:inherit;">
+                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('/') }}">{{ __('messages.news-activities') }}</a>
+                                                <ul style="padding-left:30px;margin-bottom: 30px;">
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('announcement')) }}">{{ __('messages.announcement') }}</a></li>
+                                                    <li style="list-style-type:inherit;">
+                                                        <a href="{{ str_replace(url('/'),"",url('event')) }}">{{ __('messages.event') }}</a>
+                                                        <ul style="padding-left:30px;">
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('event/csr')) }}">{{ __('messages.csr') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('event/csr')) }}">{{ __('messages.company-activities') }}</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('article')) }}">{{ __('messages.article') }}</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="col-md-4" style="list-style-type:inherit;">
+                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('/') }}">{{ __('messages.contact-us') }}</a>
+                                                <ul style="padding-left:30px;margin-bottom: 30px;">
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('contact-information')) }}">{{ __('messages.contact-information') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('internship-program')) }}">{{ __('messages.internship-program') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('supplier-meeting')) }}">{{ __('messages.supplier-meeting') }}</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="col-md-4" style="list-style-type:inherit;">
+                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('/') }}">{{ __('messages.administration') }}</a>
+                                                <ul style="padding-left:30px;margin-bottom: 30px;">
+                                                    <li style="list-style-type:inherit;">
+                                                        <a href="{{ str_replace(url('/'),"",url('content-management')) }}">{{ __('messages.content-management') }}</a>
+                                                        <ul style="padding-left:30px;">
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('/')) }}">{{ __('messages.news-activities') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('/')) }}">{{ __('messages.our-service') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('/')) }}">{{ __('messages.history') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('/')) }}">{{ __('messages.customer') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('/')) }}">{{ __('messages.related-link') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('/')) }}">{{ __('messages.join-us') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('/')) }}">{{ __('messages.contact-us') }}</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ str_replace(url('/'),"",url('system-configuration')) }}">{{ __('messages.system-configuration') }}</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -396,7 +490,7 @@
                 responsive:{
                     0:{
                         items:1,
-                        nav:true
+                        nav:false
                     },
                     600:{
                         items:3,
@@ -404,7 +498,7 @@
                     },
                     1000:{
                         items:5,
-                        nav:true,
+                        nav:false,
                         loop:false
                     }
                 }
@@ -423,7 +517,7 @@
                 responsive:{
                     0:{
                         items:1,
-                        nav:true
+                        nav:false
                     },
                     600:{
                         items:3,
@@ -431,7 +525,7 @@
                     },
                     1000:{
                         items:5,
-                        nav:true,
+                        nav:false,
                         loop:false
                     }
                 }
