@@ -82,6 +82,13 @@ class AboutUsItemController extends Controller
             'datatype' => $this->getEnumValues()
         ]);
     }
+    public function create2($about_us_id)
+    {
+        return view('page-backend.history.create',[
+            'about_us_id' => $about_us_id,
+            'datatype' => $this->getEnumValues()
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -119,7 +126,7 @@ class AboutUsItemController extends Controller
         }
         $table->save();
         if ($table) {
-            return redirect('/webadmin/about-us/item/'.$about_us_id)->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+            return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
         }
         return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
@@ -135,6 +142,13 @@ class AboutUsItemController extends Controller
         return view('page-backend.about.item.show',[
             'data' => $aboutUsItem->where('about_us_id',$about_us_id)->get(),
             'about_us_id' => $about_us_id
+        ]);
+    }
+    public function showHistoryOnly(AboutUsItem $aboutUsItem)
+    {
+        return view('page-backend.history.show',[
+            'data' => $aboutUsItem->where('about_us_id',2)->get(),
+            'about_us_id' => 2
         ]);
     }
 
@@ -157,6 +171,14 @@ class AboutUsItemController extends Controller
     public function edit($id, AboutUsItem $aboutUsItem)
     {
         return view('page-backend.about.item.edit',[
+            'data' => $aboutUsItem->where('id',$id)->first(),
+            'datatype' => $this->getEnumValues(),
+            'about_us_id' => $aboutUsItem->where('id',$id)->first()->about_us_id
+        ]);
+    }
+    public function edit2($id, AboutUsItem $aboutUsItem)
+    {
+        return view('page-backend.history.edit',[
             'data' => $aboutUsItem->where('id',$id)->first(),
             'datatype' => $this->getEnumValues(),
             'about_us_id' => $aboutUsItem->where('id',$id)->first()->about_us_id
@@ -204,7 +226,7 @@ class AboutUsItemController extends Controller
         }
         $table = $aboutUsItem->where('id',$id)->update($data);
         if ($table) {
-            return redirect('/webadmin/about-us/edititem/'.$id)->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+            return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
         }
         return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
@@ -215,7 +237,7 @@ class AboutUsItemController extends Controller
             'status' => $status
         ]);
         if ($table) {
-            return redirect()->back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+            return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
         }
         return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }

@@ -181,4 +181,16 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
 
     Route::get('/one-stop-service','OneStopServiceController@index');
     Route::post('/one-stop-service/update','OneStopServiceController@update');
+
+    Route::get('/history','AboutUsItemController@showHistoryOnly');
+    Route::get('/history/createitem/{about_us_id}','AboutUsItemController@create2');
+    Route::post('/history/createitem/{about_us_id}','AboutUsItemController@store');
+    Route::get('/history/edititem/{id}','AboutUsItemController@edit2');
+    Route::post('/history/edititem/{id}','AboutUsItemController@update');
+    Route::get('/history/deleteitem/{id}','AboutUsItemController@destroy');
+    Route::get('/history/item-update-status/{id}/{status}','AboutUsItemController@itemUpdateStatus');
+
+    Route::get('/system-configuration','SystemConfigurationController@index');
+    Route::get('/system-configuration/edit','SystemConfigurationController@edit');
+    Route::post('/system-configuration/edit','SystemConfigurationController@update');
 });
