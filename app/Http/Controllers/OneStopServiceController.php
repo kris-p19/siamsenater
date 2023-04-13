@@ -48,7 +48,15 @@ class OneStopServiceController extends Controller
      */
     public function show(OneStopService $oneStopService)
     {
-        //
+        $data = [];
+        if (app()->getLocale()=='th') {
+            $data = $oneStopService->select('content_th as content')->first();
+        } else {
+            $data = $oneStopService->select('content_en as content')->first();
+        }
+        return view('one-stop-service',[
+            'data'     => $data
+        ]);
     }
 
     /**

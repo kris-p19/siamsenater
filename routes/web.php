@@ -34,10 +34,11 @@ Route::get('/logout-token','SupplierMeetingController@logout');
 Route::get('/customer','CustomerController@index');
 Route::get('/news-activities','NewsActivitieController@index');
 Route::get('/news-activities/read/{id}','NewsActivitieController@read');
-Route::get('/contact-us','ContactUsController@index');
+Route::get('/contact-information','ContactUsController@index');
 Route::get('/join-us/{all}','JoinUsJobController@index');
 Route::get('/join-us-read/{id}','JoinUsJobController@read');
 Route::post('/join-us-register','JoinUsJobController@register');
+Route::get('/one-stop-service','OneStopServiceController@show');
 
 Route::get('/admin',function(){ return redirect('/webadmin'); });
 Route::get('/administration',function(){ return redirect('/webadmin'); });
