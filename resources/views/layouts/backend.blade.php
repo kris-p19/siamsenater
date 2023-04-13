@@ -162,7 +162,7 @@
             </li>
 
             <li class="nav-header">{{ strtoupper(('Other menu')) }}</li>
-            <li class="nav-item  menu-is-opening menu-open">
+            <li class="nav-item  menu-is-opening menu-open" style="margin-bottom:70px;">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-question"></i>
                 <p>{{ __('messages.other') }} <i class="right fas fa-angle-left"></i></p>
@@ -230,8 +230,6 @@
                 </li>
               </ul>
             </li>
-
-
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
