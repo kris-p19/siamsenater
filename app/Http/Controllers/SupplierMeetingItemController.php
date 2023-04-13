@@ -13,7 +13,7 @@ class SupplierMeetingItemController extends Controller
     public function ajaxQuery(Request $request)
     {
         if ($request->ajax()) {
-            $data = SupplierMeetingItem::select("*");
+            $data = SupplierMeetingItem::select("*")->orderBy('created_at','desc');
             return DataTables::of($data)->make(true);
         }
     }

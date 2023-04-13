@@ -1,4 +1,5 @@
 @php
+    use App\OurService;
     $contactUs = DB::table('contact_us')->first();
     use App\SystemConfiguration;
     $system = [
@@ -122,11 +123,14 @@
                                         <a href="{{ url('/our-service') }}">{{ __('messages.our-service') }}</a>
                                         <ul class="dropdown-menu">
                                             <li class="@yield('page-one-stop-service')"><a href="{{ url('one-stop-service') }}">{{ __('messages.one-stop-service') }}</a></li>
-                                            <li class="@yield('page-stamping')"><a href="{{ url('stamping') }}">{{ __('messages.stamping') }}</a></li>
+                                            @foreach(OurService::where('status','active')->orderBy('created_at','desc')->get() as $index => $row)
+                                            <li class="@yield('page-our-service-'.$row->id)"><a href="{{ url('our-service/read/'.$row->id) }}">{{ (app()->getLocale()=='th'?$row->service_name_th:$row->service_name_en) }}</a></li>
+                                            @endforeach
+                                            {{-- <li class="@yield('page-stamping')"><a href="{{ url('stamping') }}">{{ __('messages.stamping') }}</a></li>
                                             <li class="@yield('page-welding-co2')"><a href="{{ url('welding-co2') }}">{{ __('messages.welding-co2') }}</a></li>
                                             <li class="@yield('page-banding')"><a href="{{ url('banding') }}">{{ __('messages.banding') }}</a></li>
                                             <li class="@yield('page-spindle')"><a href="{{ url('spindle') }}">{{ __('messages.spindle') }}</a></li>
-                                            <li class="@yield('page-spot')"><a href="{{ url('spot') }}">{{ __('messages.spot') }}</a></li>
+                                            <li class="@yield('page-spot')"><a href="{{ url('spot') }}">{{ __('messages.spot') }}</a></li> --}}
                                         </ul>
                                     </li>
                                     {{-- <li class="@yield('page-product')"><a href="{{ url('/product') }}">{{ __('messages.product') }}</a></li> --}}
@@ -134,13 +138,13 @@
                                     <li class="dropdown @yield('page-news-activities')">
                                         <a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a>
                                         <ul class="dropdown-menu">
-                                            <li class="@yield('page-announcement')"><a href="{{ url('announcement') }}">{{ __('messages.announcement') }}</a></li>
-                                            <li class="@yield('page-event')"><a href="{{ url('event') }}">{{ __('messages.event') }}</a></li>
-                                            <li class="@yield('page-article')"><a href="{{ url('article') }}">{{ __('messages.article') }}</a></li>
+                                            <li class="@yield('page-announcement')"><a href="{{ url('news-activities/announcement') }}">{{ __('messages.announcement') }}</a></li>
+                                            <li class="@yield('page-event')"><a href="{{ url('news-activities/event') }}">{{ __('messages.event') }}</a></li>
+                                            <li class="@yield('page-article')"><a href="{{ url('news-activities/article') }}">{{ __('messages.article') }}</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown @yield('page-contact-us')">
-                                        <a href="{{ url('/contact-us') }}">{{ __('messages.contact-us') }}</a>
+                                        <a href="{{ url('/contact-information') }}">{{ __('messages.contact-us') }}</a>
                                         <ul class="dropdown-menu">
                                             <li class="@yield('page-contact-us')"><a href="{{ url('contact-information') }}">{{ __('messages.contact-information') }}</a></li>
                                             <li class="@yield('page-internship-program')"><a href="{{ url('internship-program') }}">{{ __('messages.internship-program') }}</a></li>
@@ -205,7 +209,7 @@
                                         <li><a href="{{ url('/our-service') }}">{{ __('messages.our-service') }}</a></li>
                                         <li><a href="{{ url('/customer') }}">{{ __('messages.customer') }}</a></li>
                                         <li><a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a></li>
-                                        <li><a href="{{ url('/contact-us') }}">{{ __('messages.contact-us') }}</a></li>
+                                        <li><a href="{{ url('/contact-information') }}">{{ __('messages.contact-us') }}</a></li>
                                         <li><a href="{{ url('/administration') }}">{{ __('messages.administration') }}</a></li>
                                         <li class="@yield('page-join-us')"><a href="{{ url('/join-us/all') }}">{{ __('messages.join-us') }}</a></li>
                                     </ul>

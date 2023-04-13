@@ -13,7 +13,7 @@ class OurServiceController extends Controller
     public function ajaxQuery(Request $request)
     {
         if ($request->ajax()) {
-            $data = OurService::select("*");
+            $data = OurService::select("*")->orderBy('created_at','desc');
             return DataTables::of($data)
             ->make(true);
         }

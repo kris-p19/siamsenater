@@ -14,7 +14,7 @@ class UserController extends Controller
     public function ajaxQuery(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::select("*");
+            $data = User::select("*")->orderBy('created_at','desc');
             return DataTables::of($data)
             ->addColumn("action",function($row){
                 if($row->email=='master@siamsenater.com') {

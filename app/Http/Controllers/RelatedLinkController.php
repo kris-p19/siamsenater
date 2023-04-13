@@ -11,7 +11,7 @@ class RelatedLinkController extends Controller
     public function ajaxQuery(Request $request)
     {
         if ($request->ajax()) {
-            $data = RelatedLink::select("*");
+            $data = RelatedLink::select("*")->orderBy('created_at','desc');
             return DataTables::of($data)
             ->addColumn("link",function($row){
                 return "<a href='".urldecode($row->url)."' target='_blank'>".urldecode($row->url)."</a>";

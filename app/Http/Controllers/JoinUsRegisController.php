@@ -12,7 +12,7 @@ class JoinUsRegisController extends Controller
     public function ajaxQuery(Request $request)
     {
         if ($request->ajax()) {
-            $data = JoinUsRegis::select("*");
+            $data = JoinUsRegis::select("*")->orderBy('created_at','desc');
             return DataTables::of($data)
             ->addColumn("job",function($row){
                 return "<a href='".url('join-us-read/'.$row->job_id)."' target='_blank'>" .

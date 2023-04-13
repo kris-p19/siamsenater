@@ -12,7 +12,7 @@ class SlideShowController extends Controller
     public function ajaxQuery(Request $request)
     {
         if ($request->ajax()) {
-            $data = SlideShow::select("*");
+            $data = SlideShow::select("*")->orderBy('created_at','desc');
             return DataTables::of($data)->make(true);
         }
     }

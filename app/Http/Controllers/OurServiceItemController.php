@@ -13,7 +13,7 @@ class OurServiceItemController extends Controller
     public function ajaxQuery($our_service_id, Request $request)
     {
         if ($request->ajax()) {
-            $data = OurServiceItem::where('our_service_id',$our_service_id)->select("*");
+            $data = OurServiceItem::where('our_service_id',$our_service_id)->select("*")->orderBy('created_at','desc');
             return DataTables::of($data)
             ->make(true);
         }

@@ -12,7 +12,7 @@ class HotIssueController extends Controller
     public function ajaxQuery(Request $request)
     {
         if ($request->ajax()) {
-            $data = HotIssue::select("*");
+            $data = HotIssue::select("*")->orderBy('created_at','desc');
             return DataTables::of($data)->make(true);
         }
     }

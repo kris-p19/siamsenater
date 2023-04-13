@@ -100,6 +100,8 @@
                 },
                 { "data": "title_th", "title": "ชื่อเรื่องไทย", "className": "nowrap" },
                 { "data": "title_en", "title": "ชื่อเรื่องอังกฤษ", "className": "nowrap" },
+                { "data": "group_type_th", "title": "ประเภทภาษาไทย", "className": "nowrap" },
+                { "data": "group_type_en", "title": "ประเภทภาษาอังกฤษ", "className": "nowrap" },
                 { 
                     "data": "picture_header", "title": "ภาพ", 
                     "render": function(data, type, row, meta) {

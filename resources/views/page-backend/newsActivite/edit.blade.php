@@ -22,6 +22,32 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label>ประเภทภาษาไทย</label>
+                            <select name="group_type_th" class="form-control">
+                                <option {{ $data->group_type_th=='ประกาศ'?'selected':'' }} value="ประกาศ">ประกาศ</option>
+                                <option {{ $data->group_type_th=='เหตุการณ์'?'selected':'' }} value="เหตุการณ์">เหตุการณ์</option>
+                                <option {{ $data->group_type_th=='บทความ'?'selected':'' }} value="บทความ">บทความ</option>
+                            </select>
+                            @error('group_type_th')
+                                <small class="form-text color-red">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>ประเภทภาษาอังกษ</label>
+                            <select name="group_type_en" class="form-control">
+                                <option {{ $data->group_type_th=='Announcement'?'selected':'' }} value="Announcement">Announcement</option>
+                                <option {{ $data->group_type_th=='Event'?'selected':'' }} value="Event">Event</option>
+                                <option {{ $data->group_type_th=='Article'?'selected':'' }} value="Article">Article</option>
+                            </select>
+                            @error('group_type_en')
+                                <small class="form-text color-red">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label>ชื่อเรื่องภาษาไทย</label>
                             <input type="text" class="form-control" autofocus placeholder="ชื่อเรื่องภาษาไทย" name="title_th" value="{!! $data->title_th !!}">
                             @error('title_th')

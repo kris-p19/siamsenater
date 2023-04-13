@@ -175,6 +175,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="{{ url('/webadmin/internship-program') }}" class="nav-link @yield('webadmin-internship-program')">
+                    <i class="nav-icon far fa-star"></i>
+                    <p>{{ __('messages.internship-program') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{{ url('/webadmin/hotIssue') }}" class="nav-link @yield('webadmin-hotIssue')">
                     <i class="nav-icon far fa-flag"></i>
                     <p>{{ __('messages.hotIssue') }}</p>

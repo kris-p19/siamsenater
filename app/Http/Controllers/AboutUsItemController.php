@@ -14,7 +14,7 @@ class AboutUsItemController extends Controller
     public function ajaxQuery($id, Request $request)
     {
         if ($request->ajax()) {
-            $data = AboutUsItem::where('about_us_id',$id)->select("*");
+            $data = AboutUsItem::where('about_us_id',$id)->select("*")->orderBy('created_at','desc');
             return DataTables::of($data)->make(true);
         }
     }

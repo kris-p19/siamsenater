@@ -34,6 +34,11 @@ Route::get('/logout-token','SupplierMeetingController@logout');
 Route::get('/customer','CustomerController@index');
 Route::get('/news-activities','NewsActivitieController@index');
 Route::get('/news-activities/read/{id}','NewsActivitieController@read');
+Route::get('/news-activities/announcement','NewsActivitieController@index');
+Route::get('/news-activities/event','NewsActivitieController@index');
+Route::get('/news-activities/article','NewsActivitieController@index');
+Route::get('/internship-program','InternshipProgramController@show');
+
 Route::get('/contact-information','ContactUsController@index');
 Route::get('/join-us/{all}','JoinUsJobController@index');
 Route::get('/join-us-read/{id}','JoinUsJobController@read');
@@ -182,6 +187,9 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
 
     Route::get('/one-stop-service','OneStopServiceController@index');
     Route::post('/one-stop-service/update','OneStopServiceController@update');
+
+    Route::get('/internship-program','InternshipProgramController@index');
+    Route::post('/internship-program/update','InternshipProgramController@update');
 
     Route::get('/history','AboutUsItemController@showHistoryOnly');
     Route::get('/history/createitem/{about_us_id}','AboutUsItemController@create2');

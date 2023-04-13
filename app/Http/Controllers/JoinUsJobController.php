@@ -12,7 +12,7 @@ class JoinUsJobController extends Controller
     public function ajaxQuery(Request $request)
     {
         if ($request->ajax()) {
-            $data = JoinUsJob::select("*");
+            $data = JoinUsJob::select("*")->orderBy('created_at','desc');
             return DataTables::of($data)
             ->make(true);
         }

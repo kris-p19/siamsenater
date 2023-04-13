@@ -3,6 +3,8 @@
     use App\Http\Controllers\CustomerController;
     use App\Http\Controllers\OurServiceController;
     use App\Http\Controllers\OneStopServiceController;
+    use App\OurService;
+    use App\OurServiceItem;
 @endphp
 @extends('layouts.frontend')
 @section('page-home','active')
@@ -251,7 +253,17 @@
                                                 <a style="font-size: 18px;font-weight: bold;" href="">{{ __('messages.our-service') }}</a>
                                                 <ul style="padding-left:30px;margin-bottom: 30px;">
                                                     <li style="list-style-type:inherit;"><a href="{{ url('one-stop-service') }}" target="_blank">{{ __('messages.one-stop-service') }}</a></li>
+                                                    @foreach(OurService::where('status','active')->orderBy('created_at','desc')->get() as $index => $row)
                                                     <li style="list-style-type:inherit;">
+                                                        <a href="{{ url('our-service/read/'.$row->id) }}">{{ (app()->getLocale()=='th'?$row->service_name_th:$row->service_name_en) }}</a>
+                                                        <ul style="padding-left:30px;">
+                                                            @foreach(OurServiceItem::where('status','active')->where('our_service_id',$row->id)->wherenotnull('name_th')->wherenotnull('name_en')->orderBy('created_at','desc')->get() as $key => $info)
+                                                            <li style="list-style-type:inherit;">{{ (app()->getLocale()=='th'?$info->name_th:$info->name_en) }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                    @endforeach
+                                                    {{-- <li style="list-style-type:inherit;">
                                                         <a href="{{ url('our-service/stamping') }}" target="_blank">{{ __('messages.stamping') }}</a>
                                                         <ul style="padding-left:30px;">
                                                             <li style="list-style-type:inherit;"><a href="{{ url('our-service/stamping') }}" target="_blank">{{ __('messages.ex-product-stamping') }}</a></li>
@@ -280,28 +292,28 @@
                                                         <ul style="padding-left:30px;">
                                                             <li style="list-style-type:inherit;"><a href="{{ url('our-service/spot') }}" target="_blank">{{ __('messages.ex-product-spot') }}</a></li>
                                                         </ul>
-                                                    </li>
+                                                    </li> --}}
                                                 </ul>
                                             </li>
                                             <li class="col-md-4" style="list-style-type:inherit;">
                                                 <a style="font-size: 18px;font-weight: bold;" href="">{{ __('messages.customer') }}</a>
                                             </li>
                                             <li class="col-md-4" style="list-style-type:inherit;">
-                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('/') }}">{{ __('messages.news-activities') }}</a>
+                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('news-activities') }}">{{ __('messages.news-activities') }}</a>
                                                 <ul style="padding-left:30px;margin-bottom: 30px;">
                                                     <li style="list-style-type:inherit;"><a href="{{ url('announcement') }}" target="_blank">{{ __('messages.announcement') }}</a></li>
                                                     <li style="list-style-type:inherit;">
                                                         <a href="{{ url('event') }}" target="_blank">{{ __('messages.event') }}</a>
                                                         <ul style="padding-left:30px;">
                                                             <li style="list-style-type:inherit;"><a href="{{ url('event/csr') }}" target="_blank">{{ __('messages.csr') }}</a></li>
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('event/csr') }}" target="_blank">{{ __('messages.company-activities') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ url('event/company-activities') }}" target="_blank">{{ __('messages.company-activities') }}</a></li>
                                                         </ul>
                                                     </li>
                                                     <li style="list-style-type:inherit;"><a href="{{ url('article') }}" target="_blank">{{ __('messages.article') }}</a></li>
                                                 </ul>
                                             </li>
                                             <li class="col-md-4" style="list-style-type:inherit;">
-                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('/') }}">{{ __('messages.contact-us') }}</a>
+                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('contact-information') }}">{{ __('messages.contact-us') }}</a>
                                                 <ul style="padding-left:30px;margin-bottom: 30px;">
                                                     <li style="list-style-type:inherit;"><a href="{{ url('contact-information') }}" target="_blank">{{ __('messages.contact-information') }}</a></li>
                                                     <li style="list-style-type:inherit;"><a href="{{ url('internship-program') }}" target="_blank">{{ __('messages.internship-program') }}</a></li>
@@ -309,21 +321,21 @@
                                                 </ul>
                                             </li>
                                             <li class="col-md-4" style="list-style-type:inherit;">
-                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('/') }}">{{ __('messages.administration') }}</a>
+                                                <a style="font-size: 18px;font-weight: bold;" href="{{ url('webadmin') }}">{{ __('messages.administration') }}</a>
                                                 <ul style="padding-left:30px;margin-bottom: 30px;">
                                                     <li style="list-style-type:inherit;">
-                                                        <a href="{{ url('content-management') }}" target="_blank">{{ __('messages.content-management') }}</a>
+                                                        <a href="{{ url('/webadmin') }}" target="_blank">{{ __('messages.content-management') }}</a>
                                                         <ul style="padding-left:30px;">
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('/') }}" target="_blank">{{ __('messages.news-activities') }}</a></li>
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('/') }}" target="_blank">{{ __('messages.our-service') }}</a></li>
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('/') }}" target="_blank">{{ __('messages.history') }}</a></li>
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('/') }}" target="_blank">{{ __('messages.customer') }}</a></li>
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('/') }}" target="_blank">{{ __('messages.related-link') }}</a></li>
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('/') }}" target="_blank">{{ __('messages.join-us') }}</a></li>
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('/') }}" target="_blank">{{ __('messages.contact-us') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ url('webadmin/news-activities') }}" target="_blank">{{ __('messages.news-activities') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ url('webadmin/our-service') }}" target="_blank">{{ __('messages.our-service') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ url('webadmin/history') }}" target="_blank">{{ __('messages.history') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ url('webadmin/customer') }}" target="_blank">{{ __('messages.customer') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ url('webadmin/related-link') }}" target="_blank">{{ __('messages.related-link') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ url('webadmin/join-us') }}" target="_blank">{{ __('messages.join-us') }}</a></li>
+                                                            <li style="list-style-type:inherit;"><a href="{{ url('webadmin/contact-us') }}" target="_blank">{{ __('messages.contact-us') }}</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li style="list-style-type:inherit;"><a href="{{ url('system-configuration') }}" target="_blank">{{ __('messages.system-configuration') }}</a></li>
+                                                    <li style="list-style-type:inherit;"><a href="{{ url('webadmin/system-configuration') }}" target="_blank">{{ __('messages.system-configuration') }}</a></li>
                                                 </ul>
                                             </li>
                                         </ul>

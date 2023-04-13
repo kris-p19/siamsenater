@@ -20,6 +20,8 @@ class CreateNewsActivitiesTable extends Migration
             $table->string('picture_header')->nullable();
             $table->text('content_th');
             $table->text('content_en');
+            $table->string('group_type_th')->nullable();
+            $table->string('group_type_en')->nullable();
             $table->text('picture_gallery')->nullable();
             $table->integer('conter')->default(0)->nullable();
             $table->text('keyword_th')->nullable();

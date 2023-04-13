@@ -13,7 +13,7 @@ class AboutUsController extends Controller
     public function ajaxQuery(Request $request)
     {
         if ($request->ajax()) {
-            $data = AboutUs::select("*");
+            $data = AboutUs::select("*")->orderBy('created_at','desc');
             return DataTables::of($data)->make(true);
         }
     }
