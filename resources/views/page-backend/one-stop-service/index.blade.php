@@ -18,13 +18,19 @@
                 <button type="submit" style="border-radius:45px;" class="btn btn-outline-primary btn-sm float-right"><i class="fas fa-pencil-alt"></i> บันทึก</a>
             </div>
             <div class="card-body">
-                <div class="form-group">
-                    <label class="control-label">เนื้อหาภาษาไทย (Text/HTML)</label>
-                    <textarea name="content_th" id="content_th" style="width:100%;min-height:350px;">{{ $data->content_th }}</textarea>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">เนื้อหาภาษาอังกฤษ (Text/HTML)</label>
-                    <textarea name="content_en" id="content_en" style="width:100%;min-height:350px;">{{ $data->content_en }}</textarea>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">เนื้อหาภาษาไทย (Text/HTML)</label>
+                            <textarea name="content_th" id="content_th" style="width:100%;min-height:350px;">{{ $data->content_th }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">เนื้อหาภาษาอังกฤษ (Text/HTML)</label>
+                            <textarea name="content_en" id="content_en" style="width:100%;min-height:350px;">{{ $data->content_en }}</textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
