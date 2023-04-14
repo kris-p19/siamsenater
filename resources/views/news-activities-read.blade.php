@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
     <li><a href="{{ url('/') }}">{{ __('messages.home') }}</a></li>
     <li><a href="{{ url('news-activities') }}">{{ __('messages.news-activities') }}</a></li>
-    <li><a href="{{ url('news-activities/'.$group) }}">{{ $data->group_type }}</a></li>
+    <li><a href="{{ empty($group)?url('news-activities'):$group }}">{{ $data->group_type }}</a></li>
     <li class="active">{{ $data->title }}</li>
 </ol>
 @endsection

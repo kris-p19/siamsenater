@@ -90,6 +90,7 @@ class NewsActivitieController extends Controller
                 'title_th as title',
                 'content_th as content',
                 'group_type_th as group_type',
+                'group_type_en',
                 'picture_header',
                 'picture_gallery',
                 'conter',
@@ -102,6 +103,7 @@ class NewsActivitieController extends Controller
                 'title_en as title',
                 'content_en as content',
                 'group_type_en as group_type',
+                'group_type_en',
                 'picture_header',
                 'picture_gallery',
                 'conter',
@@ -110,10 +112,21 @@ class NewsActivitieController extends Controller
                 'id'
             );
         }
-        
+        $url_group = "";
+        switch ($data->where('status','active')->where('id',$id)->first()->group_type_en) {
+            case 'Announcement':
+                $url_group = url('news-activities/announcement');
+                break;
+            case 'Event':
+                $url_group = url('news-activities/event');
+                break;
+            case 'Article':
+                $url_group = url('news-activities/article');
+                break;
+        }
         return view('news-activities-read',[
             'data' => $data->where('status','active')->where('id',$id)->first(),
-            'group' => $data->where('status','active')->where('id',$id)->first()->group_type_en
+            'group' => $url_group
         ]);
     }
 
