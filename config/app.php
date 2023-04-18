@@ -175,7 +175,6 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
         /*
          * Application Service Providers...
          */
