@@ -91,7 +91,7 @@ return [
     'general-links' => 'ลิงค์ทั่วไป',
     'social-media' => 'สื่อสังคม',
     'lastpost' => 'โพสต์ล่าสุด',
-    'home' => 'หน้ากลัก',
+    'home' => 'หน้าหลัก',
     'about-us' => 'เกี่ยวกับเรา',
     'our-service' => 'บริการของเรา',
     'customer' => 'ลูกค้า',

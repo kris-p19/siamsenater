@@ -51,6 +51,9 @@
                 --active-color:#621919;
                 --theme-font-color:#ffffff;
             }
+            .footer-col p, .footer-ul li {
+                font-size: 16px !important;
+            }
         </style>
         @if(app()->getLocale()=='th')
         <style>
@@ -147,6 +150,7 @@
                                         <a href="{{ url('/contact-information') }}">{{ __('messages.contact-us') }}</a>
                                         <ul class="dropdown-menu">
                                             <li class="@yield('page-contact-us')"><a href="{{ url('contact-information') }}">{{ __('messages.contact-information') }}</a></li>
+                                            <li class="@yield('page-join-us')"><a href="{{ url('/join-us/all') }}">{{ __('messages.join-us') }}</a></li>
                                             <li class="@yield('page-internship-program')"><a href="{{ url('internship-program') }}">{{ __('messages.internship-program') }}</a></li>
                                             <li class="@yield('page-supplier-meeting')"><a href="{{ url('/supplier-meetings') }}">{{ __('messages.supplier-meeting') }}</a></li>
                                         </ul>
@@ -211,10 +215,9 @@
                                         <li><a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a></li>
                                         <li><a href="{{ url('/contact-information') }}">{{ __('messages.contact-us') }}</a></li>
                                         <li><a href="{{ url('/administration') }}">{{ __('messages.administration') }}</a></li>
-                                        <li class="@yield('page-join-us')"><a href="{{ url('/join-us/all') }}">{{ __('messages.join-us') }}</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-md-3 col-sm-6 footer-col">
+                                <div class="col-md-3 col-sm-6 footer-col" style="padding-right: 30px;">
                                     <h6 class="heading7">{{ __('messages.lastpost') }}</h6>
                                     <div class="post">
                                         @foreach(DB::table('news_activities')->select('title_th','title_en','id','public_datetime','conter')->where('status','active')->where('public_datetime','<',date('Y-m-d H:i:s'))->orderBy('public_datetime','desc')->take(3)->get() as $index => $item)

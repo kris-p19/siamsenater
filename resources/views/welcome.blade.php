@@ -52,34 +52,7 @@
     @endif
 </div>
 <div class="row">
-    <div class="col-md-5">
-        <h2 class="text-center title">{{ __('messages.company-info') }}</h2>
-        <div class="panel panel-default" style="background-color: brown;">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel-body" style="color:white;">
-                            @foreach((new AboutUsItemController)->welcomPageByG(1) as $key => $row)
-                                <p style="padding:15px;background:#af2d2d;border-radius:10px;">
-                                    {{ $row->subject }} 
-                                    @if($row->datatype=='image')
-                                    <img src="{{ asset('upload/about-us') }}/{{ $row->content }}" class="img-responsive">
-                                    @elseif($row->datatype=='file')
-                                    <a href="{{ asset('upload/about-us') }}/{{ $row->content }}" target="_blank">
-                                        <img src="{{ asset('images/pdf.png') }}" style="width:40px;" class="img-responsive">
-                                    </a>
-                                    @else
-                                    {!! $row->content !!}
-                                    @endif
-                                </p>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-7">
+    <div class="col-md-12">
         <h2 class="text-center title">{{ __('messages.one-stop-service') }}</h2>
         <div class="panel panel-default" style="background-color: _brown;">
             <div class="panel-body">
@@ -146,6 +119,33 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <h2 class="text-center title">{{ __('messages.company-info') }}</h2>
+        <div class="panel panel-default" style="background-color: brown;">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-body" style="color:white;">
+                            @foreach((new AboutUsItemController)->welcomPageByG(1) as $key => $row)
+                                <p style="padding:15px;background:#af2d2d;border-radius:10px;">
+                                    {{ $row->subject }} 
+                                    @if($row->datatype=='image')
+                                    <img src="{{ asset('upload/about-us') }}/{{ $row->content }}" class="img-responsive">
+                                    @elseif($row->datatype=='file')
+                                    <a href="{{ asset('upload/about-us') }}/{{ $row->content }}" target="_blank">
+                                        <img src="{{ asset('images/pdf.png') }}" style="width:40px;" class="img-responsive">
+                                    </a>
+                                    @else
+                                    {!! $row->content !!}
+                                    @endif
+                                </p>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -203,7 +203,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-12">
         <h2 class="text-center title">{{ __('messages.site-map') }}</h2>
         <div class="panel panel-default" style="background-color: _brown;">
@@ -263,36 +263,6 @@
                                                         </ul>
                                                     </li>
                                                     @endforeach
-                                                    {{-- <li style="list-style-type:inherit;">
-                                                        <a href="{{ url('our-service/stamping') }}" target="_blank">{{ __('messages.stamping') }}</a>
-                                                        <ul style="padding-left:30px;">
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('our-service/stamping') }}" target="_blank">{{ __('messages.ex-product-stamping') }}</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li style="list-style-type:inherit;">
-                                                        <a href="{{ url('our-service/welding-co2') }}" target="_blank">{{ __('messages.welding-co2') }}</a>
-                                                        <ul style="padding-left:30px;">
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('our-service/welding-co2') }}" target="_blank">{{ __('messages.ex-product-welding-co2') }}</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li style="list-style-type:inherit;">
-                                                        <a href="{{ url('our-service/banding') }}" target="_blank">{{ __('messages.banding') }}</a>
-                                                        <ul style="padding-left:30px;">
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('our-service/banding') }}" target="_blank">{{ __('messages.ex-product-banding') }}</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li style="list-style-type:inherit;">
-                                                        <a href="{{ url('our-service/spindle') }}" target="_blank">{{ __('messages.spindle') }}</a>
-                                                        <ul style="padding-left:30px;">
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('our-service/spindle') }}" target="_blank">{{ __('messages.ex-product-spindle') }}</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li style="list-style-type:inherit;">
-                                                        <a href="{{ url('our-service/spot') }}" target="_blank">{{ __('messages.spot') }}</a>
-                                                        <ul style="padding-left:30px;">
-                                                            <li style="list-style-type:inherit;"><a href="{{ url('our-service/spot') }}" target="_blank">{{ __('messages.ex-product-spot') }}</a></li>
-                                                        </ul>
-                                                    </li> --}}
                                                 </ul>
                                             </li>
                                             <li class="col-md-4" style="list-style-type:inherit;">
@@ -348,7 +318,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="row">
     <!--<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">-->
     <!--    <div class="panel panel-default" style="min-height: 480px;">-->
