@@ -43,6 +43,7 @@ Route::get('/contact-information','ContactUsController@index');
 Route::get('/join-us/{all}','JoinUsJobController@index');
 Route::get('/join-us-read/{id}','JoinUsJobController@read');
 Route::post('/join-us-register','JoinUsJobController@register');
+Route::get('/card/{name}','JoinUsRegisController@viewCard')->middleware(['auth']);
 Route::get('/one-stop-service','OneStopServiceController@show');
 
 Route::get('/admin',function(){ return redirect('/webadmin'); });

@@ -98,8 +98,8 @@
                         <a style="border-radius:45px;width:100px;" href="{{ url('/webadmin/news-activities/update-status') }}/`+row.id+`/`+(row.status=='active'?'inactive':'active')+`" class="btn btn-outline-`+(row.status=='active'?'primary':'secondary')+` btn-sm"><i class="fa fa-`+(row.status=='active'?'eye':'eye-slash')+`" aria-hidden="true"></i> `+(row.status=='active'?'เผยแพร่':'ไม่เผยแพร่')+`</a>`;
                     }
                 },
-                { "data": "title_th", "title": "ชื่อเรื่องไทย", "className": "nowrap" },
-                { "data": "title_en", "title": "ชื่อเรื่องอังกฤษ", "className": "nowrap" },
+                { "data": "title_th", "title": "ชื่อเรื่องไทย", "className": "_nowrap" },
+                { "data": "title_en", "title": "ชื่อเรื่องอังกฤษ", "className": "_nowrap" },
                 { "data": "group_type_th", "title": "ประเภทภาษาไทย", "className": "nowrap" },
                 { "data": "group_type_en", "title": "ประเภทภาษาอังกฤษ", "className": "nowrap" },
                 { 

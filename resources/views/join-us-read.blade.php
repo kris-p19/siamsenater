@@ -75,40 +75,44 @@
                             '<div class="modal-content">'+
                                 '<div class="modal-header">'+
                                     '<h3 class="modal-title">สมัครงานตำแหน่ง {{ $data->job_name }}</h3>' +
-                                    '<input type="hidden" name="_token" value="{{ csrf_token() }}" required>'+
-                                    '<input type="hidden" name="job_id" value="{{ $data->id }}" required>'+
+                                    '<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" required>'+
+                                    '<input type="hidden" id="job_id" name="job_id" value="{{ $data->id }}" required>'+
                                 '</div/>'+
                                 '<div class="modal-body">'+
                                     '<div class="row">'+
                                         '<div class="col-md-12">'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">ชื่อ <strong style="color:red;">*</strong></label>'+
-                                                '<input type="text" class="form-control" placeholder="ชื่อ" name="first_name" required autofocus>'+
+                                                '<input type="text" class="form-control" placeholder="ชื่อ" id="first_name" name="first_name" required autofocus>'+
                                             '</div>'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">สกุล <strong style="color:red;">*</strong></label>'+
-                                                '<input type="text" class="form-control" placeholder="สกุล" name="last_name" required autofocus>'+
+                                                '<input type="text" class="form-control" placeholder="สกุล" id="last_name" name="last_name" required autofocus>'+
                                             '</div>'+
 
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">เบอร์โทรศัพท์ <strong style="color:red;">*</strong></label>'+
-                                                '<input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" name="phone" required autofocus>'+
+                                                '<input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" id="phone" name="phone" required autofocus>'+
                                             '</div>'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">อีเมล <strong style="color:red;">*</strong></label>'+
-                                                '<input type="email" class="form-control" placeholder="อีเมล" name="email" required autofocus>'+
+                                                '<input type="email" class="form-control" placeholder="อีเมล" id="email" name="email" required autofocus>'+
                                             '</div>'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">อายุ <strong style="color:red;">*</strong></label>'+
-                                                '<input type="number" class="form-control" placeholder="อายุ" name="age" required autofocus>'+
+                                                '<input type="number" class="form-control" placeholder="อายุ" id="age" name="age" required autofocus>'+
                                             '</div>'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">วันเดือนปีเกิด <strong style="color:red;">*</strong></label>'+
-                                                '<input type="date" class="form-control" placeholder="วันเดือนปีเกิด" name="birth_date" required autofocus>'+
+                                                '<input type="date" class="form-control" placeholder="วันเดือนปีเกิด" id="birth_date" name="birth_date" required autofocus>'+
                                             '</div>'+
+                                            // '<div class="form-group">'+
+                                            //     '<label for="" class="control-label">เลขประจำตัวประชาชน <strong style="color:red;">*</strong></label>'+
+                                            //     '<input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" name="id_card" required autofocus>'+
+                                            // '</div>'+
                                             '<div class="form-group">'+
-                                                '<label for="" class="control-label">เลขประจำตัวประชาชน <strong style="color:red;">*</strong></label>'+
-                                                '<input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" name="id_card" required autofocus>'+
+                                                '<label for="" class="control-label">แนบบัตรประจำตัวประชาชน <strong style="color:red;">*</strong></label>'+
+                                                '<input type="file" class="form-control" id="id_card_file" name="id_card_file" required autofocus>'+
                                             '</div>'+
                                         '</div>'+
                                     '</div>'+
@@ -125,15 +129,33 @@
                 $('#modal-register-join-us form').unbind('submit');
                 $('#modal-register-join-us form').submit(function(e){
                     e.preventDefault();
+                    var formData = new FormData();
+                    formData.append('id_card_file', $('#id_card_file')[0].files[0]);
+                    formData.append('_token', $('#_token').val());
+                    formData.append('job_id', $('#job_id').val());
+                    formData.append('first_name', $('#first_name').val());
+                    formData.append('last_name', $('#last_name').val());
+                    formData.append('phone', $('#phone').val());
+                    formData.append('email', $('#email').val());
+                    formData.append('age', $('#age').val());
+                    formData.append('birth_date', $('#birth_date').val());
+                    console.log(formData);
                     $.ajax({
                         url:"{{ url('join-us-register') }}",
                         type:"post",
                         cache:false,
                         dataType:"json",
-                        data:$(this).serialize(),
-                        beforeSend:function(){},
-                        error:function(){},
+                        processData: false,
+                        contentType: false,
+                        data:formData,
+                        beforeSend:function(){
+                            $('body').append('<div id="abc" class="text-center" style="top:0;width:100%;height:100%;position:fixed;z-index:9999;background:#000000c2;"><h4 class="text-center" style="color:white;padding-top:75px;">กำลังส่งข้อมูล...โปรดรอสัดครู่</h4></div>');
+                        },
+                        error:function(){
+                            $("#abc").remove();
+                        },
                         success:function(response){
+                            // $("#abc").find('h4').text(response.status);
                             if (response.status=='success') {
                                 alert(response.msg);
                                 $('#modal-register-join-us').modal('hide');

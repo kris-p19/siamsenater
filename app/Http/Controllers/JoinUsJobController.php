@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\JoinUsJob;
 use App\JoinUsRegis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use DataTables;
 
 class JoinUsJobController extends Controller
@@ -156,13 +157,13 @@ class JoinUsJobController extends Controller
             "email" => "required|email",
             "age" => "required|numeric|min:1",
             "birth_date" => "required|string",
-            "id_card" => "required|string|min:13"
+            "id_card_file" => "required"
         ]);
         $job = JoinUsJob::where('id',$request->job_id)
         ->whereDate('date_begin','<=',date('Y-m-d'))
         ->whereDate('date_end','>=',date('Y-m-d'))
         ->where('status','active')
-        ->where('maximum_regis','>=',JoinUsRegis::where('job_id',$request->job_id)->count())
+        ->where('maximum_regis','>',JoinUsRegis::where('job_id',$request->job_id)->count())
         ->count();
         
         if ($job==0) {
@@ -177,7 +178,13 @@ class JoinUsJobController extends Controller
         $table->email = base64_encode($request->email);
         $table->age = $request->age;
         $table->birth_date = $request->birth_date;
-        $table->id_card = base64_encode($request->id_card);
+        
+        $file = $request->file('id_card_file');
+        $destinationPath = storage_path('card');
+        $profileImage = date('YmdHis') . Str::random(5) . "." . $file->getClientOriginalExtension();
+        $file->move($destinationPath, $profileImage);
+
+        $table->id_card = $profileImage;
         $table->save();
         if ($table) {
             return response()->json(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);

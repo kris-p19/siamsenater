@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\JoinUsRegis;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\File\File;
 use DataTables;
 use DB;
 
@@ -26,11 +27,22 @@ class JoinUsRegisController extends Controller
                 return base64_decode($row->email);
             })
             ->addColumn("de_id_card",function($row){
-                return base64_decode($row->id_card);
+                return "<a href='".url('card/'.$row->id_card)."' target='_blank'>เปิดดู</a>";
             })
             ->rawColumns(['job','de_phone','de_email','de_id_card'])
             ->make(true);
         }
+    }
+    public function viewCard($name)
+    {
+        $myFile = storage_path("card/".$name);
+        if (!file_exists($myFile)) { abort(404); }
+        return response()->download(
+            $myFile,
+            $name,
+            [],
+            'inline'
+        );
     }
     /**
      * Display a listing of the resource.
