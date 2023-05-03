@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\NewsActivitie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use DB;
 use DataTables;
 
 class NewsActivitieController extends Controller
@@ -338,5 +339,106 @@ class NewsActivitieController extends Controller
             return back()->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
         }
         return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
+    }
+
+    public function uploadTmp(Request $request)
+    {
+        $this->validate($request,[
+            'picture_gallery'   => 'required',
+            'id_form'           => 'required',
+            'type'              => 'required'
+        ]);
+        $id = empty($request->id)?$request->id_form:$request->id;
+        if (!empty($request->file('picture_gallery'))) {
+            $files = $request->file('picture_gallery');
+            $destinationPath = public_path('/images/news-activites/tmp/');
+            $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
+            if ($files->move($destinationPath, $profileImage)) {
+                $table = DB::table('tmpuploadnewsactivitie')->insert([
+                    'token' => $id,
+                    'name'  => $profileImage,
+                    'type'  => $request->type,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+                if ($table) {
+                    return response()->json(['status'=>true,'img'=>asset('images/news-activites/tmp/'.$profileImage)]);
+                }
+            }
+        }
+        return response()->json(['status'=>false]);
+    }
+    public function getTmp(Request $request)
+    {
+        $id = empty($request->id)?$request->id_form:$request->id;
+        return response()->json([
+            'status' => true,
+            'img' => DB::table('tmpuploadnewsactivitie')->where('token',$id)->get()
+        ]);
+    }
+
+    public function addHeader(Request $request)
+    {
+        $files = $request->file('file');
+        $destinationPath = public_path('/images/news-activites/');
+        $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
+        if ($files->move($destinationPath, $profileImage)) {
+            $table = NewsActivitie::where('id',$request->id)->update([
+                'picture_header' => $profileImage
+            ]);
+            if ($table) {
+                return response()->json(true);
+            }
+        }
+        return response()->json(false);
+    }
+    public function addGallery(Request $request)
+    {
+        $files = $request->file('file');
+        $old_array = NewsActivitie::where('id',$request->id)->first()->picture_gallery;
+        $items = [];
+        $destinationPath = public_path('/images/news-activites/');
+        $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
+        if (empty($old_array)) {
+            array_push($items,$profileImage);
+            if ($files->move($destinationPath, $profileImage)) {
+                $table = NewsActivitie::where('id',$request->id)->update([
+                    'picture_gallery' => json_encode($items)
+                ]);
+                if ($table) {
+                    return response()->json(true);
+                }
+            }
+        } else {
+            $items = json_decode($old_array);
+            array_push($items,$profileImage);
+            if ($files->move($destinationPath, $profileImage)) {
+                $table = NewsActivitie::where('id',$request->id)->update([
+                    'picture_gallery' => json_encode($items)
+                ]);
+                if ($table) {
+                    return response()->json(true);
+                }
+            }
+        }
+    }
+    public function removeGallery(Request $request)
+    {
+        $item = $request->item;
+        $old_array = NewsActivitie::where('id',$request->id)->first()->picture_gallery;
+        $items = json_decode($old_array);
+        $items = array_filter($items, function($e) use ($item) {
+            return ($e !== $item);
+        });
+        $final = [];
+        foreach ($items as $key => $value) {
+            array_push($final,$value);
+        }
+        $table = NewsActivitie::where('id',$request->id)->update([
+            'picture_gallery' => json_encode($final)
+        ]);
+        if ($table) {
+            return response()->json(true);
+        }
     }
 }

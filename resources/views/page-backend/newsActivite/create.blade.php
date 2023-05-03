@@ -12,6 +12,7 @@
     @endif
     <form method="post" enctype="multipart/form-data" id="quickForm">
         @csrf
+        <input type="hidden" name="id_form" id="id_form" value="{{ Illuminate\Support\Str::random(30) }}">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">{{ __('messages.news-activities') }} - สร้างรายการใหม่</h3>
@@ -92,7 +93,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                         <div class="form-group">
                             <label>ภาพส่วนหัว</label>
                             <input type="file" class="form-control" autofocus placeholder="ภาพส่วนหัว" name="picture_header">
@@ -104,12 +105,12 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>อัลบั้มภาพ</label>
-                            <input type="file" class="form-control" autofocus placeholder="อัลบั้มภาพ" name="picture_gallery[]" multiple>
+                            <input type="file" class="form-control" autofocus placeholder="อัลบั้มภาพ" id="picture_gallery" name="picture_gallery[]" multiple>
                             @error('picture_gallery')
                                 <small class="form-text color-red">{{ $message }}</small>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>วันที่เผยแพร่ข่าว</label>
@@ -128,10 +129,42 @@
 
 @section('script')
 <script>
+    // function getTmp() {
+    //     $.ajax({
+    //         url: '{{ url("webadmin/news-activities/getTmp") }}', 
+    //         type: 'get',
+    //         dataType: 'json',
+    //         success: function (response) {
+    //             console.log(response);
+    //         }
+    //     });
+    // }
+    // function uploadImageTmp() {
+    //     var form_data = new FormData();
+    //     var totalfiles = document.getElementById('picture_gallery').files.length;
+    //     for (var index = 0; index < totalfiles; index++) {
+    //         form_data.append("picture_gallery", document.getElementById('picture_gallery').files[index]);
+    //         form_data.append("_token", "{{ csrf_token() }}");
+    //         form_data.append("id_form", document.getElementById('id_form'));
+    //         form_data.append("type", "insert");
+    //         $.ajax({
+    //             url: '{{ url("webadmin/news-activities/uploadTmp") }}', 
+    //             type: 'post',
+    //             data: form_data,
+    //             dataType: 'json',
+    //             contentType: false,
+    //             processData: false,
+    //             success: function (response) {
+    //                 getTmp();
+    //             }
+    //         });
+    //     }
+    // }
     $(document).ready(function(){
         CKEDITOR.replace("editor_content_th");
         CKEDITOR.replace("editor_content_en");
         CKEDITOR.config.height = 300;
+        // getTmp();
     });
 </script>
 @endsection

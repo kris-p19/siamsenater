@@ -60,6 +60,74 @@
 @section('script')
 <script>
     var table;
+    function addHeader(id) {
+        $('#header_id_'+id).trigger('click');
+        $('#header_id_'+id).val('');
+        $('#header_id_'+id).unbind('change');
+        $('#header_id_'+id).on('change',function(){
+            var form_data = new FormData();
+            var totalfiles = document.getElementById('header_id_'+id).files.length;
+            for (var index = 0; index < totalfiles; index++) {
+                form_data.append("file", document.getElementById('header_id_'+id).files[index]);
+                form_data.append("id", id);
+                form_data.append("_token", "{{ csrf_token() }}");
+                console.log([form_data,id]);
+                $.ajax({
+                    url: '{{ url("webadmin/news-activities/addHeader") }}', 
+                    type: 'post',
+                    data: form_data,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        table.ajax.reload(null,false);
+                    }
+                });
+            }
+        });
+    }
+    function addGallery(id) {
+        $('#gallery_id_'+id).trigger('click');
+        $('#gallery_id_'+id).val('');
+        $('#gallery_id_'+id).unbind('change');
+        $('#gallery_id_'+id).on('change',function(){
+            var form_data = new FormData();
+            var totalfiles = document.getElementById('gallery_id_'+id).files.length;
+            for (var index = 0; index < totalfiles; index++) {
+                form_data.append("file", document.getElementById('gallery_id_'+id).files[index]);
+                form_data.append("id", id);
+                form_data.append("_token", "{{ csrf_token() }}");
+                $.ajax({
+                    url: '{{ url("webadmin/news-activities/addGallery") }}', 
+                    type: 'post',
+                    data: form_data,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        table.ajax.reload(null,false);
+                    }
+                });
+            }
+        });
+    }
+    function removeGallery(id,th) {
+        var form_data = new FormData();
+        form_data.append("item", $(th).data('file'));
+        form_data.append("id", id);
+        form_data.append("_token", "{{ csrf_token() }}");
+        $.ajax({
+            url: '{{ url("webadmin/news-activities/removeGallery") }}', 
+            type: 'post',
+            data: form_data,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                table.ajax.reload(null,false);
+            }
+        });
+    }
     $(document).ready( function () {
         table = $('#table').DataTable({
             "processing": true,
@@ -105,13 +173,35 @@
                 { 
                     "data": "picture_header", "title": "ภาพ", 
                     "render": function(data, type, row, meta) {
-                        return `<img src="{{ asset('images/news-activites') }}/`+data+`" class="img-responsive" style="width:150px;" onerror="this.style.display='none'">`;
+                        if (data==null || data=="[]" || data=="") {
+                            return `<input type="file" id="header_id_`+row.id+`" style="display:none;"><a style="border-radius:20px;" class="btn btn-primary btn-sm" onclick="addHeader(`+row.id+`);">เพิ่ม</a>`;
+                        } else {
+                            return `<input type="file" id="header_id_`+row.id+`" style="display:none;"><a style="border-radius:20px;" class="btn btn-warning btn-sm" onclick="addHeader(`+row.id+`);">เปลี่ยน</a><div class="small-box bg-info" style="margin:5px;">
+                                            <div class="inner">
+                                                <img src="{{ asset('images/news-activites') }}/`+data+`" class="img-responsive" style="width:150px;" onerror="this.style.display='none'">
+                                            </div>
+                                        </div>`;
+                        }
                     }
                 },
                 { 
                     "data": "picture_gallery", "title": "อัลบั้มภาพ", 
                     "render": function(data, type, row, meta) {
-                        return row.gallery;
+                        if (data==null || data=="[]" || data=="") {
+                            return `<input type="file" id="gallery_id_`+row.id+`" style="display:none;"><a style="border-radius:20px;" class="btn btn-primary btn-sm" onclick="addGallery(`+row.id+`);">เพิ่ม</a>`;
+                        } else {
+                            var ii = (data.replace(/&quot;/g,'').replace('[','').replace(']','')).split(',');
+                            var hh = "";
+                            for (let index = 0; index < ii.length; index++) {
+                                hh += `<div class="small-box bg-info" style="margin:5px;">
+                                            <div class="inner">
+                                                <img src="{{ asset('images/news-activites') }}/`+ii[index]+`" class="img-responsive" style="width:150px;" onerror="this.style.display='none'">
+                                            </div>
+                                            <a href="javascript:void(0);" onclick="removeGallery(`+row.id+`,this);" data-file="`+ii[index]+`" class="small-box-footer">ลบไฟล์ <i class="fas fa fa-trash"></i></a>
+                                        </div>`;
+                            }
+                            return `<input type="file" id="gallery_id_`+row.id+`" style="display:none;"><a style="border-radius:20px;" class="btn btn-primary btn-sm" onclick="addGallery(`+row.id+`);">เพิ่ม</a><div class="row">` + hh + `</div>`;
+                        }
                     }
                 }
                 

@@ -92,7 +92,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                         <div class="form-group">
                             <label>ภาพส่วนหัว</label>
                             <input type="file" class="form-control" autofocus placeholder="ภาพส่วนหัว" name="picture_header">
@@ -119,7 +119,7 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>วันที่เผยแพร่ข่าว</label>

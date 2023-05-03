@@ -90,6 +90,12 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/news-activities/delete/{id}','NewsActivitieController@destroy');
     Route::get('/news-activities/update-status/{id}/{status}','NewsActivitieController@updateStatus');
     Route::get('/news-activities-ajax','NewsActivitieController@ajaxQuery');
+    Route::post('/news-activities/uploadTmp','NewsActivitieController@uploadTmp');
+    Route::get('/news-activities/getTmp','NewsActivitieController@getTmp');
+    Route::post('/news-activities/addHeader','NewsActivitieController@addHeader');
+    Route::post('/news-activities/addGallery','NewsActivitieController@addGallery');
+    Route::post('/news-activities/removeGallery','NewsActivitieController@removeGallery');
+    
 
     Route::get('/contact-us','ContactUsController@show');
     Route::get('/contact-us/edit/{id}','ContactUsController@edit');
