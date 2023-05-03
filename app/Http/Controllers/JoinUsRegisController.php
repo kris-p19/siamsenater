@@ -9,10 +9,10 @@ use DB;
 
 class JoinUsRegisController extends Controller
 {
-    public function ajaxQuery(Request $request)
+    public function ajaxQuery($job_id, Request $request)
     {
         if ($request->ajax()) {
-            $data = JoinUsRegis::select("*")->orderBy('created_at','desc');
+            $data = JoinUsRegis::select("*")->where('job_id',$job_id)->orderBy('created_at','desc');
             return DataTables::of($data)
             ->addColumn("job",function($row){
                 return "<a href='".url('join-us-read/'.$row->job_id)."' target='_blank'>" .

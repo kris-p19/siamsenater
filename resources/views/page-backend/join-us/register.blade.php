@@ -79,7 +79,7 @@
         table = $('#table').DataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": "{{ url('webadmin/join-us-is-join-ajax') }}",
+            "ajax": "{{ url('webadmin/join-us-is-join-ajax/'.$job_id) }}",
             "language": {
                 "url": '//cdn.datatables.net/plug-ins/1.13.4/i18n/th.json',
             },

@@ -74,13 +74,12 @@
                     $('#content_en').find('div').html('<input type="file" class="form-control" style="padding:4px;" accept="application/pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" name="content_en">');
                     $('#content_th').find('div').html('<input type="file" class="form-control" style="padding:4px;" accept="application/pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" name="content_th">');
                     break;
-            
                 default:
                     $('#content_en').find('div').html('<textarea class="form-control" autofocus placeholder="เนื้อหาภาษาอังกฤษ" id="editor_content_en" name="content_en"></textarea>');
                     $('#content_th').find('div').html('<textarea class="form-control" autofocus placeholder="เนื้อหาภาษาไทย" id="editor_content_th" name="content_th"></textarea>');
-                    CKEDITOR.replace('editor_content_en');
-                    CKEDITOR.replace('editor_content_th');
-                    CKEDITOR.config.height = 300;
+                    // CKEDITOR.replace('editor_content_en');
+                    // CKEDITOR.replace('editor_content_th');
+                    // CKEDITOR.config.height = 300;
                     break;
             }
         });

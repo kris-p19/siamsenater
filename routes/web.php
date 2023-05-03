@@ -163,7 +163,7 @@ Route::group(['prefix'=>'webadmin','middleware'=>['auth']],function(){
     Route::get('/join-us/delete/{id}','JoinUsJobController@destroy');
     Route::get('/join-us-is-join/{id}','JoinUsJobController@viewRegister');
     Route::get('/join-us-ajax','JoinUsJobController@ajaxQuery');
-    Route::get('/join-us-is-join-ajax','JoinUsRegisController@ajaxQuery');
+    Route::get('/join-us-is-join-ajax/{id}','JoinUsRegisController@ajaxQuery');
 
     Route::get('/related-link','RelatedLinkController@index');
     Route::get('/related-link/create','RelatedLinkController@create');

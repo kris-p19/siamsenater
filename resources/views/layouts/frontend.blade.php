@@ -60,6 +60,9 @@
             html, body {
                 font-family: 'Noto Sans Thai', sans-serif;
             }
+            #bs-example-navbar-collapse-1 li {
+                font-size: 16px;
+            }
         </style>
         @else
         <style>
@@ -123,7 +126,7 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown @yield('page-our-service')">
-                                        <a href="{{ url('/our-service') }}">{{ __('messages.our-service') }}</a>
+                                        <a href="#{{ url('/our-service') }}">{{ __('messages.our-service') }}</a>
                                         <ul class="dropdown-menu">
                                             <li class="@yield('page-one-stop-service')"><a href="{{ url('one-stop-service') }}">{{ __('messages.one-stop-service') }}</a></li>
                                             @foreach(OurService::where('status','active')->orderBy('created_at','desc')->get() as $index => $row)
@@ -139,7 +142,7 @@
                                     {{-- <li class="@yield('page-product')"><a href="{{ url('/product') }}">{{ __('messages.product') }}</a></li> --}}
                                     <li class="@yield('page-customer')"><a href="{{ url('/customer') }}">{{ __('messages.customer') }}</a></li>
                                     <li class="dropdown @yield('page-news-activities')">
-                                        <a href="{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a>
+                                        <a href="#{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a>
                                         <ul class="dropdown-menu">
                                             <li class="@yield('page-announcement')"><a href="{{ url('news-activities/announcement') }}">{{ __('messages.announcement') }}</a></li>
                                             <li class="@yield('page-event')"><a href="{{ url('news-activities/event') }}">{{ __('messages.event') }}</a></li>
@@ -147,7 +150,7 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown @yield('page-contact-us')">
-                                        <a href="{{ url('/contact-information') }}">{{ __('messages.contact-us') }}</a>
+                                        <a href="#{{ url('/contact-information') }}">{{ __('messages.contact-us') }}</a>
                                         <ul class="dropdown-menu">
                                             <li class="@yield('page-contact-us')"><a href="{{ url('contact-information') }}">{{ __('messages.contact-information') }}</a></li>
                                             <li class="@yield('page-join-us')"><a href="{{ url('/join-us/all') }}">{{ __('messages.join-us') }}</a></li>

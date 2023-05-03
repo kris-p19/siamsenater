@@ -130,10 +130,10 @@
                                 <p style="padding:15px;background:#af2d2d;border-radius:10px;">
                                     {{ $row->subject }} 
                                     @if($row->datatype=='image')
-                                    <img src="{{ asset('upload/about-us') }}/{{ $row->content }}" class="img-responsive">
+                                    <img style="display: inline-block;" src="{{ asset('upload/about-us') }}/{{ $row->content }}" class="img-responsive">
                                     @elseif($row->datatype=='file')
                                     <a href="{{ asset('upload/about-us') }}/{{ $row->content }}" target="_blank">
-                                        <img src="{{ asset('images/pdf.png') }}" style="width:40px;" class="img-responsive">
+                                        <img style="display: inline-block;width:40px;height:50px;" src="{{ asset('images/pdf.png') }}" style="width:40px;" class="img-responsive">
                                     </a>
                                     @else
                                     {!! $row->content !!}

@@ -188,7 +188,8 @@ class JoinUsJobController extends Controller
     public function viewRegister($id)
     {
         return view('page-backend.join-us.register',[
-            'data' => JoinUsRegis::where('job_id',$id)->orderBy('created_at','desc')->get()
+            'data' => JoinUsRegis::where('job_id',$id)->orderBy('created_at','desc')->get(),
+            'job_id' => $id
         ]);
     }
 

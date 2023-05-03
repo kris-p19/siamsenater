@@ -169,43 +169,46 @@ class NewsActivitieController extends Controller
             'group_type_th' => 'required',
             'group_type_en' => 'required'
         ]);
-        $table = new NewsActivitie;
-        $table->title_th = $request->title_th;
-        $table->title_en = $request->title_en;
-        $table->content_th = $request->content_th;
-        $table->content_en = $request->content_en;
-        $table->group_type_th = $request->group_type_th;
-        $table->group_type_en = $request->group_type_en;
-        if (!empty($request->file('picture_header'))) {
-            $files = $request->file('picture_header');
-            $destinationPath = public_path('/images/news-activites/');
-            $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
-            if ($files->move($destinationPath, $profileImage)) {
-                $table->picture_header = $profileImage;
-            }
-        }
-        if (!empty($request->file('picture_gallery'))) {
-            $files = $request->file('picture_gallery');
-            $items = [];
-            foreach ($files as $key => $value) {
-                $file = $value;
+        try {
+            $table = new NewsActivitie;
+            $table->title_th = $request->title_th;
+            $table->title_en = $request->title_en;
+            $table->content_th = $request->content_th;
+            $table->content_en = $request->content_en;
+            $table->group_type_th = $request->group_type_th;
+            $table->group_type_en = $request->group_type_en;
+            if (!empty($request->file('picture_header'))) {
+                $files = $request->file('picture_header');
                 $destinationPath = public_path('/images/news-activites/');
-                $profileImage = date('YmdHis') . Str::random(5) . $key . "." . $file->getClientOriginalExtension();
-                if ($file->move($destinationPath, $profileImage)) {
-                    array_push($items,$profileImage);
+                $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
+                if ($files->move($destinationPath, $profileImage)) {
+                    $table->picture_header = $profileImage;
                 }
             }
-            $table->picture_gallery = json_encode($items);
+            if (!empty($request->file('picture_gallery'))) {
+                $files = $request->file('picture_gallery');
+                $items = [];
+                foreach ($files as $key => $value) {
+                    $file = $value;
+                    $destinationPath = public_path('/images/news-activites/');
+                    $profileImage = date('YmdHis') . Str::random(5) . $key . "." . $file->getClientOriginalExtension();
+                    if ($file->move($destinationPath, $profileImage)) {
+                        array_push($items,$profileImage);
+                    }
+                }
+                $table->picture_gallery = json_encode($items);
+            }
+            $table->conter = $request->conter;
+            $table->keyword_th = $request->keyword_th;
+            $table->keyword_en = $request->keyword_en;
+            $table->public_datetime = empty($request->public_datetime)?date('Y-m-d H:i:s'):$request->public_datetime;
+            $table->save();
+            if ($table) {
+                return redirect('/webadmin/news-activities')->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+            }
+        } catch (\Exception $e) {
+            return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ ' . $e->getMessage()]);
         }
-        $table->conter = $request->conter;
-        $table->keyword_th = $request->keyword_th;
-        $table->keyword_en = $request->keyword_en;
-        $table->public_datetime = empty($request->public_datetime)?date('Y-m-d H:i:s'):$request->public_datetime;
-        $table->save();
-        if ($table) {
-            return redirect('/webadmin/news-activities')->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
-        }
-        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
 
     /**
@@ -251,52 +254,55 @@ class NewsActivitieController extends Controller
             'group_type_th' => 'required',
             'group_type_en' => 'required'
         ]);
-        $data = [
-            'title_th' => $request->title_th,
-            'title_en' => $request->title_en,
-            'content_th' => $request->content_th,
-            'content_en' => $request->content_en,
-            'group_type_th' => $request->group_type_th,
-            'group_type_en' => $request->group_type_en,
-            'keyword_th' => $request->keyword_th,
-            'keyword_en' => $request->keyword_en,
-            'public_datetime' => $request->public_datetime
-        ];
-        if (!empty($request->file('picture_header'))) {
-            $table = $newsActivitie->where('id',$id)->first();
-            try { unlink(public_path('/images/news-activites/'.$table->picture_header)); } catch (\Throwable $th) { }
-            $files = $request->file('picture_header');
-            $destinationPath = public_path('/images/news-activites/');
-            $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
-            if ($files->move($destinationPath, $profileImage)) {
-                $data['picture_header'] = $profileImage;
-            }
-        }
-        if (!empty($request->file('picture_gallery'))) {
-
-            $table = $newsActivitie->where('id',$id)->first();
-            if (!empty($table->picture_gallery)) {
-                foreach (json_decode($table->picture_gallery) as $key => $value) {
-                    try { unlink(public_path('/images/news-activites/'.$table->value)); } catch (\Throwable $th) { }
-                }
-            }
-            $files = $request->file('picture_gallery');
-            $items = [];
-            foreach ($files as $key => $value) {
-                $file = $value;
+        try {
+            $data = [
+                'title_th' => $request->title_th,
+                'title_en' => $request->title_en,
+                'content_th' => $request->content_th,
+                'content_en' => $request->content_en,
+                'group_type_th' => $request->group_type_th,
+                'group_type_en' => $request->group_type_en,
+                'keyword_th' => $request->keyword_th,
+                'keyword_en' => $request->keyword_en,
+                'public_datetime' => $request->public_datetime
+            ];
+            if (!empty($request->file('picture_header'))) {
+                $table = $newsActivitie->where('id',$id)->first();
+                try { unlink(public_path('/images/news-activites/'.$table->picture_header)); } catch (\Throwable $th) { }
+                $files = $request->file('picture_header');
                 $destinationPath = public_path('/images/news-activites/');
-                $profileImage = date('YmdHis') . Str::random(5) . $key . "." . $file->getClientOriginalExtension();
-                if ($file->move($destinationPath, $profileImage)) {
-                    array_push($items,$profileImage);
+                $profileImage = date('YmdHis') . Str::random(5) . "." . $files->getClientOriginalExtension();
+                if ($files->move($destinationPath, $profileImage)) {
+                    $data['picture_header'] = $profileImage;
                 }
             }
-            $data['picture_gallery'] = json_encode($items);
+            if (!empty($request->file('picture_gallery'))) {
+    
+                $table = $newsActivitie->where('id',$id)->first();
+                if (!empty($table->picture_gallery)) {
+                    foreach (json_decode($table->picture_gallery) as $key => $value) {
+                        try { unlink(public_path('/images/news-activites/'.$table->value)); } catch (\Throwable $th) { }
+                    }
+                }
+                $files = $request->file('picture_gallery');
+                $items = [];
+                foreach ($files as $key => $value) {
+                    $file = $value;
+                    $destinationPath = public_path('/images/news-activites/');
+                    $profileImage = date('YmdHis') . Str::random(5) . $key . "." . $file->getClientOriginalExtension();
+                    if ($file->move($destinationPath, $profileImage)) {
+                        array_push($items,$profileImage);
+                    }
+                }
+                $data['picture_gallery'] = json_encode($items);
+            }
+            $table = $newsActivitie->where('id',$id)->update($data);
+            if ($table) {
+                return redirect('/webadmin/news-activities')->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
+            }
+        } catch (\Exception $e) {
+            return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ ' . $e->getMessage()]);
         }
-        $table = $newsActivitie->where('id',$id)->update($data);
-        if ($table) {
-            return redirect('/webadmin/news-activities')->with(['status'=>'success', 'msg'=>'ทำรายการสำเร็จ']);
-        }
-        return back()->with(['status'=>'danger', 'msg'=>'ทำรายการไม่สำเร็จ']);
     }
     public function updateStatus($id, $status, NewsActivitie $newsActivitie)
     {
