@@ -83,6 +83,9 @@ class NewsActivitieController extends Controller
 
     public function read($id, NewsActivitie $newsActivitie)
     {
+        if (empty($newsActivitie->where('id',$id)->count())) {
+            abort(404);
+        }
         $newsActivitie->where('id',$id)->update(['conter'=>(($newsActivitie->where('id',$id)->first()->conter*1)+1)]);
         $data = [];
         if (app()->getLocale()=='th') {
@@ -325,8 +328,10 @@ class NewsActivitieController extends Controller
     {
         $table = $newsActivitie->where('id',$id)->first();
         try { unlink(public_path('/images/news-activites/'.$table->picture_header)); } catch (\Throwable $th) { }
-        foreach (json_decode($table->picture_gallery) as $key => $value) {
-            try { unlink(public_path('/images/news-activites/'.$value)); } catch (\Throwable $th) { }
+        if (!empty($table->picture_gallery)) {
+            foreach (json_decode($table->picture_gallery) as $key => $value) {
+                try { unlink(public_path('/images/news-activites/'.$value)); } catch (\Throwable $th) { }
+            }
         }
         $table = $newsActivitie->where('id',$id)->delete();
         if ($table) {
