@@ -37,12 +37,12 @@
                 <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
                     @if(!empty($data->picture_gallery))
                         <div id="lightgallery">
-                            <a class="selector" href="{{ asset('images/news-activites/'.$data->picture_header) }}" data-sub-html="{{ $data->title }}">
-                                <img src="{{ asset('images/news-activites/'.$data->picture_header) }}" style="width:150px;height:150px;object-fit:cover;" onerror="this.style.display='none'">
+                            <a class="selector col-xs-12 col-sm-4 col-md-2 col-lg-2" href="{{ asset('images/news-activites/'.$data->picture_header) }}" data-sub-html="{{ $data->title }}">
+                                <img src="{{ asset('images/news-activites/'.$data->picture_header) }}" class="img-responsive" style="margin:10px;border-radius:10px;width:100%;object-fit:cover;" onerror="this.style.display='none'">
                             </a>
                             @foreach(json_decode($data->picture_gallery) as $index => $info)
-                            <a class="selector" href="{{ asset('images/news-activites/'.$info) }}" data-sub-html="{{ $data->title }}">
-                                <img src="{{ asset('images/news-activites/'.$info) }}" style="width:150px;height:150px;object-fit:cover;" onerror="this.style.display='none'">
+                            <a class="selector col-xs-12 col-sm-4 col-md-2 col-lg-2" href="{{ asset('images/news-activites/'.$info) }}" data-sub-html="{{ $data->title }}">
+                                <img src="{{ asset('images/news-activites/'.$info) }}" class="img-responsive" style="margin:10px;border-radius:10px;width:100%;object-fit:cover;" onerror="this.style.display='none'">
                             </a>
                             @endforeach
                         </div>
