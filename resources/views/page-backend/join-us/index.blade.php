@@ -79,7 +79,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>จำกัดจำนวนผู้สมัคร <strong style="color:red;">*</strong></label>
+                            <label>จำนวนตำแหน่ง <strong style="color:red;">*</strong></label>
                             <input type="number" value="{{ (!empty(old('maximum_regis'))?old('maximum_regis'):1) }}" name="maximum_regis" class="form-control @error('maximum_regis') is-invalid @enderror" placeholder="จำกัดจำนวนผู้สมัคร">
                             @error('maximum_regis')
                                 <span class="error invalid-feedback" role="alert">
@@ -198,7 +198,7 @@
                 },
                 { "data": "date_begin", "title": "วันที่เปิดรับสมัคร" },
                 { "data": "date_end", "title": "วันที่ปิดรับสมัคร" },
-                { "data": "maximum_regis", "title": "จำกัดจำนวนผู้สมัคร" },
+                { "data": "maximum_regis", "title": "จำนวนตำแหน่ง" },
                 { "data": "job_name_th", "title": "ชื่อตำแหน่งภาษาไทย" },
                 { "data": "job_name_en", "title": "ชื่อตำแหน่งภาษาอังกฤษ" },
                 { "data": "job_description_th", "title": "รายละเอียดภาษาไทย" },

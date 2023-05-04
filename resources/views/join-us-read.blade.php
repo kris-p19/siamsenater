@@ -5,7 +5,8 @@
 @section('position')
 <ol class="breadcrumb">
     <li><a href="{{ url('/') }}">{{ __('messages.home') }}</a></li>
-    <li class="active">{{ __('messages.join-us') }}</li>
+    <li><a href="{{ url('join-us/all') }}">{{ __('messages.join-us') }}</a></li>
+    <li class="active">{{ $data->job_name }}</li>
 </ol>
 @endsection
 
@@ -80,32 +81,43 @@
                                 '</div/>'+
                                 '<div class="modal-body">'+
                                     '<div class="row">'+
-                                        '<div class="col-md-12">'+
+                                        '<div class="col-md-6">'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">ชื่อ <strong style="color:red;">*</strong></label>'+
                                                 '<input type="text" class="form-control" placeholder="ชื่อ" id="first_name" name="first_name" required autofocus>'+
                                             '</div>'+
+                                        '</div>'+
+                                        '<div class="col-md-6">'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">สกุล <strong style="color:red;">*</strong></label>'+
                                                 '<input type="text" class="form-control" placeholder="สกุล" id="last_name" name="last_name" required autofocus>'+
                                             '</div>'+
-
+                                        '</div>'+
+                                        '<div class="col-md-6">'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">เบอร์โทรศัพท์ <strong style="color:red;">*</strong></label>'+
                                                 '<input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" id="phone" name="phone" required autofocus>'+
                                             '</div>'+
+                                        '</div>'+
+                                        '<div class="col-md-6">'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">อีเมล <strong style="color:red;">*</strong></label>'+
                                                 '<input type="email" class="form-control" placeholder="อีเมล" id="email" name="email" required autofocus>'+
                                             '</div>'+
+                                        '</div>'+
+                                        '<div class="col-md-6">'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">อายุ <strong style="color:red;">*</strong></label>'+
                                                 '<input type="number" class="form-control" placeholder="อายุ" id="age" name="age" required autofocus>'+
                                             '</div>'+
+                                        '</div>'+
+                                        '<div class="col-md-6">'+
                                             '<div class="form-group">'+
                                                 '<label for="" class="control-label">วันเดือนปีเกิด <strong style="color:red;">*</strong></label>'+
                                                 '<input type="date" class="form-control" placeholder="วันเดือนปีเกิด" id="birth_date" name="birth_date" required autofocus>'+
                                             '</div>'+
+                                        '</div>'+
+                                        '<div class="col-md-6">'+
                                             // '<div class="form-group">'+
                                             //     '<label for="" class="control-label">เลขประจำตัวประชาชน <strong style="color:red;">*</strong></label>'+
                                             //     '<input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" name="id_card" required autofocus>'+
@@ -163,7 +175,7 @@
                             } else {
                                 alert(response.msg);
                                 $('#modal-register-join-us').modal('hide');
-                                window.location.href = "";
+                                // window.location.href = "";
                             }
                         }
                     });

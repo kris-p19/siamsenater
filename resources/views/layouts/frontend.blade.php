@@ -110,7 +110,7 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                {{-- <a class="navbar-brand" href="{{ url('/') }}">{{ __('messages.brand') }}</a> --}}
+                                <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('images/band-logo.png') }}" style="margin-top: -8px;width:40px;height:40px;"></a>
                             </div>
                       
                             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -118,7 +118,7 @@
                                 <ul class="nav navbar-nav">
                                     <li class="@yield('page-home')"><a href="{{ url('/') }}"><span class="glyphicon glyphicon-home"></span> {{ __('messages.home') }} <span class="sr-only">(current)</span></a></li>
                                     <li class="dropdown @yield('page-about-us')">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ __('messages.about-us') }}</a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ __('messages.about-us') }} <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             @foreach (DB::table('about_us')->where('status','active')->get() as $item)
                                             <li><a href="{{ url($item->path) }}">{{ (app()->getLocale()=='th'?$item->subject_th:$item->subject_en) }}</a></li>
@@ -126,7 +126,7 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown @yield('page-our-service')">
-                                        <a href="#{{ url('/our-service') }}">{{ __('messages.our-service') }}</a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ __('messages.our-service') }} <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li class="@yield('page-one-stop-service')"><a href="{{ url('one-stop-service') }}">{{ __('messages.one-stop-service') }}</a></li>
                                             @foreach(OurService::where('status','active')->orderBy('created_at','desc')->get() as $index => $row)
@@ -142,7 +142,7 @@
                                     {{-- <li class="@yield('page-product')"><a href="{{ url('/product') }}">{{ __('messages.product') }}</a></li> --}}
                                     <li class="@yield('page-customer')"><a href="{{ url('/customer') }}">{{ __('messages.customer') }}</a></li>
                                     <li class="dropdown @yield('page-news-activities')">
-                                        <a href="#{{ url('/news-activities') }}">{{ __('messages.news-activities') }}</a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ __('messages.news-activities') }} <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li class="@yield('page-announcement')"><a href="{{ url('news-activities/announcement') }}">{{ __('messages.announcement') }}</a></li>
                                             <li class="@yield('page-event')"><a href="{{ url('news-activities/event') }}">{{ __('messages.event') }}</a></li>
@@ -150,7 +150,7 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown @yield('page-contact-us')">
-                                        <a href="#{{ url('/contact-information') }}">{{ __('messages.contact-us') }}</a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ __('messages.contact-us') }} <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li class="@yield('page-contact-us')"><a href="{{ url('contact-information') }}">{{ __('messages.contact-information') }}</a></li>
                                             <li class="@yield('page-join-us')"><a href="{{ url('/join-us/all') }}">{{ __('messages.join-us') }}</a></li>

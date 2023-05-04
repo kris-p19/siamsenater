@@ -3,10 +3,10 @@
     /* font-family: 'db_helvethaicamon', sans-serif; */
 /* } */
 .dropdown .dropdown-menu {
-    transition: 0.5s;
+    /* transition: 0.5s; */
 }
 .dropdown:hover .dropdown-menu {
-    display: block;
+    /* display: block; */
 }
 .navbar-default {
     background-color: var(--theme-color);

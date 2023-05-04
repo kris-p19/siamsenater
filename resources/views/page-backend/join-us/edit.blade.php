@@ -80,7 +80,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>จำกัดจำนวนผู้สมัคร <strong style="color:red;">*</strong></label>
+                            <label>จำนวนตำแหน่ง <strong style="color:red;">*</strong></label>
                             <input type="number" value="{{ (!empty(old('maximum_regis'))?old('maximum_regis'):$data->maximum_regis) }}" name="maximum_regis" class="form-control @error('maximum_regis') is-invalid @enderror" placeholder="จำกัดจำนวนผู้สมัคร">
                             @error('maximum_regis')
                                 <span class="error invalid-feedback" role="alert">

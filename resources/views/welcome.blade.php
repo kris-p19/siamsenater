@@ -562,7 +562,7 @@
                 });
                 setTimeout(() => {
                     $('#popup').modal('show'); 
-                }, 2000);
+                }, 500);
             });
         </script> 
     @endif

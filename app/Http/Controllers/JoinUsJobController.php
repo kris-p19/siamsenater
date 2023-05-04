@@ -163,7 +163,7 @@ class JoinUsJobController extends Controller
         ->whereDate('date_begin','<=',date('Y-m-d'))
         ->whereDate('date_end','>=',date('Y-m-d'))
         ->where('status','active')
-        ->where('maximum_regis','>',JoinUsRegis::where('job_id',$request->job_id)->count())
+        // ->where('maximum_regis','>',JoinUsRegis::where('job_id',$request->job_id)->count())
         ->count();
         
         if ($job==0) {
